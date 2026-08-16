@@ -1,0 +1,6 @@
+{
+  "name": "NyayaNow",
+  "description": "India's 30-Second Police Rights Guide — Clear, verified legal guidance for dealing with police situations under the Bharatiya Nagarik Suraksha Sanhita (BNSS).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
