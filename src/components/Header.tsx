@@ -47,28 +47,28 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex-1 bg-emerald-600"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-18">
+      <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-15 sm:h-18 gap-1 sm:gap-2">
           
           {/* Brand Logo & Title */}
           <button
             id="brand-logo-btn"
             onClick={() => handleNav({ type: 'home' })}
-            className="flex items-center space-x-3 text-left group focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-lg p-1"
+            className="flex items-center space-x-2 sm:space-x-3 text-left group focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-lg p-1 shrink min-w-0"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20 text-slate-950 font-bold group-hover:scale-105 transition-transform">
-              <Shield className="w-5 h-5 text-slate-950 stroke-[2.5]" />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20 text-slate-950 font-bold group-hover:scale-105 transition-transform shrink-0">
+              <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-slate-950 stroke-[2.5]" />
             </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <span className="text-xl font-extrabold tracking-tight text-white group-hover:text-amber-400 transition-colors">
+            <div className="min-w-0">
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
+                <span className="text-lg sm:text-xl font-extrabold tracking-tight text-white group-hover:text-amber-400 transition-colors truncate">
                   NyayaNow
                 </span>
-                <span className="text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-slate-800 text-amber-400 border border-slate-700">
-                  BNSS 2023
+                <span className="hidden xs:inline-block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest px-1 sm:px-1.5 py-0.5 rounded bg-slate-800 text-amber-400 border border-slate-700 shrink-0">
+                  BNSS
                 </span>
               </div>
-              <p className="text-xs text-slate-400 font-medium hidden sm:block">
+              <p className="text-[11px] text-slate-400 font-medium hidden sm:block truncate">
                 Police Rights Guide • India
               </p>
             </div>
@@ -143,19 +143,19 @@ export const Header: React.FC<HeaderProps> = ({
           </nav>
 
           {/* Right Action Controls: Language, SOS & Emergency Mode */}
-          <div className="flex items-center space-x-2 sm:space-x-3">
+          <div className="flex items-center space-x-1.5 sm:space-x-2.5 shrink-0">
             
             {/* Language Selector Dropdown */}
             <div className="relative">
               <button
                 id="language-selector-btn"
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-colors"
+                className="flex items-center space-x-1 px-2 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-colors"
                 aria-label="Select Language"
               >
-                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400"></span>
                 <span>{currentLangObj.native}</span>
-                <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                <ChevronDown className="w-3 h-3 text-slate-400" />
               </button>
 
               {langDropdownOpen && (
@@ -189,8 +189,9 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="header-sos-btn"
               onClick={onOpenSos}
-              className="p-2 sm:px-3 sm:py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white text-xs font-semibold border border-slate-700 flex items-center space-x-1.5 transition-all"
+              className="p-1.5 sm:px-3 sm:py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white text-xs font-semibold border border-slate-700 flex items-center space-x-1.5 transition-all shrink-0"
               title="Official Emergency Helplines (112, 1091, 1064)"
+              aria-label="Helplines"
             >
               <PhoneCall className="w-4 h-4 text-emerald-400" />
               <span className="hidden sm:inline">Helplines</span>
@@ -200,9 +201,9 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="header-emergency-mode-btn"
               onClick={onOpenEmergency}
-              className="flex items-center space-x-1.5 sm:space-x-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-bold text-xs sm:text-sm shadow-md shadow-red-600/30 transition-all hover:scale-105"
+              className="flex items-center space-x-1 sm:space-x-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-bold text-xs sm:text-sm shadow-md shadow-red-600/30 transition-all shrink-0"
             >
-              <AlertCircle className="w-4 h-4 animate-pulse" />
+              <AlertCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-pulse shrink-0" />
               <span className="hidden sm:inline">Emergency Mode</span>
               <span className="sm:hidden font-bold">Help 🚨</span>
             </button>
@@ -211,10 +212,10 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="mobile-menu-toggle"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none"
+              className="md:hidden p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none shrink-0"
               aria-label="Open Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>

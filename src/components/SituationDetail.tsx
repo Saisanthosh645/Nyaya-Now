@@ -20,7 +20,7 @@ import {
   ChevronRight,
   Info
 } from 'lucide-react';
-import { Situation, Language, ActiveView } from '../types';
+import { Situation, Language, ActiveView, RightItem } from '../types';
 import { legalSources } from '../data/sources';
 import { translations } from '../data/translations';
 import { RightsCard } from './RightsCard';
@@ -28,6 +28,10 @@ import { ActionTimeline } from './ActionTimeline';
 import { SayThisPolitely } from './SayThisPolitely';
 import { ComplaintFlow } from './ComplaintFlow';
 import { PrintGuideModal } from './PrintGuideModal';
+import { ConstitutionalProtection } from './ConstitutionalProtection';
+import { LegalAidCard } from './LegalAidCard';
+import { SpecialSafeguards } from './SpecialSafeguards';
+import { SourceVerificationDrawer } from './SourceVerificationDrawer';
 
 interface SituationDetailProps {
   situation: Situation;
@@ -56,6 +60,7 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
   onOpenEmergency
 }) => {
   const [printModalOpen, setPrintModalOpen] = useState<boolean>(false);
+  const [selectedVerifyRight, setSelectedVerifyRight] = useState<RightItem | null>(null);
   const t = translations[language];
 
   const handleShare = () => {
@@ -107,7 +112,7 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
       </nav>
 
       {/* Top Header & Action Controls */}
-      <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm mb-8">
+      <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs mb-8">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
           
           {/* Title & Icon */}
@@ -160,7 +165,7 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
       </div>
 
       {/* ⚡ 30-SECOND GUIDE (Visually Distinct Prominent Panel) */}
-      <section id="30-second-guide-panel" className="bg-gradient-to-br from-amber-500 via-amber-600 to-amber-700 text-slate-950 rounded-2xl p-6 sm:p-8 shadow-xl shadow-amber-500/15 mb-10 border border-amber-400">
+      <section id="30-second-guide-panel" className="bg-linear-to-br from-amber-500 via-amber-600 to-amber-700 text-slate-950 rounded-2xl p-6 sm:p-8 shadow-xl shadow-amber-500/15 mb-8 border border-amber-400">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 rounded-lg bg-slate-950 text-amber-400 flex items-center justify-center font-bold">
@@ -183,7 +188,7 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
           {situation.quick30SecSummary.map((step, idx) => (
             <div
               key={idx}
-              className="bg-white/95 rounded-xl p-3.5 sm:p-4 border border-amber-300/80 shadow-sm flex items-start space-x-3.5"
+              className="bg-white/95 rounded-xl p-3.5 sm:p-4 border border-amber-300/80 shadow-xs flex items-start space-x-3.5"
             >
               <div className="w-7 h-7 rounded-lg bg-slate-950 text-amber-400 font-black text-sm flex items-center justify-center shrink-0">
                 {idx + 1}
@@ -196,9 +201,19 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
         </div>
       </section>
 
+      {/* 🇮🇳 CONSTITUTIONAL PROTECTION LAYER */}
+      {situation.constitutionalProtection && (
+        <div className="mb-8">
+          <ConstitutionalProtection
+            protection={situation.constitutionalProtection}
+            language={language}
+          />
+        </div>
+      )}
+
       {/* Special Guide Panel (e.g. Zero FIR explanation) */}
       {situation.specialGuide && (
-        <section className="bg-blue-50/80 rounded-2xl p-6 border border-blue-200 mb-10">
+        <section className="bg-blue-50/80 rounded-2xl p-6 border border-blue-200 mb-8">
           <div className="flex items-center space-x-2 mb-3">
             <Info className="w-5 h-5 text-blue-600" />
             <h3 className="text-lg font-bold text-blue-950">
@@ -221,19 +236,25 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
 
       {/* YOUR RIGHTS Section */}
       <section id="your-rights-section" className="mb-10">
-        <div className="flex items-center space-x-2.5 mb-4">
-          <ShieldCheck className="w-5 h-5 text-emerald-600" />
-          <h3 className="text-xl font-bold text-slate-900 tracking-tight">
-            {t.yourRights}
-          </h3>
-          <span className="text-xs text-slate-500 font-medium ml-2">
-            (Guaranteed under BNSS 2023 & Constitution)
+        <div className="flex items-center justify-between gap-2 mb-4">
+          <div className="flex items-center space-x-2.5">
+            <ShieldCheck className="w-5 h-5 text-emerald-600" />
+            <h3 className="text-xl font-bold text-slate-900 tracking-tight">
+              {t.yourRights}
+            </h3>
+          </div>
+          <span className="text-xs text-slate-500 font-medium">
+            (Tap "✓ Source verified" for statutory citations)
           </span>
         </div>
 
         <div className="space-y-3.5">
           {situation.rights.map((right) => (
-            <RightsCard key={right.id} right={right} />
+            <RightsCard
+              key={right.id}
+              right={right}
+              onVerifyClick={(r) => setSelectedVerifyRight(r)}
+            />
           ))}
         </div>
       </section>
@@ -280,12 +301,29 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
         </div>
       </section>
 
+      {/* SPECIAL SAFEGUARDS (Vulnerable Groups) */}
+      {situation.specialSafeguards && situation.specialSafeguards.length > 0 && (
+        <div className="mb-10">
+          <SpecialSafeguards
+            safeguards={situation.specialSafeguards}
+            language={language}
+          />
+        </div>
+      )}
+
       {/* SAY THIS POLITELY Section */}
       <SayThisPolitely
         phrases={situation.sayThis}
         language={language}
         onShowToast={onShowToast}
       />
+
+      {/* FREE LEGAL AID CARD (NALSA 15100) */}
+      {situation.needsLegalAid && (
+        <div className="mb-10">
+          <LegalAidCard language={language} />
+        </div>
+      )}
 
       {/* WHERE TO COMPLAIN Section */}
       <section id="where-to-complain-section" className="mb-10">
@@ -304,7 +342,7 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
       </section>
 
       {/* SOURCES & LEGAL REFERENCES Section */}
-      <section id="sources-section" className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm mb-12">
+      <section id="sources-section" className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs mb-12">
         <div className="flex items-center space-x-2.5 mb-4">
           <BookOpen className="w-5 h-5 text-slate-700" />
           <h3 className="text-xl font-bold text-slate-900 tracking-tight">
@@ -382,6 +420,14 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
         situation={situation}
         isOpen={printModalOpen}
         onClose={() => setPrintModalOpen(false)}
+        language={language}
+      />
+
+      {/* Source Verification Drawer */}
+      <SourceVerificationDrawer
+        rightItem={selectedVerifyRight}
+        isOpen={!!selectedVerifyRight}
+        onClose={() => setSelectedVerifyRight(null)}
         language={language}
       />
 

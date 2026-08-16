@@ -1,5 +1,17 @@
 export type Language = 'en' | 'hi' | 'te';
 
+export type SourceType = 'PRIMARY_LAW' | 'OFFICIAL_GOVERNMENT' | 'JUDICIAL' | 'LEGAL_AID';
+
+export interface LegalBasis {
+  law: string;
+  section?: string;
+  article?: string;
+  sourceName: string;
+  sourceUrl: string;
+  lastVerified: string;
+  sourceType: SourceType;
+}
+
 export interface LegalSource {
   id: string;
   title: string;
@@ -7,9 +19,11 @@ export interface LegalSource {
   legalSection?: string;
   url: string;
   type: 'statute' | 'judgment' | 'guideline' | 'portal';
+  sourceType?: SourceType;
   officialBadge?: boolean;
   summary: string;
   lastReviewed: string;
+  category?: 'CONSTITUTION' | 'CRIMINAL_PROCEDURE' | 'LEGAL_AID' | 'JUDICIAL' | 'HUMAN_RIGHTS' | 'PUBLIC_AUTHORITIES';
 }
 
 export interface SayThisPhrase {
@@ -24,11 +38,16 @@ export interface SayThisPhrase {
 export interface RightItem {
   id: string;
   title: string;
-  description: string;
+  plainLanguage: string;
+  legalBasis: LegalBasis;
+  scopeNote?: string;
+  confidence: 'verified';
+  // Legacy / fallback fields
+  description?: string;
   bnssSection?: string;
   crpcEquivalent?: string;
   constitutionArticle?: string;
-  sourceId: string;
+  sourceId?: string;
   landmarkCase?: string;
   legalSection?: string;
   organization?: string;
@@ -56,6 +75,23 @@ export interface EscalationNode {
   description: string;
   action: string;
   timeframe?: string;
+  statutoryBasis?: string;
+}
+
+export interface SpecialSafeguard {
+  group: 'women' | 'children' | 'seniors' | 'disabilities' | 'general';
+  title: string;
+  protection: string;
+  statutoryProvision: string;
+  sourceUrl?: string;
+}
+
+export interface ConstitutionalRight {
+  article: string;
+  title: string;
+  plainExplanation: string;
+  scopeAndExceptions: string;
+  sourceUrl: string;
 }
 
 export interface Situation {
@@ -67,18 +103,22 @@ export interface Situation {
   emergencyTag?: string;
   badgeText?: string;
   quick30SecSummary: string[];
+  constitutionalProtection?: ConstitutionalRight;
   rights: RightItem[];
   actions: ActionStep[];
   donts: DontItem[];
   sayThis: SayThisPhrase[];
+  specialSafeguards?: SpecialSafeguard[];
   escalationPath: EscalationNode[];
   sourceIds: string[];
   specialGuide?: {
     title: string;
     content: string;
     points: string[];
+    statutoryRef?: string;
   };
   keywords: string[];
+  needsLegalAid?: boolean;
 }
 
 export interface StateHelpline {
@@ -93,7 +133,9 @@ export interface StateHelpline {
 export type ActiveView = 
   | { type: 'home' }
   | { type: 'situation'; slug: string }
-  | { type: 'complaints' }
+  | { type: 'complaints'; subCategory?: string }
   | { type: 'sources' }
+  | { type: 'methodology' }
   | { type: 'assessment' }
   | { type: 'helplines' };
+

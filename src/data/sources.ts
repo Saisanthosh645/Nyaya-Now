@@ -1,27 +1,73 @@
 import { LegalSource } from '../types';
 
 export const legalSources: Record<string, LegalSource> = {
-  'bnss-47': {
-    id: 'bnss-47',
-    title: 'Grounds of arrest and right to bail to be communicated',
-    organization: 'Ministry of Law & Justice, Govt of India',
-    legalSection: 'Section 47, Bharatiya Nagarik Suraksha Sanhita, 2023',
-    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
+  // === CONSTITUTION OF INDIA ===
+  'const-art-22': {
+    id: 'const-art-22',
+    title: 'Protection against arrest and detention in certain cases',
+    organization: 'Supreme Court of India / Constitution of India',
+    legalSection: 'Article 22(1) & 22(2), Constitution of India',
+    url: 'https://www.india.gov.in/my-government/constitution-india',
     type: 'statute',
+    sourceType: 'PRIMARY_LAW',
     officialBadge: true,
-    summary: 'Every police officer or other person arresting any person without warrant shall forthwith communicate to him full particulars of the offence for which he is arrested or other grounds for such arrest. (Previously CrPC Section 50).',
-    lastReviewed: 'July 2024 (BNSS Implementation)'
+    category: 'CONSTITUTION',
+    summary: 'Article 22(1): No person who is arrested shall be detained in custody without being informed, as soon as may be, of the grounds for such arrest, nor denied the right to consult and be defended by a legal practitioner of choice. Article 22(2): Every person arrested and detained must be produced before the nearest Magistrate within 24 hours of arrest, excluding journey time, and cannot be detained beyond that period without authority of a Magistrate (subject to constitutional exceptions).',
+    lastReviewed: '16 August 2026'
   },
-  'bnss-48': {
-    id: 'bnss-48',
-    title: 'Obligation of person making arrest to inform friend/relative',
+  'const-art-20': {
+    id: 'const-art-20',
+    title: 'Protection against self-incrimination (Right to Silence)',
+    organization: 'Constitution of India',
+    legalSection: 'Article 20(3), Constitution of India',
+    url: 'https://www.india.gov.in/my-government/constitution-india',
+    type: 'statute',
+    sourceType: 'PRIMARY_LAW',
+    officialBadge: true,
+    category: 'CONSTITUTION',
+    summary: 'Guarantees that no person accused of any offence shall be compelled to be a witness against himself. Citizens have the right to remain silent in response to self-incriminating questions during police interrogation.',
+    lastReviewed: '16 August 2026'
+  },
+  'const-art-21': {
+    id: 'const-art-21',
+    title: 'Protection of life and personal liberty',
+    organization: 'Constitution of India',
+    legalSection: 'Article 21, Constitution of India',
+    url: 'https://www.india.gov.in/my-government/constitution-india',
+    type: 'statute',
+    sourceType: 'PRIMARY_LAW',
+    officialBadge: true,
+    category: 'CONSTITUTION',
+    summary: 'No person shall be deprived of his life or personal liberty except according to procedure established by law. State action, including restraint or detention by law enforcement, must be just, fair, and reasonable.',
+    lastReviewed: '16 August 2026'
+  },
+
+  // === CRIMINAL PROCEDURE: BHARATIYA NAGARIK SURAKSHA SANHITA, 2023 (BNSS) ===
+  'bnss-35-notice': {
+    id: 'bnss-35-notice',
+    title: 'Notice of appearance before police officer instead of routine arrest',
     organization: 'Ministry of Law & Justice, Govt of India',
-    legalSection: 'Section 48, Bharatiya Nagarik Suraksha Sanhita, 2023',
+    legalSection: 'Section 35(3), Bharatiya Nagarik Suraksha Sanhita, 2023',
     url: 'https://www.indiacode.nic.in/handle/123456789/20062',
     type: 'statute',
+    sourceType: 'PRIMARY_LAW',
     officialBadge: true,
-    summary: 'Mandates the police officer making an arrest to immediately inform a nominated friend, relative, or person of interest about the arrest and the location where the arrested person is being held. (Previously CrPC Section 50A).',
-    lastReviewed: 'July 2024'
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'For offences punishable with imprisonment for a term which may be less than 7 years or up to 7 years, police must issue a Notice of Appearance instead of routine arrest, unless specific statutory necessity grounds for arrest are recorded in writing.',
+    lastReviewed: '16 August 2026'
+  },
+  'bnss-36': {
+    id: 'bnss-36',
+    title: 'Procedure of arrest and duties of officer making arrest',
+    organization: 'Ministry of Law & Justice, Govt of India',
+    legalSection: 'Section 36, Bharatiya Nagarik Suraksha Sanhita, 2023',
+    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
+    type: 'statute',
+    sourceType: 'PRIMARY_LAW',
+    officialBadge: true,
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'Requires every police officer making an arrest to bear accurate, visible and clear identification of his name and designation, prepare an arrest memorandum attested by at least one witness (family member or respectable locality inhabitant) and countersigned by the arrested person.',
+    lastReviewed: '16 August 2026'
   },
   'bnss-38': {
     id: 'bnss-38',
@@ -30,163 +76,264 @@ export const legalSources: Record<string, LegalSource> = {
     legalSection: 'Section 38, Bharatiya Nagarik Suraksha Sanhita, 2023',
     url: 'https://www.indiacode.nic.in/handle/123456789/20062',
     type: 'statute',
+    sourceType: 'PRIMARY_LAW',
     officialBadge: true,
-    summary: 'An arrested person has the right to meet and consult with an advocate of their choice during interrogation, though not throughout the entire interrogation. (Previously CrPC Section 41D).',
-    lastReviewed: 'July 2024'
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'An arrested person has the statutory right to meet and consult with an advocate of their choice during interrogation, though not necessarily throughout the entire interrogation.',
+    lastReviewed: '16 August 2026'
+  },
+  'bnss-43-women': {
+    id: 'bnss-43-women',
+    title: 'Special protections regarding arrest and search of women',
+    organization: 'Ministry of Law & Justice, Govt of India',
+    legalSection: 'Section 43(5) & Section 47, BNSS, 2023',
+    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
+    type: 'statute',
+    sourceType: 'PRIMARY_LAW',
+    officialBadge: true,
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'Except in exceptional circumstances, no woman shall be arrested after sunset and before sunrise. Where exceptional circumstances exist, the arrest must be effected by a woman police officer after obtaining prior written permission from a Judicial Magistrate First Class. Searches of female persons must strictly be made by a female officer with strict regard to decency.',
+    lastReviewed: '16 August 2026'
+  },
+  'bnss-46': {
+    id: 'bnss-46',
+    title: 'No unnecessary restraint on arrested person',
+    organization: 'Ministry of Law & Justice, Govt of India',
+    legalSection: 'Section 46, Bharatiya Nagarik Suraksha Sanhita, 2023',
+    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
+    type: 'statute',
+    sourceType: 'PRIMARY_LAW',
+    officialBadge: true,
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'The person arrested shall not be subjected to more restraint than is necessary to prevent his escape. Routine hand-cuffing without judicial justification or demonstrated flight risk/violent conduct is legally prohibited.',
+    lastReviewed: '16 August 2026'
+  },
+  'bnss-47': {
+    id: 'bnss-47',
+    title: 'Grounds of arrest and right to bail to be communicated',
+    organization: 'Ministry of Law & Justice, Govt of India',
+    legalSection: 'Section 47, Bharatiya Nagarik Suraksha Sanhita, 2023',
+    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
+    type: 'statute',
+    sourceType: 'PRIMARY_LAW',
+    officialBadge: true,
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'Every police officer or other person arresting any person without warrant shall forthwith communicate full particulars of the offence or other grounds for such arrest. Where a person is arrested for a bailable offence, the officer shall inform him that he is entitled to be released on bail and may arrange sureties.',
+    lastReviewed: '16 August 2026'
+  },
+  'bnss-48': {
+    id: 'bnss-48',
+    title: 'Obligation to inform friend, relative or nominee of arrest',
+    organization: 'Ministry of Law & Justice, Govt of India',
+    legalSection: 'Section 48, Bharatiya Nagarik Suraksha Sanhita, 2023',
+    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
+    type: 'statute',
+    sourceType: 'PRIMARY_LAW',
+    officialBadge: true,
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'Mandates the police officer making an arrest to immediately inform a nominated friend, relative, or person of interest about the arrest and the location where the arrested person is being held, and record who was informed in the station register.',
+    lastReviewed: '16 August 2026'
+  },
+  'bnss-49': {
+    id: 'bnss-49',
+    title: 'Search of arrested person & custody of seized articles',
+    organization: 'Ministry of Law & Justice, Govt of India',
+    legalSection: 'Section 49, Bharatiya Nagarik Suraksha Sanhita, 2023',
+    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
+    type: 'statute',
+    sourceType: 'PRIMARY_LAW',
+    officialBadge: true,
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'Upon lawful arrest, an officer may search the person and place in safe custody all articles other than necessary wearing apparel. A receipt showing the articles taken into possession shall be given to the arrested person.',
+    lastReviewed: '16 August 2026'
+  },
+  'bnss-53': {
+    id: 'bnss-53',
+    title: 'Examination of arrested person by registered medical practitioner',
+    organization: 'Ministry of Law & Justice, Govt of India',
+    legalSection: 'Section 53, Bharatiya Nagarik Suraksha Sanhita, 2023',
+    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
+    type: 'statute',
+    sourceType: 'PRIMARY_LAW',
+    officialBadge: true,
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'Mandatory medical examination of the arrested person immediately upon arrest by a registered medical practitioner (government medical officer or registered doctor), documenting existing injuries or marks of force, with a copy of the report furnished to the person.',
+    lastReviewed: '16 August 2026'
   },
   'bnss-58': {
     id: 'bnss-58',
     title: 'Person arrested not to be detained more than twenty-four hours',
     organization: 'Ministry of Law & Justice, Govt of India',
-    legalSection: 'Section 58, Bharatiya Nagarik Suraksha Sanhita, 2023',
+    legalSection: 'Section 57 & Section 58, BNSS, 2023',
     url: 'https://www.indiacode.nic.in/handle/123456789/20062',
     type: 'statute',
+    sourceType: 'PRIMARY_LAW',
     officialBadge: true,
-    summary: 'No police officer shall detain in custody a person arrested without warrant for a longer period than under all circumstances is reasonable, and such period shall not exceed twenty-four hours exclusive of journey time, without special magistrate order. (Previously CrPC Section 57).',
-    lastReviewed: 'July 2024'
-  },
-  'bnss-53': {
-    id: 'bnss-53',
-    title: 'Examination of arrested person by medical officer',
-    organization: 'Ministry of Law & Justice, Govt of India',
-    legalSection: 'Section 53, Bharatiya Nagarik Suraksha Sanhita, 2023',
-    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
-    type: 'statute',
-    officialBadge: true,
-    summary: 'Mandatory medical examination of the arrested person immediately upon arrest by a registered medical practitioner, with a copy of the report furnished to the arrested person or their nominee. (Previously CrPC Section 54).',
-    lastReviewed: 'July 2024'
-  },
-  'bnss-43-women': {
-    id: 'bnss-43-women',
-    title: 'Special protections regarding arrest of women',
-    organization: 'Ministry of Law & Justice, Govt of India',
-    legalSection: 'Section 43(5), Bharatiya Nagarik Suraksha Sanhita, 2023',
-    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
-    type: 'statute',
-    officialBadge: true,
-    summary: 'Except in exceptional circumstances, no woman shall be arrested after sunset and before sunrise, and where exceptional circumstances exist, arrest must be executed by a woman police officer after obtaining prior permission from a Judicial Magistrate First Class. (Previously CrPC Section 46(4)).',
-    lastReviewed: 'July 2024'
-  },
-  'bnss-173': {
-    id: 'bnss-173',
-    title: 'Information in cognizable cases & FIR Registration / Zero FIR',
-    organization: 'Ministry of Law & Justice, Govt of India',
-    legalSection: 'Section 173, Bharatiya Nagarik Suraksha Sanhita, 2023',
-    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
-    type: 'statute',
-    officialBadge: true,
-    summary: 'Mandates FIR registration for cognizable offences irrespective of jurisdiction (Zero FIR). Section 173(4) provides that if an officer in charge refuses to record information, the aggrieved person may send the substance in writing by post to the Superintendent of Police. (Previously CrPC Section 154).',
-    lastReviewed: 'July 2024'
-  },
-  'bnss-175-magistrate': {
-    id: 'bnss-175-magistrate',
-    title: 'Magistrate’s power to order investigation on police refusal',
-    organization: 'Ministry of Law & Justice, Govt of India',
-    legalSection: 'Section 175(3), Bharatiya Nagarik Suraksha Sanhita, 2023',
-    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
-    type: 'statute',
-    officialBadge: true,
-    summary: 'Where an application has been made to the Superintendent of Police under Section 173(4) and no investigation has commenced, the aggrieved person may apply to the Magistrate empowered to take cognizance. (Previously CrPC Section 156(3)).',
-    lastReviewed: 'July 2024'
-  },
-  'bnss-105-search': {
-    id: 'bnss-105-search',
-    title: 'Recording of search and seizure through audio-video electronic means',
-    organization: 'Ministry of Law & Justice, Govt of India',
-    legalSection: 'Section 105, Bharatiya Nagarik Suraksha Sanhita, 2023',
-    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
-    type: 'statute',
-    officialBadge: true,
-    summary: 'Mandates that the process of conducting search of a place or taking possession of any property, article, or device, including preparation of the seizure list and signature of witnesses, shall be recorded through audio-video electronic means (mobile or other electronic device) and forwarded promptly to the Magistrate.',
-    lastReviewed: 'July 2024'
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'No police officer shall detain in custody a person arrested without warrant for a longer period than under all circumstances is reasonable, and such period shall not exceed twenty-four hours exclusive of the time necessary for the journey from the place of arrest to the Magistrate\'s Court, without a special order of a Magistrate under Section 187.',
+    lastReviewed: '16 August 2026'
   },
   'bnss-100-witnesses': {
     id: 'bnss-100-witnesses',
     title: 'Search in presence of two independent and respectable witnesses (Panchnama)',
     organization: 'Ministry of Law & Justice, Govt of India',
-    legalSection: 'Section 100, Bharatiya Nagarik Suraksha Sanhita, 2023',
+    legalSection: 'Section 103 & Section 100, BNSS, 2023',
     url: 'https://www.indiacode.nic.in/handle/123456789/20062',
     type: 'statute',
+    sourceType: 'PRIMARY_LAW',
     officialBadge: true,
-    summary: 'Searches must be conducted in the presence of two or more independent and respectable inhabitants of the locality. A list of all things seized shall be signed by such witnesses and a copy delivered to the occupant. (Previously CrPC Section 100).',
-    lastReviewed: 'July 2024'
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'Searches of premises must be conducted in the presence of two or more independent and respectable inhabitants of the locality. A list of all things seized shall be signed by such witnesses and a copy delivered to the occupant.',
+    lastReviewed: '16 August 2026'
   },
-  'bnss-35-notice': {
-    id: 'bnss-35-notice',
-    title: 'Notice of appearance before police officer instead of routine arrest',
+  'bnss-105-search': {
+    id: 'bnss-105-search',
+    title: 'Mandatory audio-video electronic recording of search and seizure',
     organization: 'Ministry of Law & Justice, Govt of India',
-    legalSection: 'Section 35(3), Bharatiya Nagarik Suraksha Sanhita, 2023',
+    legalSection: 'Section 105, Bharatiya Nagarik Suraksha Sanhita, 2023',
     url: 'https://www.indiacode.nic.in/handle/123456789/20062',
     type: 'statute',
+    sourceType: 'PRIMARY_LAW',
     officialBadge: true,
-    summary: 'For offences punishable with imprisonment for a term which may be less than 7 years or up to 7 years, police must issue a Notice of Appearance instead of routine arrest, unless specific statutory necessity grounds for arrest are recorded in writing. (Previously CrPC Section 41A).',
-    lastReviewed: 'July 2024'
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'Mandates that the process of conducting search of a place or taking possession of any property, article, or device, including preparation of the seizure list and signature of witnesses, shall be recorded through audio-video electronic means (mobile or other electronic device) and forwarded promptly to the Magistrate.',
+    lastReviewed: '16 August 2026'
   },
-  'const-art-22': {
-    id: 'const-art-22',
-    title: 'Protection against arrest and detention in certain cases',
-    organization: 'Supreme Court of India / Constitution of India',
-    legalSection: 'Article 22(1) & 22(2), Constitution of India',
-    url: 'https://www.india.gov.in/my-government/constitution-india',
+  'bnss-173': {
+    id: 'bnss-173',
+    title: 'Information in cognizable cases, FIR Registration & Zero FIR',
+    organization: 'Ministry of Law & Justice, Govt of India',
+    legalSection: 'Section 173, Bharatiya Nagarik Suraksha Sanhita, 2023',
+    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
     type: 'statute',
+    sourceType: 'PRIMARY_LAW',
     officialBadge: true,
-    summary: 'Fundamental Right: No person who is arrested shall be detained in custody without being informed, as soon as may be, of the grounds for such arrest, nor denied the right to consult and be defended by a legal practitioner of choice. Production before Magistrate within 24 hours is a constitutional guarantee.',
-    lastReviewed: 'Active'
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'Section 173(1): Information relating to a cognizable offence may be given orally or electronically to an officer in charge irrespective of the area where the crime was committed (Zero FIR). Section 173(2): A copy of the FIR shall be given forthwith, free of cost, to the informant. Section 173(4): If an officer refuses to record the information, the aggrieved person may send the substance in writing by post to the Superintendent of Police.',
+    lastReviewed: '16 August 2026'
   },
-  'const-art-20': {
-    id: 'const-art-20',
-    title: 'Protection against self-incrimination',
-    organization: 'Constitution of India',
-    legalSection: 'Article 20(3), Constitution of India',
-    url: 'https://www.india.gov.in/my-government/constitution-india',
+  'bnss-175-magistrate': {
+    id: 'bnss-175-magistrate',
+    title: 'Application to Magistrate on police failure to investigate',
+    organization: 'Ministry of Law & Justice, Govt of India',
+    legalSection: 'Section 175(3), Bharatiya Nagarik Suraksha Sanhita, 2023',
+    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
     type: 'statute',
+    sourceType: 'PRIMARY_LAW',
     officialBadge: true,
-    summary: 'No person accused of any offence shall be compelled to be a witness against himself (Right to Silence against self-incriminating questions during interrogation).',
-    lastReviewed: 'Active'
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'Where an application has been made to the Superintendent of Police under Section 173(4) and no investigation has commenced or the grievance persists, the aggrieved person may apply to the Judicial Magistrate empowered to take cognizance under Section 175(3).',
+    lastReviewed: '16 August 2026'
+  },
+  'bnss-196-custodial': {
+    id: 'bnss-196-custodial',
+    title: 'Mandatory Judicial Magisterial Inquiry in custodial death/violence',
+    organization: 'Ministry of Law & Justice, Govt of India',
+    legalSection: 'Section 196(4), Bharatiya Nagarik Suraksha Sanhita, 2023',
+    url: 'https://www.indiacode.nic.in/handle/123456789/20062',
+    type: 'statute',
+    sourceType: 'PRIMARY_LAW',
+    officialBadge: true,
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'Where any person dies or disappears, or rape is alleged to have been committed on any woman while in the custody of the police, an inquiry shall be conducted by the Judicial Magistrate or Metropolitan Magistrate within whose jurisdiction the offence took place, in addition to the police investigation.',
+    lastReviewed: '16 August 2026'
+  },
+
+  // === LEGAL AID ===
+  'nalsa-legal-aid': {
+    id: 'nalsa-legal-aid',
+    title: 'National Legal Services Authority (NALSA) & Statutory Free Legal Aid',
+    organization: 'National Legal Services Authority (Govt of India)',
+    legalSection: 'Section 12 & 13, Legal Services Authorities Act, 1987',
+    url: 'https://nalsa.gov.in/',
+    type: 'statute',
+    sourceType: 'LEGAL_AID',
+    officialBadge: true,
+    category: 'LEGAL_AID',
+    summary: 'Under Section 12 of the Legal Services Authorities Act, 1987, free legal aid and counsel representation is provided to eligible citizens: women, children, persons in custody, members of SC/ST, victims of human trafficking/disasters, disabled persons, and individuals below statutory income limits through DLSA, SLSA, and TLSC.',
+    lastReviewed: '16 August 2026'
+  },
+
+  // === HUMAN RIGHTS ===
+  'nhrc-portal': {
+    id: 'nhrc-portal',
+    title: 'National Human Rights Commission (NHRC) Complaint Redressal',
+    organization: 'National Human Rights Commission (NHRC)',
+    legalSection: 'Protection of Human Rights Act, 1993',
+    url: 'https://hrcnet.nic.in/',
+    type: 'portal',
+    sourceType: 'OFFICIAL_GOVERNMENT',
+    officialBadge: true,
+    category: 'HUMAN_RIGHTS',
+    summary: 'Statutory commission under the Protection of Human Rights Act, 1993 empowered to enquire into complaints of human rights violations, custodial torture, illegal detention, or negligence by public servants. Online 24x7 complaint registry assigns a trackable HRCNet number.',
+    lastReviewed: '16 August 2026'
+  },
+
+  // === PUBLIC AUTHORITIES & JUDICIAL PRECEDENTS ===
+  'pc-act-1988': {
+    id: 'pc-act-1988',
+    title: 'Prevention of Corruption Act, 1988 (Amended 2018)',
+    organization: 'Ministry of Personnel, Public Grievances and Pensions',
+    legalSection: 'Sections 7, 7A & 8, PC Act 1988',
+    url: 'https://www.indiacode.nic.in/handle/123456789/1943',
+    type: 'statute',
+    sourceType: 'PRIMARY_LAW',
+    officialBadge: true,
+    category: 'PUBLIC_AUTHORITIES',
+    summary: 'Criminalizes taking or demanding of undue advantage by a public servant. Section 8 protects a person who is compelled to give bribe if they report the matter to the law enforcement authority or investigating agency within 7 days.',
+    lastReviewed: '16 August 2026'
+  },
+  'prakash-singh-pca': {
+    id: 'prakash-singh-pca',
+    title: 'Prakash Singh v. Union of India (2006) 8 SCC 1 - Police Complaints Authority (PCA)',
+    organization: 'Supreme Court of India',
+    legalSection: 'Landmark Directive on Independent Police Oversight',
+    url: 'https://main.sci.gov.in/',
+    type: 'judgment',
+    sourceType: 'JUDICIAL',
+    officialBadge: true,
+    category: 'PUBLIC_AUTHORITIES',
+    summary: 'Supreme Court directed all States to establish State and District Police Complaints Authorities (PCA) headed by retired judges to independently enquire into allegations of grave police misconduct, custodial violence, extortion, and unlawful arrest.',
+    lastReviewed: '16 August 2026'
   },
   'sc-dk-basu': {
     id: 'sc-dk-basu',
     title: 'D.K. Basu v. State of West Bengal (1997) 1 SCC 416',
     organization: 'Supreme Court of India',
-    legalSection: 'Landmark Precedent on Custodial Safeguards',
-    url: 'https://main.sci.gov.in/judgment/judgments.php',
+    legalSection: 'Landmark Precedent on Custodial Safeguards & Arrest Memo',
+    url: 'https://main.sci.gov.in/',
     type: 'judgment',
+    sourceType: 'JUDICIAL',
     officialBadge: true,
+    category: 'JUDICIAL',
     summary: 'Supreme Court established 11 mandatory guidelines to prevent custodial torture and wrongful detention, including mandatory identification tags for arresting officers, arrest memo signed by a witness, inspection memo, and prompt medical checkups.',
-    lastReviewed: 'Active Precedent'
-  },
-  'sc-lalita-kumari': {
-    id: 'sc-lalita-kumari',
-    title: 'Lalita Kumari v. Govt. of U.P. (2014) 2 SCC 1',
-    organization: 'Supreme Court of India (Constitution Bench)',
-    legalSection: 'Landmark Precedent on Mandatory FIR Registration',
-    url: 'https://main.sci.gov.in/judgment/judgments.php',
-    type: 'judgment',
-    officialBadge: true,
-    summary: 'Held that registration of FIR is mandatory under Section 154 (now BNSS 173) if the information discloses commission of a cognizable offence and no preliminary inquiry is permissible in such cases. Failure to register attracts disciplinary and criminal action.',
-    lastReviewed: 'Active Precedent'
+    lastReviewed: '16 August 2026'
   },
   'sc-arnesh-kumar': {
     id: 'sc-arnesh-kumar',
     title: 'Arnesh Kumar v. State of Bihar (2014) 8 SCC 273',
     organization: 'Supreme Court of India',
-    legalSection: 'Landmark Precedent on Restricting Unwarranted Arrests',
-    url: 'https://main.sci.gov.in/judgment/judgments.php',
+    legalSection: 'Landmark Precedent Restricting Automatic Arrests',
+    url: 'https://main.sci.gov.in/',
     type: 'judgment',
+    sourceType: 'JUDICIAL',
     officialBadge: true,
+    category: 'JUDICIAL',
     summary: 'Directed all state governments and police officers that arrests should not be automatic upon filing of an FIR for offences with punishment up to 7 years. Checklists and reasons must be presented before the Magistrate.',
-    lastReviewed: 'Active Precedent'
+    lastReviewed: '16 August 2026'
   },
-  'nhrc-guidelines': {
-    id: 'nhrc-guidelines',
-    title: 'NHRC Guidelines on Arrest, Custody & Police Misconduct',
-    organization: 'National Human Rights Commission (NHRC)',
-    legalSection: 'Protection of Human Rights Act, 1993',
-    url: 'https://nhrc.nic.in/',
-    type: 'guideline',
+  'sc-lalita-kumari': {
+    id: 'sc-lalita-kumari',
+    title: 'Lalita Kumari v. Govt. of U.P. (2014) 2 SCC 1',
+    organization: 'Supreme Court of India (Constitution Bench)',
+    legalSection: 'Landmark Precedent on Mandatory FIR for Cognizable Offences',
+    url: 'https://main.sci.gov.in/',
+    type: 'judgment',
+    sourceType: 'JUDICIAL',
     officialBadge: true,
-    summary: 'Requires mandatory reporting of any custodial death, custodial rape, or grievous custodial injury to NHRC within 24 hours, followed by magisterial inquiry and videographed post-mortem.',
-    lastReviewed: 'Active Guidelines'
+    category: 'JUDICIAL',
+    summary: 'Held that registration of FIR is mandatory under Section 154 (now BNSS Section 173) if the information discloses commission of a cognizable offence and no preliminary inquiry is permissible in such cases.',
+    lastReviewed: '16 August 2026'
   },
   'cpgrams-portal': {
     id: 'cpgrams-portal',
@@ -195,30 +342,23 @@ export const legalSources: Record<string, LegalSource> = {
     legalSection: 'Government of India Grievance Mechanism',
     url: 'https://pgportal.gov.in/',
     type: 'portal',
+    sourceType: 'OFFICIAL_GOVERNMENT',
     officialBadge: true,
+    category: 'PUBLIC_AUTHORITIES',
     summary: 'Online 24x7 portal for citizens to lodge grievances regarding public authorities and central law enforcement, tracked with unique registration numbers and mandated resolution timelines.',
-    lastReviewed: 'Active Portal'
+    lastReviewed: '16 August 2026'
   },
-  'pc-act-1988': {
-    id: 'pc-act-1988',
-    title: 'Prevention of Corruption Act, 1988 (Amended 2018)',
-    organization: 'Ministry of Personnel, Public Grievances and Pensions',
-    legalSection: 'Sections 7, 7A & 8, PC Act 1988',
-    url: 'https://www.indiacode.nic.in/handle/123456789/1943',
+  'jj-act-2015': {
+    id: 'jj-act-2015',
+    title: 'Juvenile Justice (Care and Protection of Children) Act, 2015',
+    organization: 'Ministry of Women and Child Development, Govt of India',
+    legalSection: 'Section 10 & 107, Juvenile Justice Act, 2015',
+    url: 'https://www.indiacode.nic.in/handle/123456789/2148',
     type: 'statute',
+    sourceType: 'PRIMARY_LAW',
     officialBadge: true,
-    summary: 'Criminalizes taking of undue advantage by a public servant. Section 8 provides protection to a person who is compelled to give bribe if they report the matter to the law enforcement authority or investigating agency within 7 days.',
-    lastReviewed: 'Active Statute'
-  },
-  'prakash-singh-pca': {
-    id: 'prakash-singh-pca',
-    title: 'Prakash Singh v. Union of India (2006) 8 SCC 1 - Police Complaints Authority (PCA)',
-    organization: 'Supreme Court of India',
-    legalSection: 'Landmark Directive on Police Reforms & Oversight',
-    url: 'https://main.sci.gov.in/',
-    type: 'judgment',
-    officialBadge: true,
-    summary: 'Mandated the creation of State and District Police Complaints Authorities (PCA) headed by retired High Court / District Judges to investigate public complaints of serious police misconduct, extortion, rape, and abuse of power.',
-    lastReviewed: 'Active Directive'
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'A child in conflict with law cannot be kept in a police lockup or jail. Must be placed under charge of a Special Juvenile Police Unit (SJPU) or designated Child Welfare Police Officer (CWPO) and produced before the Juvenile Justice Board (JJB) within 24 hours.',
+    lastReviewed: '16 August 2026'
   }
 };

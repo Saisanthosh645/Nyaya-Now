@@ -119,7 +119,7 @@ export default function App() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-slate-900 font-['Plus_Jakarta_Sans',sans-serif]">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden flex flex-col bg-[#F8FAFC] text-slate-900 font-['Plus_Jakarta_Sans',sans-serif]">
       
       {/* Navigation Header */}
       <Header
@@ -132,11 +132,11 @@ export default function App() {
       />
 
       {/* Main View Router */}
-      <main className="flex-1">
+      <main className="flex-1 w-full max-w-full overflow-x-hidden">
         
         {/* VIEW 1: HOME PAGE */}
         {currentView.type === 'home' && (
-          <div>
+          <div className="w-full max-w-full overflow-x-hidden">
             {/* Hero Section */}
             <Hero
               language={language}
@@ -148,14 +148,14 @@ export default function App() {
             />
 
             {/* SITUATION SELECTOR SECTION */}
-            <section id="situation-selector" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+            <section id="situation-selector" className="w-full max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-10 sm:py-16">
               
               {/* Section Heading */}
-              <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+              <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-10">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-2">
                   {t.whatsHappening}
                 </h2>
-                <p className="text-sm sm:text-base text-slate-600 font-normal">
+                <p className="text-xs sm:text-base text-slate-600 font-normal">
                   {t.chooseSituation}
                 </p>
               </div>
@@ -169,7 +169,7 @@ export default function App() {
               />
 
               {/* 8 Primary Situation Cards Responsive Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6">
                 {filteredSituations.map((situation) => (
                   <SituationCard
                     key={situation.id}
@@ -182,7 +182,7 @@ export default function App() {
 
               {/* Empty Search Result */}
               {filteredSituations.length === 0 && (
-                <div className="text-center py-12 bg-white rounded-2xl border border-slate-200 p-8 max-w-lg mx-auto">
+                <div className="text-center py-10 bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 max-w-lg mx-auto">
                   <HelpCircle className="w-10 h-10 text-slate-400 mx-auto mb-3" />
                   <h3 className="text-base font-bold text-slate-900 mb-1">
                     No matching situations found
@@ -201,11 +201,11 @@ export default function App() {
             </section>
 
             {/* THREE THINGS TO REMEMBER SECTION */}
-            <section className="bg-white border-y border-slate-200 py-12 sm:py-16">
-              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section className="bg-white border-y border-slate-200 py-10 sm:py-16 w-full max-w-full overflow-x-hidden">
+              <div className="max-w-6xl mx-auto px-3.5 sm:px-6 lg:px-8">
                 
-                <div className="text-center max-w-2xl mx-auto mb-10">
-                  <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+                <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+                  <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
                     {t.threeRulesTitle}
                   </h2>
                   <p className="text-xs sm:text-sm text-slate-500">
@@ -213,43 +213,43 @@ export default function App() {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                   
                   {/* Card 01 */}
-                  <div className="p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 relative overflow-hidden group hover:border-slate-300 transition-all">
-                    <div className="text-4xl font-black text-slate-200 mb-3 font-mono">
+                  <div className="p-5 sm:p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 relative overflow-hidden group hover:border-slate-300 transition-all">
+                    <div className="text-3xl sm:text-4xl font-black text-slate-200 mb-2 sm:mb-3 font-mono">
                       01
                     </div>
-                    <h3 className="text-lg font-bold text-slate-900 mb-2">
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1 sm:mb-2">
                       {t.rule1Title}
                     </h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                       {t.rule1Desc}
                     </p>
                   </div>
 
                   {/* Card 02 */}
-                  <div className="p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 relative overflow-hidden group hover:border-slate-300 transition-all">
-                    <div className="text-4xl font-black text-slate-200 mb-3 font-mono">
+                  <div className="p-5 sm:p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 relative overflow-hidden group hover:border-slate-300 transition-all">
+                    <div className="text-3xl sm:text-4xl font-black text-slate-200 mb-2 sm:mb-3 font-mono">
                       02
                     </div>
-                    <h3 className="text-lg font-bold text-slate-900 mb-2">
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1 sm:mb-2">
                       {t.rule2Title}
                     </h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                       {t.rule2Desc}
                     </p>
                   </div>
 
                   {/* Card 03 */}
-                  <div className="p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 relative overflow-hidden group hover:border-slate-300 transition-all">
-                    <div className="text-4xl font-black text-slate-200 mb-3 font-mono">
+                  <div className="p-5 sm:p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 relative overflow-hidden group hover:border-slate-300 transition-all">
+                    <div className="text-3xl sm:text-4xl font-black text-slate-200 mb-2 sm:mb-3 font-mono">
                       03
                     </div>
-                    <h3 className="text-lg font-bold text-slate-900 mb-2">
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1 sm:mb-2">
                       {t.rule3Title}
                     </h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                       {t.rule3Desc}
                     </p>
                   </div>
@@ -259,17 +259,17 @@ export default function App() {
             </section>
 
             {/* DIAGNOSTIC TOOL CALLOUT BANNER */}
-            <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-              <div className="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 text-white rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+            <section className="w-full max-w-5xl mx-auto px-3.5 sm:px-6 lg:px-8 py-8 sm:py-14">
+              <div className="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 text-white rounded-2xl sm:rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-xl flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6">
                 <div className="space-y-2 text-center md:text-left">
                   <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
                     <Compass className="w-3.5 h-3.5" />
                     <span>Interactive 30-Second Diagnostic</span>
                   </span>
-                  <h3 className="text-2xl sm:text-3xl font-black tracking-tight">
+                  <h3 className="text-xl sm:text-3xl font-black tracking-tight leading-tight">
                     Unsure if you are officially under arrest?
                   </h3>
-                  <p className="text-sm text-slate-300 max-w-xl">
+                  <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
                     Answer 3 quick yes/no questions to immediately identify whether you are facing casual inquiry, street questioning, or formal custody.
                   </p>
                 </div>
@@ -286,9 +286,9 @@ export default function App() {
             </section>
 
             {/* TRUST AND TRANSPARENCY SECTION */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-4">
-              <div className="text-center max-w-2xl mx-auto mb-10">
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+            <section className="w-full max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 pb-12 sm:pb-16 pt-2 sm:pt-4">
+              <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+                <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
                   {t.trustTitle}
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500">
@@ -296,10 +296,10 @@ export default function App() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                 
                 {/* Trust Item 1 */}
-                <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-3">
+                <div className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-2.5 sm:space-y-3">
                   <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-100">
                     <BookOpen className="w-5 h-5 stroke-[2.5]" />
                   </div>
@@ -312,7 +312,7 @@ export default function App() {
                 </div>
 
                 {/* Trust Item 2 */}
-                <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-3">
+                <div className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-2.5 sm:space-y-3">
                   <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center border border-amber-100">
                     <Zap className="w-5 h-5 stroke-[2.5]" />
                   </div>
@@ -325,7 +325,7 @@ export default function App() {
                 </div>
 
                 {/* Trust Item 3 */}
-                <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-3">
+                <div className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-2.5 sm:space-y-3">
                   <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-700 flex items-center justify-center border border-sky-100">
                     <Lock className="w-5 h-5 stroke-[2.5]" />
                   </div>
@@ -378,6 +378,7 @@ export default function App() {
           <SourcesPage
             language={language}
             onNavigate={navigateTo}
+            onShowToast={showToast}
           />
         )}
 
@@ -397,6 +398,7 @@ export default function App() {
         onNavigate={navigateTo}
         language={language}
         onOpenSos={() => setSosModalOpen(true)}
+        onShowToast={showToast}
       />
 
       {/* Floating Emergency Mobile Button */}

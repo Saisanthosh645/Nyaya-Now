@@ -1,15 +1,22 @@
-import React from 'react';
-import { Shield, ExternalLink, Heart, AlertTriangle, PhoneCall, Scale, BookOpen } from 'lucide-react';
+import React, { useState } from 'react';
+import { Shield, PhoneCall, AlertTriangle, FileCheck2, History, MessageSquare, Lock } from 'lucide-react';
 import { Language, ActiveView } from '../types';
 import { translations } from '../data/translations';
+import { MethodologyModal } from './MethodologyModal';
+import { VersionModal } from './VersionModal';
+import { ReportCorrectionModal } from './ReportCorrectionModal';
 
 interface FooterProps {
   onNavigate: (view: ActiveView) => void;
   language: Language;
   onOpenSos: () => void;
+  onShowToast?: (msg: string) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigate, language, onOpenSos }) => {
+export const Footer: React.FC<FooterProps> = ({ onNavigate, language, onOpenSos, onShowToast }) => {
+  const [methodologyOpen, setMethodologyOpen] = useState(false);
+  const [versionOpen, setVersionOpen] = useState(false);
+  const [reportOpen, setReportOpen] = useState(false);
   const t = translations[language];
 
   return (
@@ -33,6 +40,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, language, onOpenSos 
             <p className="text-sm text-slate-400 leading-relaxed max-w-md">
               India's 30-Second Police Rights Guide — empowering citizens with immediate, verified legal safeguards under the Bharatiya Nagarik Suraksha Sanhita (BNSS), 2023.
             </p>
+
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300">
+              <Lock className="w-3.5 h-3.5 text-emerald-400" />
+              <span><strong>Privacy First:</strong> Zero tracking. No personal data, location, or logs are collected.</span>
+            </div>
             
             {/* Direct Emergency Numbers Pill Bar */}
             <div className="pt-2">
@@ -64,7 +76,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, language, onOpenSos 
           {/* Col 2: Navigation */}
           <div>
             <h3 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-3">
-              Navigation
+              Quick Navigation
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -121,37 +133,49 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, language, onOpenSos 
                   onClick={onOpenSos}
                   className="text-amber-400 hover:text-amber-300 font-medium transition-colors"
                 >
-                  All Emergency Numbers Directory
+                  Emergency Helplines
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Col 3: Official Legal Frameworks */}
+          {/* Col 3: Trust & Legal Credibility */}
           <div>
             <h3 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-3">
-              Legal Frameworks
+              Transparency & Review
             </h3>
-            <ul className="space-y-2 text-sm text-slate-400">
-              <li className="flex items-center space-x-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-                <span>BNSS, 2023 (Current Criminal Procedure)</span>
+            <ul className="space-y-2.5 text-sm">
+              <li>
+                <button
+                  onClick={() => setMethodologyOpen(true)}
+                  className="hover:text-amber-400 transition-colors flex items-center gap-1.5 text-slate-300"
+                >
+                  <FileCheck2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Verification Methodology</span>
+                </button>
               </li>
-              <li className="flex items-center space-x-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                <span>Constitution of India (Articles 20, 21, 22)</span>
+              <li>
+                <button
+                  onClick={() => setVersionOpen(true)}
+                  className="hover:text-amber-400 transition-colors flex items-center gap-1.5 text-slate-300"
+                >
+                  <History className="w-3.5 h-3.5 text-blue-400" />
+                  <span>Edition & Changelog (v2.4)</span>
+                </button>
               </li>
-              <li className="flex items-center space-x-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-                <span>D.K. Basu Custodial Guidelines (SC)</span>
+              <li>
+                <button
+                  onClick={() => setReportOpen(true)}
+                  className="hover:text-amber-400 transition-colors flex items-center gap-1.5 text-slate-300"
+                >
+                  <MessageSquare className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Report Legal Correction</span>
+                </button>
               </li>
-              <li className="flex items-center space-x-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
-                <span>Lalita Kumari Mandatory FIR Ruling</span>
-              </li>
-              <li className="flex items-center space-x-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
-                <span>NHRC Custodial Directives</span>
+              <li className="pt-2">
+                <span className="text-xs text-slate-400 block leading-relaxed">
+                  Independent civic legal-awareness project. Not affiliated with the police, ministry, or judiciary.
+                </span>
               </li>
             </ul>
           </div>
@@ -176,11 +200,31 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, language, onOpenSos 
             <span>NyayaNow Civic Initiative</span>
           </div>
           <div>
-            <span>General legal information • No account or personal data collected</span>
+            <span>Verified against BNSS 2023 & Supreme Court Rulings • Free Public Service</span>
           </div>
         </div>
 
       </div>
+
+      {/* Modals */}
+      <MethodologyModal
+        isOpen={methodologyOpen}
+        onClose={() => setMethodologyOpen(false)}
+        language={language}
+      />
+
+      <VersionModal
+        isOpen={versionOpen}
+        onClose={() => setVersionOpen(false)}
+        language={language}
+      />
+
+      <ReportCorrectionModal
+        isOpen={reportOpen}
+        onClose={() => setReportOpen(false)}
+        language={language}
+        onSubmittedToast={onShowToast}
+      />
     </footer>
   );
 };
