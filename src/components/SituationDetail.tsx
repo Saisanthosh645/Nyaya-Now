@@ -32,6 +32,7 @@ import { ConstitutionalProtection } from './ConstitutionalProtection';
 import { LegalAidCard } from './LegalAidCard';
 import { SpecialSafeguards } from './SpecialSafeguards';
 import { SourceVerificationDrawer } from './SourceVerificationDrawer';
+import { AshokaChakra } from './AshokaChakra';
 
 interface SituationDetailProps {
   situation: Situation;
@@ -164,11 +165,16 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
         </p>
       </div>
 
-      {/* ⚡ 30-SECOND GUIDE (Visually Distinct Prominent Panel) */}
-      <section id="30-second-guide-panel" className="bg-linear-to-br from-amber-500 via-amber-600 to-amber-700 text-slate-950 rounded-2xl p-6 sm:p-8 shadow-xl shadow-amber-500/15 mb-8 border border-amber-400">
-        <div className="flex items-center justify-between mb-4">
+      {/* ⚡ 30-SECOND GUIDE (Visually Distinct Prominent Panel with Ashoka Chakra Watermark) */}
+      <section id="30-second-guide-panel" className="relative bg-gradient-to-br from-amber-500 via-amber-600 to-amber-700 text-slate-950 rounded-2xl p-6 sm:p-8 shadow-xl shadow-amber-500/15 mb-8 border border-amber-400 overflow-hidden">
+        {/* Subtle Background Rotating Chakra */}
+        <div className="absolute -right-12 -bottom-12 opacity-15 pointer-events-none">
+          <AshokaChakra size={220} speed="slow" color="#000000" strokeWidth={1.6} />
+        </div>
+
+        <div className="relative z-10 flex items-center justify-between mb-4">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 rounded-lg bg-slate-950 text-amber-400 flex items-center justify-center font-bold">
+            <div className="w-8 h-8 rounded-lg bg-slate-950 text-amber-400 flex items-center justify-center font-bold shadow-xs">
               <Zap className="w-5 h-5 fill-amber-400" />
             </div>
             <h2 className="text-xl sm:text-2xl font-black text-slate-950 tracking-tight">

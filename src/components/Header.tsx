@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Shield, AlertCircle, Menu, X, PhoneCall, Scale, BookOpen, Compass, ChevronDown, Check } from 'lucide-react';
+import { Shield, AlertCircle, Menu, X, PhoneCall, Scale, BookOpen, Compass, ChevronDown, Check, Smartphone, Download } from 'lucide-react';
 import { Language, ActiveView } from '../types';
 import { translations } from '../data/translations';
+import { AshokaChakra } from './AshokaChakra';
 
 interface HeaderProps {
   currentView: ActiveView;
@@ -10,6 +11,7 @@ interface HeaderProps {
   onLanguageChange: (lang: Language) => void;
   onOpenEmergency: () => void;
   onOpenSos: () => void;
+  onOpenDownloadModal?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -18,7 +20,8 @@ export const Header: React.FC<HeaderProps> = ({
   language,
   onLanguageChange,
   onOpenEmergency,
-  onOpenSos
+  onOpenSos,
+  onOpenDownloadModal
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
@@ -40,11 +43,13 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header id="app-header" className="sticky top-0 z-40 bg-slate-900/95 text-white backdrop-blur-md border-b border-slate-800 shadow-md">
-      {/* Top subtle Indian tri-color indicator bar */}
-      <div className="h-1 w-full flex">
-        <div className="flex-1 bg-amber-600"></div>
-        <div className="flex-1 bg-slate-100"></div>
-        <div className="flex-1 bg-emerald-600"></div>
+      {/* Top subtle Indian tri-color indicator bar with animated shimmer */}
+      <div className="h-1 w-full flex relative overflow-hidden">
+        <div className="flex-1 bg-gradient-to-r from-amber-600 to-amber-500"></div>
+        <div className="flex-1 bg-slate-100 relative flex items-center justify-center">
+          <div className="w-1.5 h-1.5 rounded-full bg-blue-800"></div>
+        </div>
+        <div className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600"></div>
       </div>
 
       <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
@@ -54,18 +59,22 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="brand-logo-btn"
             onClick={() => handleNav({ type: 'home' })}
-            className="flex items-center space-x-2 sm:space-x-3 text-left group focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-lg p-1 shrink min-w-0"
+            className="flex items-center space-x-2 sm:space-x-3 text-left group focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-lg p-1 shrink min-w-0 cursor-pointer"
           >
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20 text-slate-950 font-bold group-hover:scale-105 transition-transform shrink-0">
-              <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-slate-950 stroke-[2.5]" />
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-amber-500 via-amber-600 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-500/20 text-slate-950 font-bold group-hover:scale-105 transition-transform shrink-0 overflow-hidden">
+              <div className="absolute inset-0 opacity-25 flex items-center justify-center pointer-events-none">
+                <AshokaChakra size={34} speed="medium" color="#000000" strokeWidth={1.5} />
+              </div>
+              <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-slate-950 stroke-[2.5] relative z-10" />
             </div>
             <div className="min-w-0">
               <div className="flex items-center space-x-1.5 sm:space-x-2">
                 <span className="text-lg sm:text-xl font-extrabold tracking-tight text-white group-hover:text-amber-400 transition-colors truncate">
                   NyayaNow
                 </span>
-                <span className="hidden xs:inline-block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest px-1 sm:px-1.5 py-0.5 rounded bg-slate-800 text-amber-400 border border-slate-700 shrink-0">
-                  BNSS
+                <span className="hidden xs:inline-flex items-center space-x-1 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-slate-800 text-amber-400 border border-slate-700 shrink-0">
+                  <AshokaChakra size={10} speed="slow" color="#f59e0b" strokeWidth={2} />
+                  <span>BNSS</span>
                 </span>
               </div>
               <p className="text-[11px] text-slate-400 font-medium hidden sm:block truncate">
@@ -189,7 +198,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="header-sos-btn"
               onClick={onOpenSos}
-              className="p-1.5 sm:px-3 sm:py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white text-xs font-semibold border border-slate-700 flex items-center space-x-1.5 transition-all shrink-0"
+              className="p-1.5 sm:px-3 sm:py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white text-xs font-semibold border border-slate-700 flex items-center space-x-1.5 transition-all shrink-0 cursor-pointer"
               title="Official Emergency Helplines (112, 1091, 1064)"
               aria-label="Helplines"
             >
@@ -197,11 +206,24 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="hidden sm:inline">Helplines</span>
             </button>
 
+            {/* Download App Trigger */}
+            {onOpenDownloadModal && (
+              <button
+                id="header-download-app-btn"
+                onClick={onOpenDownloadModal}
+                className="hidden lg:flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 hover:text-emerald-200 text-xs font-bold border border-emerald-500/30 transition-all shrink-0 cursor-pointer"
+                title="Download Offline App / Add to Home Screen"
+              >
+                <Smartphone className="w-3.5 h-3.5" />
+                <span>Get App</span>
+              </button>
+            )}
+
             {/* Emergency Mode Button */}
             <button
               id="header-emergency-mode-btn"
               onClick={onOpenEmergency}
-              className="flex items-center space-x-1 sm:space-x-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-bold text-xs sm:text-sm shadow-md shadow-red-600/30 transition-all shrink-0"
+              className="flex items-center space-x-1 sm:space-x-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-bold text-xs sm:text-sm shadow-md shadow-red-600/30 transition-all shrink-0 cursor-pointer"
             >
               <AlertCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-pulse shrink-0" />
               <span className="hidden sm:inline">Emergency Mode</span>
@@ -278,6 +300,22 @@ export const Header: React.FC<HeaderProps> = ({
               <BookOpen className="w-4 h-4 text-slate-400" />
               <span>{t.sources}</span>
             </button>
+
+            {onOpenDownloadModal && (
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenDownloadModal();
+                }}
+                className="flex items-center space-x-3 w-full px-4 py-3 rounded-xl text-sm font-bold text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 text-left cursor-pointer"
+              >
+                <Smartphone className="w-4 h-4 text-emerald-400" />
+                <div className="flex-1 flex items-center justify-between">
+                  <span>Download / Install App</span>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300">Offline</span>
+                </div>
+              </button>
+            )}
           </div>
 
           <div className="pt-3 border-t border-slate-800 flex items-center justify-between">

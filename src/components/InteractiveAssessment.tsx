@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Compass, CheckCircle2, AlertTriangle, ArrowRight, RotateCcw, ShieldCheck, Lock, PhoneCall } from 'lucide-react';
 import { Language, ActiveView } from '../types';
 import { translations } from '../data/translations';
+import { AshokaChakra } from './AshokaChakra';
 
 interface InteractiveAssessmentProps {
   language: Language;
@@ -84,9 +85,9 @@ export const InteractiveAssessment: React.FC<InteractiveAssessmentProps> = ({
       
       {/* Title Header */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold mb-3 border border-amber-200">
-          <Compass className="w-3.5 h-3.5 text-amber-700" />
-          <span>30-Second Legal Diagnostic</span>
+        <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-100/90 text-amber-900 text-xs font-bold mb-3 border border-amber-300/80 shadow-xs">
+          <AshokaChakra size={16} speed="slow" color="#000080" strokeWidth={2} />
+          <span>30-Second Legal Diagnostic • BNSS 2023</span>
         </div>
         <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
           Am I Under Arrest or Detained?

@@ -30,6 +30,8 @@ import { SourcesPage } from './components/SourcesPage';
 import { InteractiveAssessment } from './components/InteractiveAssessment';
 import { EmergencyModal } from './components/EmergencyModal';
 import { SosModal } from './components/SosModal';
+import { AppDownloadModal } from './components/AppDownloadModal';
+import { ConstitutionalTicker } from './components/ConstitutionalTicker';
 import { Toast } from './components/Toast';
 import { EmergencyFloatingButton } from './components/EmergencyFloatingButton';
 import { NotFoundPage } from './components/NotFoundPage';
@@ -43,6 +45,7 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [emergencyModalOpen, setEmergencyModalOpen] = useState<boolean>(false);
   const [sosModalOpen, setSosModalOpen] = useState<boolean>(false);
+  const [downloadModalOpen, setDownloadModalOpen] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const t = translations[language];
@@ -129,6 +132,7 @@ export default function App() {
         onLanguageChange={handleLanguageChange}
         onOpenEmergency={() => setEmergencyModalOpen(true)}
         onOpenSos={() => setSosModalOpen(true)}
+        onOpenDownloadModal={() => setDownloadModalOpen(true)}
       />
 
       {/* Main View Router */}
@@ -145,7 +149,11 @@ export default function App() {
                 const el = document.getElementById('situation-selector');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
+              onOpenDownloadModal={() => setDownloadModalOpen(true)}
             />
+
+            {/* Live Constitutional Safeguards Marquee Ticker */}
+            <ConstitutionalTicker language={language} />
 
             {/* SITUATION SELECTOR SECTION */}
             <section id="situation-selector" className="w-full max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-10 sm:py-16">
@@ -399,6 +407,7 @@ export default function App() {
         language={language}
         onOpenSos={() => setSosModalOpen(true)}
         onShowToast={showToast}
+        onOpenDownloadModal={() => setDownloadModalOpen(true)}
       />
 
       {/* Floating Emergency Mobile Button */}
@@ -428,6 +437,14 @@ export default function App() {
         isOpen={sosModalOpen}
         onClose={() => setSosModalOpen(false)}
         language={language}
+      />
+
+      {/* App Download / Offline Access Modal */}
+      <AppDownloadModal
+        isOpen={downloadModalOpen}
+        onClose={() => setDownloadModalOpen(false)}
+        language={language}
+        onShowToast={showToast}
       />
 
       {/* Toast Notification */}

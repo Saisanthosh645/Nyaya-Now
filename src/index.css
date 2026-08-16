@@ -23,3 +23,177 @@ body,
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Ashoka Chakra & Ambient Motion Keyframes */
+@keyframes spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse-slow {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes shimmer-line {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 90s linear infinite;
+}
+
+.animate-spin-medium {
+  animation: spin-slow 40s linear infinite;
+}
+
+.animate-spin-fast {
+  animation: spin-slow 15s linear infinite;
+}
+
+.animate-spin-reverse-slow {
+  animation: spin-reverse-slow 120s linear infinite;
+}
+
+.animate-spin-reverse-medium {
+  animation: spin-reverse-slow 50s linear infinite;
+}
+
+.animate-float {
+  animation: float-gentle 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes badge-ring {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 15px 4px rgba(245, 158, 11, 0.2);
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.animate-twinkle-delay-1 {
+  animation: twinkle 4s ease-in-out 1s infinite;
+}
+
+.animate-twinkle-delay-2 {
+  animation: twinkle 3.5s ease-in-out 2s infinite;
+}
+
+.animate-badge-glow {
+  animation: badge-ring 3s ease-in-out infinite;
+}
+
+.bg-shimmer-sweep {
+  background-size: 200% 100%;
+  animation: shimmer-sweep 4s infinite linear;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes subtle-balance {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(3deg);
+  }
+  75% {
+    transform: rotate(-3deg);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+.animate-subtle-balance {
+  animation: subtle-balance 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-slow,
+  .animate-spin-medium,
+  .animate-spin-fast,
+  .animate-spin-reverse-slow,
+  .animate-spin-reverse-medium,
+  .animate-float,
+  .animate-pulse-glow,
+  .animate-marquee,
+  .animate-subtle-balance,
+  .animate-twinkle,
+  .animate-twinkle-delay-1,
+  .animate-twinkle-delay-2,
+  .animate-badge-glow {
+    animation: none !important;
+  }
+}
+

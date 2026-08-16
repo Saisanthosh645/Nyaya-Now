@@ -1,5 +1,7 @@
+import React from 'react';
 import { ExternalLink } from 'lucide-react';
 import { ConstitutionalRight, Language } from '../types';
+import { AshokaChakra } from './AshokaChakra';
 
 interface ConstitutionalProtectionProps {
   protection: ConstitutionalRight;
@@ -8,11 +10,16 @@ interface ConstitutionalProtectionProps {
 
 export function ConstitutionalProtection({ protection, language }: ConstitutionalProtectionProps) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border-2 border-amber-300/80 bg-linear-to-br from-amber-50/90 via-orange-50/40 to-amber-50/70 p-5 sm:p-6 shadow-xs">
+    <div className="relative overflow-hidden rounded-2xl border-2 border-amber-300/80 bg-gradient-to-br from-amber-50/90 via-orange-50/40 to-amber-50/70 p-5 sm:p-6 shadow-xs">
+      {/* Background Ashoka Chakra Watermark */}
+      <div className="absolute -right-8 -bottom-8 opacity-10 pointer-events-none">
+        <AshokaChakra size={180} speed="slow" color="#000080" strokeWidth={1.5} />
+      </div>
+
       {/* Decorative top ribbon */}
-      <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-amber-200/80">
+      <div className="relative z-10 flex items-center justify-between gap-2 pb-3 mb-3 border-b border-amber-200/80">
         <div className="flex items-center gap-2">
-          <span className="text-xl">🇮🇳</span>
+          <AshokaChakra size={22} speed="slow" color="#000080" strokeWidth={2} />
           <div>
             <span className="text-[11px] font-extrabold uppercase tracking-widest text-amber-900 block">
               {language === 'hi' ? 'संवैधानिक सुरक्षा' : language === 'te' ? 'రాజ్యాంగ రక్షణ' : 'Constitutional Protection'}
@@ -27,7 +34,7 @@ export function ConstitutionalProtection({ protection, language }: Constitutiona
           href={protection.sourceUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-xs font-semibold text-amber-900 bg-amber-200/70 hover:bg-amber-200 px-2.5 py-1 rounded-lg transition-colors border border-amber-300/70"
+          className="inline-flex items-center gap-1 text-xs font-semibold text-amber-900 bg-amber-200/70 hover:bg-amber-200 px-2.5 py-1 rounded-lg transition-colors border border-amber-300/70 shrink-0"
         >
           <span>Constitution of India</span>
           <ExternalLink className="w-3 h-3 text-amber-800" />
@@ -35,16 +42,16 @@ export function ConstitutionalProtection({ protection, language }: Constitutiona
       </div>
 
       {/* Main explanation */}
-      <h4 className="text-base sm:text-lg font-bold text-slate-900 mb-1.5">
+      <h4 className="relative z-10 text-base sm:text-lg font-bold text-slate-900 mb-1.5">
         {protection.title}
       </h4>
-      <p className="text-sm text-slate-700 leading-relaxed font-normal">
+      <p className="relative z-10 text-sm text-slate-700 leading-relaxed font-normal">
         {protection.plainExplanation}
       </p>
 
       {/* Scope & Exceptions */}
       {protection.scopeAndExceptions && (
-        <div className="mt-3 pt-3 border-t border-amber-200/60 text-xs text-amber-950/80 flex items-start gap-2 bg-amber-100/40 p-2.5 rounded-xl">
+        <div className="relative z-10 mt-3 pt-3 border-t border-amber-200/60 text-xs text-amber-950/80 flex items-start gap-2 bg-amber-100/40 p-2.5 rounded-xl">
           <span className="font-bold shrink-0">Scope & Exceptions:</span>
           <span>{protection.scopeAndExceptions}</span>
         </div>
@@ -52,3 +59,4 @@ export function ConstitutionalProtection({ protection, language }: Constitutiona
     </div>
   );
 }
+

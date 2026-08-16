@@ -1,27 +1,34 @@
 import React, { useState } from 'react';
-import { Shield, PhoneCall, AlertTriangle, FileCheck2, History, MessageSquare, Lock } from 'lucide-react';
+import { Shield, PhoneCall, AlertTriangle, FileCheck2, History, MessageSquare, Lock, Smartphone, Download } from 'lucide-react';
 import { Language, ActiveView } from '../types';
 import { translations } from '../data/translations';
 import { MethodologyModal } from './MethodologyModal';
 import { VersionModal } from './VersionModal';
 import { ReportCorrectionModal } from './ReportCorrectionModal';
+import { AshokaChakra } from './AshokaChakra';
 
 interface FooterProps {
   onNavigate: (view: ActiveView) => void;
   language: Language;
   onOpenSos: () => void;
   onShowToast?: (msg: string) => void;
+  onOpenDownloadModal?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigate, language, onOpenSos, onShowToast }) => {
+export const Footer: React.FC<FooterProps> = ({ onNavigate, language, onOpenSos, onShowToast, onOpenDownloadModal }) => {
   const [methodologyOpen, setMethodologyOpen] = useState(false);
   const [versionOpen, setVersionOpen] = useState(false);
   const [reportOpen, setReportOpen] = useState(false);
   const t = translations[language];
 
   return (
-    <footer id="app-footer" className="bg-slate-950 text-slate-400 border-t border-slate-800 pt-12 pb-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer id="app-footer" className="relative bg-slate-950 text-slate-400 border-t border-slate-800 pt-12 pb-16 overflow-hidden">
+      {/* Subtle Ashoka Chakra watermark in footer */}
+      <div className="absolute -right-20 -bottom-20 opacity-[0.06] pointer-events-none">
+        <AshokaChakra size={360} speed="slow" color="#38bdf8" strokeWidth={1.5} />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
@@ -136,6 +143,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, language, onOpenSos,
                   Emergency Helplines
                 </button>
               </li>
+              {onOpenDownloadModal && (
+                <li>
+                  <button
+                    onClick={onOpenDownloadModal}
+                    className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors flex items-center space-x-1 cursor-pointer"
+                  >
+                    <Smartphone className="w-3.5 h-3.5" />
+                    <span>Download App / Offline Card</span>
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
 
