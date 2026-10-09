@@ -42,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({
       </div>
 
       {/* Primary HD Rotating Ashoka Chakra Watermark - Centered & Right Offset */}
-      <div className="absolute -right-20 sm:right-8 -top-12 sm:top-1/2 sm:-translate-y-1/2 opacity-[0.15] pointer-events-none z-0">
+      <div className="absolute -right-20 hidden xs:block xs:right-0 sm:right-8 -top-12 sm:top-1/2 sm:-translate-y-1/2 opacity-[0.15] pointer-events-none z-0">
         <AshokaChakra
           size={460}
           speed="slow"

@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* ── Custom Breakpoints ──────────────────────────────────────────── */
+@custom-media --xs (min-width: 480px);
+
+@theme {
+  --breakpoint-xs: 480px;
+}
+
 html,
 body,
 #root {
@@ -9,6 +16,24 @@ body,
   margin: 0;
   padding: 0;
   -webkit-text-size-adjust: 100%;
+  /* Prevent horizontal bounce on iOS */
+  overscroll-behavior-x: none;
+}
+
+/* Mobile touch improvements */
+button, a, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent content overflow on all containers */
+.overflow-x-clip {
+  overflow-x: clip;
 }
 
 * {

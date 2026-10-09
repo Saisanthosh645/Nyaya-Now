@@ -1005,15 +1005,15 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({
               <Shield className="w-6 h-6 stroke-[2.5]" />
             </div>
             <div>
-              <div className="flex items-center space-x-2">
-                <h3 className="text-base sm:text-lg font-black text-white tracking-tight">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <h3 className="text-sm xs:text-base sm:text-lg font-black text-white tracking-tight">
                   NyayaNow Mobile & Offline Rights Suite
                 </h3>
                 <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-extrabold border border-emerald-500/30">
                   100% OFFLINE
                 </span>
               </div>
-              <p className="text-[11px] sm:text-xs text-slate-400 mt-0.5">
+              <p className="text-[10px] sm:text-xs text-slate-400 mt-0.5">
                 Instant Emergency Protection • Zero Data Sent • BNSS 2023 Verified
               </p>
             </div>
@@ -1047,45 +1047,48 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({
         </div>
 
         {/* Clean 3-Pillar Tab Navigation */}
-        <div className="px-3 sm:px-6 pt-2.5 pb-1 border-b border-slate-800 bg-slate-900/60 shrink-0">
+        <div className="px-2 sm:px-6 pt-2.5 pb-1 border-b border-slate-800 bg-slate-900/60 shrink-0">
           <div className="grid grid-cols-3 gap-1 sm:gap-2 p-1 bg-slate-950/90 rounded-2xl border border-slate-800 text-xs">
             <button
               onClick={() => setActiveTab('suite')}
-              className={`py-2 px-2 sm:px-3 rounded-xl font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+              className={`py-2 px-1.5 sm:px-3 rounded-xl font-bold transition-all flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer ${
                 activeTab === 'suite'
                   ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/25'
                   : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
               }`}
             >
-              <Smartphone className="w-4 h-4 shrink-0" />
-              <span className="truncate">Mobile App & Lockscreen</span>
-              <span className="hidden sm:inline text-[9px] px-1.5 py-0.2 rounded-full bg-slate-950/80 text-amber-300 font-extrabold ml-1">
+              <Smartphone className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+              <span className="truncate hidden xs:inline">Mobile App & Lockscreen</span>
+              <span className="truncate xs:hidden">App Suite</span>
+              <span className="hidden md:inline text-[9px] px-1.5 py-0.2 rounded-full bg-slate-950/80 text-amber-300 font-extrabold ml-1">
                 COMBINED
               </span>
             </button>
 
             <button
               onClick={() => setActiveTab('simulator')}
-              className={`py-2 px-2 sm:px-3 rounded-xl font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+              className={`py-2 px-1.5 sm:px-3 rounded-xl font-bold transition-all flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer ${
                 activeTab === 'simulator'
                   ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/25'
                   : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
               }`}
             >
-              <Plane className="w-4 h-4 shrink-0" />
-              <span className="truncate">Offline Simulator</span>
+              <Plane className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+              <span className="truncate hidden xs:inline">Offline Simulator</span>
+              <span className="truncate xs:hidden">Simulator</span>
             </button>
 
             <button
               onClick={() => setActiveTab('wallet-card')}
-              className={`py-2 px-2 sm:px-3 rounded-xl font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+              className={`py-2 px-1.5 sm:px-3 rounded-xl font-bold transition-all flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer ${
                 activeTab === 'wallet-card'
                   ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/25'
                   : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
               }`}
             >
-              <Printer className="w-4 h-4 shrink-0" />
-              <span className="truncate">Print Card</span>
+              <Printer className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+              <span className="truncate hidden xs:inline">Print Card</span>
+              <span className="truncate xs:hidden">Card</span>
             </button>
           </div>
         </div>

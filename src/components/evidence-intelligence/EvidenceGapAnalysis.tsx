@@ -113,7 +113,7 @@ export const EvidenceGapAnalysis: React.FC<EvidenceGapAnalysisProps> = ({
                 key={gap.id}
                 className="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-purple-500/40 transition-all space-y-3"
               >
-                <div className="flex items-start justify-between gap-3">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
                       <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border uppercase ${
@@ -135,7 +135,7 @@ export const EvidenceGapAnalysis: React.FC<EvidenceGapAnalysisProps> = ({
                   <button
                     type="button"
                     onClick={onAddEvidence}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 border border-purple-500/30 font-bold text-xs transition-colors shrink-0 cursor-pointer"
+                    className="self-start sm:self-auto flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 border border-purple-500/30 font-bold text-xs transition-colors shrink-0 cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Upload Proof</span>

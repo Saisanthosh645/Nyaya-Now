@@ -17,7 +17,7 @@ export const ComplaintFlow: React.FC<ComplaintFlowProps> = ({ nodes }) => {
             <div className="bg-white rounded-xl p-4 sm:p-5 border border-slate-200 shadow-sm relative overflow-hidden">
               
               {/* Level indicator strip */}
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
                 <div className="flex items-center space-x-2">
                   <span className="w-6 h-6 rounded-lg bg-slate-900 text-white text-xs font-bold flex items-center justify-center">
                     {node.level}

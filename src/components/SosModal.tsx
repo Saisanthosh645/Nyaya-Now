@@ -80,13 +80,13 @@ export const SosModal: React.FC<SosModalProps> = ({ isOpen, onClose, language })
               </h4>
               
               {/* Search State */}
-              <div className="relative">
+              <div className="relative w-full sm:w-auto">
                 <input
                   type="text"
                   placeholder="Filter state..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="bg-slate-800 text-xs px-3 py-1.5 pl-7 rounded-lg border border-slate-700 focus:outline-none focus:border-amber-500 text-white placeholder:text-slate-500"
+                  className="bg-slate-800 text-xs px-3 py-1.5 pl-7 rounded-lg border border-slate-700 focus:outline-none focus:border-amber-500 text-white placeholder:text-slate-500 w-full sm:w-48"
                 />
                 <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2 top-2" />
               </div>
@@ -109,7 +109,7 @@ export const SosModal: React.FC<SosModalProps> = ({ isOpen, onClose, language })
                       </a>
                     )}
                   </div>
-                  <div className="grid grid-cols-2 gap-2 text-slate-300">
+                  <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 text-slate-300">
                     <div>
                       <span className="text-slate-400 block text-[10px]">Anti-Corruption (ACB):</span>
                       <a href={`tel:${st.acbTollFree.split('/')[0].trim()}`} className="font-bold text-amber-300 hover:underline">

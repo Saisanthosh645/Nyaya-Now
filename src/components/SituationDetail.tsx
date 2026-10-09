@@ -93,7 +93,7 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
     .filter(Boolean);
 
   return (
-    <div id="situation-detail-page" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+    <div id="situation-detail-page" className="max-w-4xl mx-auto px-3.5 sm:px-6 lg:px-8 py-5 sm:py-10">
       
       {/* Breadcrumb Navigation */}
       <nav className="flex items-center space-x-2 text-xs font-semibold text-slate-500 mb-6">
@@ -111,22 +111,22 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
           {t.situations}
         </button>
         <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-        <span className="text-slate-900 font-bold truncate max-w-[200px] sm:max-w-none">
+        <span className="text-slate-900 font-bold truncate max-w-[150px] xs:max-w-[200px] sm:max-w-none">
           {situation.title}
         </span>
       </nav>
 
       {/* Top Header & Action Controls */}
-      <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs mb-8">
+      <div className="bg-white rounded-2xl p-5 sm:p-8 border border-slate-200 shadow-xs mb-8">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
           
           {/* Title & Icon */}
-          <div className="flex items-start space-x-4">
-            <div className="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center shrink-0 border border-slate-200">
-              {iconMap[situation.icon] || <ShieldAlert className="w-8 h-8 text-slate-700" />}
+          <div className="flex items-start space-x-3.5">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-slate-100 flex items-center justify-center shrink-0 border border-slate-200">
+              {iconMap[situation.icon] || <ShieldAlert className="w-7 h-7 sm:w-8 sm:h-8 text-slate-700" />}
             </div>
             <div>
-              <div className="flex items-center space-x-2 mb-1.5">
+              <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
                 <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
                   {situation.badgeText || 'BNSS Rights'}
                 </span>
@@ -136,17 +136,17 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
                   </span>
                 )}
               </div>
-              <h1 className="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 leading-tight">
                 {situation.title}
               </h1>
             </div>
           </div>
 
           {/* Action Buttons: Share & Print */}
-          <div className="flex items-center space-x-2 shrink-0">
+          <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto">
             <button
               onClick={handleShare}
-              className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center space-x-1.5 transition-colors"
+              className="flex-1 sm:flex-none justify-center px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center space-x-1.5 transition-colors cursor-pointer"
               title="Share this guide"
             >
               <Share2 className="w-3.5 h-3.5 text-slate-600" />
@@ -155,7 +155,7 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
 
             <button
               onClick={() => setPrintModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center space-x-1.5 transition-colors"
+              className="flex-1 sm:flex-none justify-center px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center space-x-1.5 transition-colors cursor-pointer"
               title="Print Pocket Rights Card"
             >
               <Printer className="w-3.5 h-3.5 text-slate-600" />
@@ -164,19 +164,19 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
           </div>
         </div>
 
-        <p className="text-base text-slate-600 leading-relaxed max-w-3xl">
+        <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl">
           {situation.shortDescription}
         </p>
       </div>
 
       {/* ⚡ 30-SECOND GUIDE (Visually Distinct Prominent Panel with Ashoka Chakra Watermark) */}
-      <section id="30-second-guide-panel" className="relative bg-gradient-to-br from-amber-500 via-amber-600 to-amber-700 text-slate-950 rounded-2xl p-6 sm:p-8 shadow-xl shadow-amber-500/15 mb-8 border border-amber-400 overflow-hidden">
+      <section id="30-second-guide-panel" className="relative bg-gradient-to-br from-amber-500 via-amber-600 to-amber-700 text-slate-950 rounded-2xl p-5 sm:p-8 shadow-xl shadow-amber-500/15 mb-8 border border-amber-400 overflow-hidden">
         {/* Subtle Background Rotating Chakra */}
         <div className="absolute -right-12 -bottom-12 opacity-15 pointer-events-none">
           <AshokaChakra size={220} speed="slow" color="#000000" strokeWidth={1.6} />
         </div>
 
-        <div className="relative z-10 flex items-center justify-between mb-4">
+        <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 mb-4">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 rounded-lg bg-slate-950 text-amber-400 flex items-center justify-center font-bold shadow-xs">
               <Zap className="w-5 h-5 fill-amber-400" />
@@ -246,9 +246,9 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
 
       {/* YOUR RIGHTS Section */}
       <section id="your-rights-section" className="mb-10">
-        <div className="flex items-center justify-between gap-2 mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-2 mb-4">
           <div className="flex items-center space-x-2.5">
-            <ShieldCheck className="w-5 h-5 text-emerald-600" />
+            <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
             <h3 className="text-xl font-bold text-slate-900 tracking-tight">
               {t.yourRights}
             </h3>
@@ -407,10 +407,10 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
       </section>
 
       {/* Bottom Back Button */}
-      <div className="flex items-center justify-between pt-6 border-t border-slate-200">
+      <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 pt-6 border-t border-slate-200">
         <button
           onClick={() => onNavigate({ type: 'home' })}
-          className="flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold transition-colors cursor-pointer"
+          className="flex-1 sm:flex-none flex items-center justify-center space-x-2 px-4 sm:px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs sm:text-sm font-bold transition-colors cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>{t.backToHome}</span>
@@ -418,7 +418,7 @@ export const SituationDetail: React.FC<SituationDetailProps> = ({
 
         <button
           onClick={onOpenEmergency}
-          className="flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm font-bold shadow-md shadow-red-600/20"
+          className="flex-1 sm:flex-none flex items-center justify-center space-x-2 px-4 sm:px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs sm:text-sm font-bold shadow-md shadow-red-600/20 cursor-pointer"
         >
           <AlertCircle className="w-4 h-4" />
           <span>{t.helpNowBtn}</span>

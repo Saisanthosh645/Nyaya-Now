@@ -98,15 +98,16 @@ export const LawyerAuthorityConnection: React.FC<LawyerAuthorityConnectionProps>
       
       {/* Top Sticky Header */}
       <div className="sticky top-0 z-30 bg-slate-950/90 backdrop-blur-md border-b border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 min-h-14 h-auto py-2 flex items-center justify-between gap-2">
           
           <button
             type="button"
             onClick={onNavigateBack}
-            className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-xs sm:text-sm font-semibold cursor-pointer group shrink-0"
+            className="flex items-center gap-1.5 sm:gap-2 text-slate-400 hover:text-white transition-colors text-xs sm:text-sm font-semibold cursor-pointer group shrink-0"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span>Back to Nyaya Now</span>
+            <span className="hidden sm:inline">Back to Nyaya Now</span>
+            <span className="sm:hidden">Back</span>
           </button>
 
           {/* Center Badge */}

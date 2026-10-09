@@ -31,7 +31,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, language, onOpenSos,
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           
           {/* Col 1: Brand & Purpose */}
           <div className="md:col-span-2 space-y-4">

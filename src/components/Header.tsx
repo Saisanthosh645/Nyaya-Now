@@ -76,13 +76,13 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
-        <div className="flex items-center justify-between h-15 gap-2">
+        <div className="flex items-center justify-between min-h-14 h-auto py-1.5 gap-1.5 sm:gap-2">
           
           {/* Brand Logo & Title — Compact & Uncrushable */}
           <button
             id="brand-logo-btn"
             onClick={() => handleNav({ type: 'home' })}
-            className="flex items-center space-x-2 text-left group focus:outline-none rounded-xl p-1 shrink-0 cursor-pointer"
+            className="flex items-center space-x-1.5 sm:space-x-2 text-left group focus:outline-none rounded-xl p-1 shrink-0 cursor-pointer"
           >
             <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-amber-500 via-amber-600 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-500/20 text-slate-950 font-bold group-hover:scale-105 transition-transform shrink-0 overflow-hidden">
               <div className="absolute inset-0 opacity-25 flex items-center justify-center pointer-events-none">
@@ -290,7 +290,7 @@ export const Header: React.FC<HeaderProps> = ({
           </nav>
 
           {/* Right Action Controls: Language, SOS & Emergency Mode */}
-          <div className="flex items-center space-x-1.5 sm:space-x-2.5 shrink-0">
+          <div className="flex items-center space-x-1 sm:space-x-1.5 shrink-0">
             
             {/* Language Selector Dropdown — Globe Icon */}
             <div className="relative" ref={langRef}>
@@ -390,11 +390,12 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="header-emergency-mode-btn"
               onClick={onOpenEmergency}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-600 hover:bg-red-500 active:bg-red-700 text-white font-extrabold text-xs shadow-md shadow-red-600/30 transition-all shrink-0 cursor-pointer"
+              className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-red-600 hover:bg-red-500 active:bg-red-700 text-white font-extrabold text-xs shadow-md shadow-red-600/30 transition-all shrink-0 cursor-pointer"
               title="Immediate Emergency Rights & 112 Dispatch"
             >
               <AlertCircle className="w-3.5 h-3.5 animate-pulse shrink-0" />
-              <span>Emergency</span>
+              <span className="hidden xs:inline">Emergency</span>
+              <span className="xs:hidden">SOS</span>
             </button>
 
             {/* Mobile Menu Toggle */}

@@ -55,7 +55,7 @@ export const SourcesPage: React.FC<SourcesPageProps> = ({ language, onNavigate, 
   };
 
   return (
-    <div id="sources-library-page" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <div id="sources-library-page" className="max-w-4xl mx-auto px-3.5 sm:px-6 lg:px-8 py-6 sm:py-12">
       
       {/* Breadcrumb */}
       <nav className="flex items-center space-x-2 text-xs font-semibold text-slate-500 mb-6">
@@ -66,14 +66,14 @@ export const SourcesPage: React.FC<SourcesPageProps> = ({ language, onNavigate, 
           {t.home}
         </button>
         <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-        <span className="text-slate-900 font-bold">Verified Sources Library</span>
+        <span className="text-slate-900 font-bold truncate">Verified Sources Library</span>
       </nav>
 
       {/* Hero Header */}
-      <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs mb-8">
+      <div className="bg-white rounded-2xl p-5 sm:p-8 border border-slate-200 shadow-xs mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-slate-900 text-amber-400 flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-xl bg-slate-900 text-amber-400 flex items-center justify-center font-bold shrink-0">
               <BookOpen className="w-5 h-5 stroke-[2.5]" />
             </div>
             <div>
@@ -86,17 +86,17 @@ export const SourcesPage: React.FC<SourcesPageProps> = ({ language, onNavigate, 
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={() => setMethodologyOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-colors cursor-pointer"
             >
               <FileCheck2 className="w-3.5 h-3.5 text-slate-600" />
               <span>How We Verify</span>
             </button>
             <button
               onClick={() => setReportModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs font-bold rounded-xl border border-amber-200 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs font-bold rounded-xl border border-amber-200 transition-colors cursor-pointer"
             >
               <MessageSquare className="w-3.5 h-3.5 text-amber-700" />
               <span>Report Discrepancy</span>
@@ -194,7 +194,7 @@ export const SourcesPage: React.FC<SourcesPageProps> = ({ language, onNavigate, 
               </p>
 
               {/* Footer row: Reviewed date & external link */}
-              <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-3 border-t border-slate-100 text-xs">
                 <span className="text-slate-400 font-medium">
                   Last verified: <strong className="text-slate-700">{source.lastReviewed}</strong>
                 </span>
@@ -203,10 +203,10 @@ export const SourcesPage: React.FC<SourcesPageProps> = ({ language, onNavigate, 
                   href={source.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold transition-colors text-xs shadow-2xs"
+                  className="inline-flex items-center justify-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold transition-colors text-xs shadow-2xs w-full sm:w-auto"
                 >
-                  <span>Official Text (India Code / Govt)</span>
-                  <ExternalLink className="w-3 h-3 text-slate-300" />
+                  <span className="truncate">Official Text (India Code / Govt)</span>
+                  <ExternalLink className="w-3 h-3 text-slate-300 shrink-0" />
                 </a>
               </div>
             </div>

@@ -81,7 +81,7 @@ export const InteractiveAssessment: React.FC<InteractiveAssessmentProps> = ({
   const diagnosis = getDiagnosis();
 
   return (
-    <div id="diagnostic-tool-page" className="max-w-3xl mx-auto px-4 py-8 sm:py-12">
+    <div id="diagnostic-tool-page" className="max-w-3xl mx-auto px-3.5 sm:px-6 py-6 sm:py-12">
       
       {/* Title Header */}
       <div className="text-center mb-8">
@@ -261,15 +261,15 @@ export const InteractiveAssessment: React.FC<InteractiveAssessmentProps> = ({
 
       {/* Step 4: Diagnosis Result Card */}
       {currentStep === 4 && (
-        <div className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-slate-900 shadow-xl space-y-6 animate-in zoom-in-95 duration-200">
+        <div className="bg-white rounded-2xl p-5 sm:p-8 border-2 border-slate-900 shadow-xl space-y-6 animate-in zoom-in-95 duration-200">
           
-          <div className="flex items-center justify-between">
-            <span className={`px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider border ${diagnosis.tagColor}`}>
+          <div className="flex flex-wrap items-center justify-between gap-2.5">
+            <span className={`px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider border leading-relaxed ${diagnosis.tagColor}`}>
               {diagnosis.status}
             </span>
             <button
               onClick={handleReset}
-              className="text-xs text-slate-500 hover:text-slate-900 flex items-center space-x-1 font-semibold"
+              className="text-xs text-slate-500 hover:text-slate-900 flex items-center space-x-1 font-semibold ml-auto sm:ml-0 cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Retake</span>

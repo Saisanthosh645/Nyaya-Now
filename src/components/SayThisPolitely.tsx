@@ -104,7 +104,7 @@ export const SayThisPolitely: React.FC<SayThisPolitelyProps> = ({ phrases, langu
               className="bg-white rounded-xl p-4 sm:p-5 border border-amber-200 shadow-sm transition-all hover:border-amber-300"
             >
               {/* Context Tag */}
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-amber-800 bg-amber-100/80 px-2.5 py-0.5 rounded-md">
                   {phrase.situation}
                 </span>

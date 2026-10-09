@@ -105,26 +105,26 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({
     <div id="emergency-mode-modal" className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/90 backdrop-blur-md flex flex-col justify-between animate-in fade-in duration-200">
       
       {/* Top Emergency Red Bar */}
-      <div className="bg-red-600 text-white px-4 py-3 sm:py-4 shadow-lg sticky top-0 z-10 border-b border-red-700 flex items-center justify-between">
-        <div className="flex items-center space-x-2.5">
-          <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center animate-pulse">
-            <AlertCircle className="w-5 h-5 text-white" />
+      <div className="bg-red-600 text-white px-3 sm:px-4 py-2.5 sm:py-4 shadow-lg sticky top-0 z-10 border-b border-red-700 flex items-center justify-between gap-2">
+        <div className="flex items-center space-x-2 sm:space-x-2.5 min-w-0">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/20 flex items-center justify-center animate-pulse shrink-0">
+            <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
           </div>
-          <div>
-            <h2 className="text-base sm:text-lg font-extrabold tracking-tight leading-tight">
+          <div className="min-w-0">
+            <h2 className="text-xs xs:text-sm sm:text-lg font-extrabold tracking-tight leading-tight truncate">
               EMERGENCY RIGHTS GUIDE
             </h2>
-            <p className="text-[11px] text-red-100 font-medium">
+            <p className="text-[10px] sm:text-[11px] text-red-100 font-medium truncate hidden xs:block">
               Simplified Stress-Reduced View • BNSS 2023 Safeguards
             </p>
           </div>
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
           {/* Quick SOS Dial */}
           <a
             href="tel:112"
-            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-white text-red-700 font-extrabold text-xs shadow-sm hover:bg-red-50 active:scale-95 transition-all"
+            className="flex items-center space-x-1 sm:space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-white text-red-700 font-extrabold text-xs shadow-sm hover:bg-red-50 active:scale-95 transition-all"
             title="Call National Emergency 112"
           >
             <PhoneCall className="w-3.5 h-3.5 text-red-600" />
@@ -135,7 +135,7 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({
           <button
             id="close-emergency-mode-btn"
             onClick={onClose}
-            className="p-1.5 sm:px-3 sm:py-1.5 rounded-lg bg-red-700/80 hover:bg-red-800 text-white text-xs font-bold transition-colors flex items-center space-x-1"
+            className="p-1.5 sm:px-3 sm:py-1.5 rounded-lg bg-red-700/80 hover:bg-red-800 text-white text-xs font-bold transition-colors flex items-center space-x-1 cursor-pointer"
           >
             <X className="w-4 h-4" />
             <span className="hidden sm:inline">{t.exitEmergency}</span>

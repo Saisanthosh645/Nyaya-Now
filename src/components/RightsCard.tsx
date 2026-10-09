@@ -49,20 +49,20 @@ export const RightsCard: React.FC<RightsCardProps> = ({ right, onVerifyClick }) 
       </div>
 
       {/* Description / Plain language */}
-      <p className="text-sm text-slate-600 leading-relaxed pl-9 mb-3">
+      <p className="text-sm text-slate-600 leading-relaxed pl-0 sm:pl-9 mb-3">
         {right.plainLanguage || right.description}
       </p>
 
       {/* Scope Note if available */}
       {right.scopeNote && (
-        <div className="ml-9 mb-3 p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600 flex items-start gap-2">
+        <div className="ml-0 sm:ml-9 mb-3 p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600 flex items-start gap-2">
           <AlertCircle className="w-3.5 h-3.5 text-slate-400 mt-0.5 shrink-0" />
           <span><strong>Scope & Condition:</strong> {right.scopeNote}</span>
         </div>
       )}
 
       {/* Legal Section Badges & Verification Button */}
-      <div className="pl-9 flex flex-wrap items-center justify-between gap-2 pt-2.5 border-t border-slate-100 text-xs">
+      <div className="pl-0 sm:pl-9 flex flex-wrap items-center justify-between gap-2 pt-2.5 border-t border-slate-100 text-xs">
         
         <div className="flex flex-wrap items-center gap-1.5">
           {/* Statutory Section */}
@@ -92,7 +92,7 @@ export const RightsCard: React.FC<RightsCardProps> = ({ right, onVerifyClick }) 
         <button
           type="button"
           onClick={() => onVerifyClick && onVerifyClick(right)}
-          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/90 font-semibold transition-colors ml-auto text-xs"
+          className="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-lg text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/90 font-semibold transition-colors ml-auto sm:ml-auto w-full xs:w-auto text-xs cursor-pointer"
           title="Inspect statutory authority, publisher, and official gazette link"
         >
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />

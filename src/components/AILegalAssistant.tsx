@@ -588,7 +588,7 @@ export const AILegalAssistant: React.FC<AILegalAssistantProps> = ({
       </div>
 
       {/* ── TOP NAVIGATION & COMBINED MODE SWITCHER ────────────────────────── */}
-      <header className="sticky top-0 z-40 w-full bg-[#070B14]/90 backdrop-blur-xl border-b border-slate-800/80 px-3 sm:px-8 py-2.5 flex items-center justify-between gap-3">
+      <header className="sticky top-0 z-40 w-full bg-[#070B14]/90 backdrop-blur-xl border-b border-slate-800/80 px-3 sm:px-8 py-2.5 flex flex-wrap items-center justify-between gap-2">
         {/* Left: Back to Home */}
         <button
           type="button"
@@ -608,14 +608,15 @@ export const AILegalAssistant: React.FC<AILegalAssistantProps> = ({
               setAssistantMode('chat');
               VoiceLanguageService.stopSpeaking();
             }}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+            className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
               assistantMode === 'chat'
                 ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
             <MessageSquare className="w-3.5 h-3.5" />
-            <span>{isHi ? 'चैट स्ट्रीम' : isTe ? 'చాట్ స్ట్రీమ్' : 'Chat Stream'}</span>
+            <span className="hidden xs:inline">{isHi ? 'चैट स्ट्रीम' : isTe ? 'చాట్ స్ట్రీమ్' : 'Chat Stream'}</span>
+            <span className="xs:hidden">{isHi ? 'चैट' : isTe ? 'చాట్' : 'Chat'}</span>
           </button>
 
           <button
@@ -626,14 +627,15 @@ export const AILegalAssistant: React.FC<AILegalAssistantProps> = ({
               VoiceLanguageService.stopSpeaking();
               setSpeakingId(null);
             }}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+            className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
               assistantMode === 'voice'
                 ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
             <Mic className="w-3.5 h-3.5 text-emerald-400 group-hover:text-white" />
-            <span>{isHi ? 'लाइव वॉयस रूम' : isTe ? 'లైవ్ వాయిస్ రూమ్' : 'Live Voice Room'}</span>
+            <span className="hidden xs:inline">{isHi ? 'लाइव वॉयस रूम' : isTe ? 'లైవ్ వాయిస్ రూమ్' : 'Live Voice Room'}</span>
+            <span className="xs:hidden">{isHi ? 'वॉयस' : isTe ? 'వాయిస్' : 'Voice'}</span>
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-0.5" />
           </button>
         </div>
@@ -705,7 +707,7 @@ export const AILegalAssistant: React.FC<AILegalAssistantProps> = ({
         <div className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 flex flex-col items-center justify-center animate-in fade-in duration-200">
           
           {/* Top Indian Language Speech Selector */}
-          <div className="w-full flex items-center justify-between bg-slate-900/80 p-2.5 rounded-2xl border border-slate-800 mb-6">
+          <div className="w-full flex flex-wrap items-center justify-between gap-2 bg-slate-900/80 p-2.5 rounded-2xl border border-slate-800 mb-6">
             <div className="flex items-center gap-2 text-xs text-slate-300 font-bold">
               <Globe className="w-4 h-4 text-emerald-400" />
               <span>{isHi ? 'आवाज की भाषा:' : isTe ? 'వాయిస్ భాష:' : 'Voice Speech Dialect:'}</span>
