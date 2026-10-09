@@ -18,7 +18,9 @@ import {
   Coins,
   ShieldAlert,
   ChevronRight,
-  Info
+  Info,
+  Gauge,
+  Car
 } from 'lucide-react';
 import { Situation, Language, ActiveView, RightItem } from '../types';
 import { legalSources } from '../data/sources';
@@ -50,7 +52,9 @@ const iconMap: Record<string, React.ReactNode> = {
   Smartphone: <Smartphone className="w-8 h-8 text-purple-600" />,
   AlertTriangle: <AlertTriangle className="w-8 h-8 text-rose-600" />,
   Coins: <Coins className="w-8 h-8 text-emerald-600" />,
-  Scale: <Scale className="w-8 h-8 text-slate-700" />
+  Scale: <Scale className="w-8 h-8 text-slate-700" />,
+  Gauge: <Gauge className="w-8 h-8 text-amber-500" />,
+  Car: <Car className="w-8 h-8 text-amber-500" />
 };
 
 export const SituationDetail: React.FC<SituationDetailProps> = ({

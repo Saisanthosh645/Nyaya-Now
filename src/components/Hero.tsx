@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertCircle, ArrowRight, ShieldCheck, Zap, Lock, BookOpen, Sparkles, Smartphone, Download, Scale } from 'lucide-react';
+import { AlertCircle, ArrowRight, ShieldCheck, Zap, Lock, BookOpen, Sparkles, Smartphone, Download, Scale, Mic } from 'lucide-react';
 import { Language } from '../types';
 import { translations } from '../data/translations';
 import { AshokaChakra } from './AshokaChakra';
@@ -10,13 +10,15 @@ interface HeroProps {
   onOpenEmergency: () => void;
   onExploreRights: () => void;
   onOpenDownloadModal?: () => void;
+  onOpenAiAssistant?: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ 
   language, 
   onOpenEmergency, 
   onExploreRights,
-  onOpenDownloadModal 
+  onOpenDownloadModal,
+  onOpenAiAssistant
 }) => {
   const t = translations[language];
 
@@ -87,6 +89,24 @@ export const Hero: React.FC<HeroProps> = ({
               <Download className="w-3 h-3 text-emerald-400 opacity-75" />
             </button>
           )}
+
+          {/* Quick jump to Feature 01 AI & Voice Legal Assistant Dedicated Page */}
+          <button
+            id="hero-ai-assistant-pill"
+            onClick={() => {
+              if (onOpenAiAssistant) {
+                onOpenAiAssistant();
+              } else {
+                const el = document.getElementById('ai-legal-assistant');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-amber-500/15 hover:bg-amber-500/25 active:bg-amber-500/35 border border-amber-500/40 text-amber-300 text-xs font-bold transition-all cursor-pointer group shadow-sm hover:scale-105"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-amber-400 group-hover:scale-110" />
+            <span>{language === 'hi' ? '01 एआई एवं वॉयस सहायक' : language === 'te' ? '01 ఏఐ & వాయిస్ అసిస్టెంట్' : '01 AI & Voice Legal Assistant'}</span>
+            <Mic className="w-3 h-3 text-emerald-400 opacity-80" />
+          </button>
         </div>
 
         {/* Main Headings with balanced typography and glowing highlight */}

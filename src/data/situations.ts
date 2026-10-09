@@ -1506,5 +1506,247 @@ export const situations: Situation[] = [
     ],
     sourceIds: ['const-art-22', 'bnss-58', 'nalsa-legal-aid', 'nhrc-portal'],
     keywords: ['24 hours', 'unlawful detention', 'illegal custody', 'habeas corpus', 'magistrate', 'remand', 'lockup']
+  },
+
+  // 9. DRUNK AND DRIVE / BREATHALYZER TRAFFIC CHECK
+  {
+    id: 'drunk-and-drive',
+    slug: 'drunk-and-drive',
+    icon: 'Gauge',
+    title: 'Drunk and drive / Breathalyzer traffic check',
+    shortDescription: 'Legal BAC limit (30mg/100ml), breathalyzer meter rules, official court challan vs illegal cash bribes, and vehicle detention rights.',
+    badgeText: 'Traffic & Section 185',
+    emergencyTag: 'TRAFFIC CHECK RULES',
+    needsLegalAid: true,
+    quick30SecSummary: [
+      'Legal Alcohol Limit: The statutory permissible threshold under Section 185 Motor Vehicles Act is 30 mg of alcohol per 100 ml of blood (0.03% BAC). A reading below 30 mg/100 ml is NOT an offence.',
+      'Official Penalties vs Illegal Bribes: First offence penalty is a fine up to ₹10,000 and/or imprisonment up to 6 months. NEVER pay cash bribes on the road—giving a bribe is an offence under Section 8 PC Act.',
+      'No Spot Cash Extortion: Traffic police cannot settle Drunk & Drive for cash on the spot. The case is forwarded to the Judicial Magistrate / Virtual Court. Demand an official printed e-challan.',
+      'Meter Inspection Rights: The officer must unpack a fresh, sealed, sanitized straw/nozzle in your presence. You have the statutory right to view the digital reading and demand a printed slip.',
+      'Vehicle Custody Memo: If no sober licensed person can drive the vehicle, police can detain it under Section 207 MV Act, but MUST issue an official Vehicle Custody Memo (Panchnama).'
+    ],
+    constitutionalProtection: {
+      article: 'Section 185, 203, 204 & 207 Motor Vehicles Act (Amended 2019)',
+      title: 'Statutory Limits, Breath Testing Procedure & Court Adjudication',
+      plainExplanation: 'Section 185 of the Motor Vehicles Act sets an objective threshold: operating a vehicle with blood alcohol exceeding 30 mg per 100 ml is an offence triable by a Judicial Magistrate. Traffic police on the street have no legal authority to collect spot cash or demand informal settlements. Procedures must follow sanitized breath testing under Section 203, and citizens have the right to a confirmatory medical blood test within 2 hours under Section 204.',
+      scopeAndExceptions: 'Applies to any person driving or attempting to drive a motor vehicle. If contested or meter is unavailable, blood test must be conducted within 2 hours at a registered hospital.',
+      sourceUrl: 'https://morth.nic.in/motor-vehicles-amendment-act-2019'
+    },
+    rights: [
+      {
+        id: 'r-dd-1',
+        title: 'Right to know the legal alcohol limit (30 mg per 100 ml)',
+        plainLanguage: 'Under Section 185 of the Motor Vehicles Act, the statutory limit is 30 mg of alcohol per 100 ml of blood. If the breathalyzer meter reads 30 mg or less, you have NOT committed an offence under Section 185.',
+        legalBasis: {
+          law: 'Motor Vehicles Act, 1988 (Amended 2019)',
+          section: 'Section 185',
+          sourceName: 'Ministry of Road Transport and Highways (MoRTH)',
+          sourceUrl: 'https://morth.nic.in/motor-vehicles-amendment-act-2019',
+          lastVerified: '16 August 2026',
+          sourceType: 'PRIMARY_LAW'
+        },
+        scopeNote: 'Offence is attracted only if blood alcohol concentration exceeds 30 mg per 100 ml of blood.',
+        confidence: 'verified',
+        description: 'Statutory alcohol limit of 30 mg/100 ml under Section 185 MV Act.',
+        legalSection: 'Section 185, MV Act 1988',
+        sourceId: 'mv-act-185'
+      },
+      {
+        id: 'r-dd-2',
+        title: 'Right to fresh sanitized straw and meter verification',
+        plainLanguage: 'The traffic police officer must open a fresh, sterile, sealed disposable straw in front of you. You have the right to inspect the digital screen and demand a printed breathalyzer slip.',
+        legalBasis: {
+          law: 'Motor Vehicles Act, 1988 (Amended 2019)',
+          section: 'Section 203',
+          sourceName: 'Ministry of Road Transport and Highways (MoRTH)',
+          sourceUrl: 'https://morth.nic.in/motor-vehicles-amendment-act-2019',
+          lastVerified: '16 August 2026',
+          sourceType: 'PRIMARY_LAW'
+        },
+        scopeNote: 'Ensures testing hygiene and device accuracy. You can decline blowing into an unsealed or pre-used straw.',
+        confidence: 'verified',
+        description: 'Breath test procedure under Section 203 MV Act.',
+        legalSection: 'Section 203, MV Act 1988',
+        sourceId: 'mv-act-185'
+      },
+      {
+        id: 'r-dd-3',
+        title: 'Right to official court challan — never pay spot cash bribes',
+        plainLanguage: 'Traffic police constables cannot lawfully settle a Section 185 offence for cash on the spot. It is a court matter sent to the Judicial Magistrate or Virtual Court. Demanding cash is illegal extortion; paying bribes is punishable under Section 8 PC Act.',
+        legalBasis: {
+          law: 'Prevention of Corruption Act, 1988 & MV Act, 1988',
+          section: 'Section 7 & 8 PC Act / Section 185 MV Act',
+          sourceName: 'Ministry of Personnel / MoRTH',
+          sourceUrl: 'https://www.indiacode.nic.in/handle/123456789/1943',
+          lastVerified: '16 August 2026',
+          sourceType: 'PRIMARY_LAW'
+        },
+        scopeNote: 'First offence fine is up to ₹10,000 (court-adjudicated). Never pay cash to an officer on the road.',
+        confidence: 'verified',
+        description: 'Court adjudication requirement and anti-bribery mandate.',
+        sourceId: 'pc-act-1988'
+      },
+      {
+        id: 'r-dd-4',
+        title: 'Right to Vehicle Custody Memo (Panchnama) if vehicle is detained',
+        plainLanguage: 'If no sober licensed companion is available and police detain the vehicle under Section 207 MV Act, they MUST provide an official Vehicle Seizure Receipt specifying the traffic yard and station.',
+        legalBasis: {
+          law: 'Motor Vehicles Act, 1988',
+          section: 'Section 207',
+          sourceName: 'Ministry of Road Transport and Highways (MoRTH)',
+          sourceUrl: 'https://morth.nic.in/motor-vehicles-amendment-act-2019',
+          lastVerified: '16 August 2026',
+          sourceType: 'PRIMARY_LAW'
+        },
+        scopeNote: 'Prevents unauthorized use or damage. Police cannot take vehicle keys without giving a signed receipt.',
+        confidence: 'verified',
+        description: 'Power to detain vehicles and requirement of seizure receipt under Section 207 MV Act.',
+        legalSection: 'Section 207, MV Act 1988',
+        sourceId: 'mv-act-185'
+      },
+      {
+        id: 'r-dd-5',
+        title: 'Right to confirmatory hospital blood test within 2 hours',
+        plainLanguage: 'If you dispute the breathalyzer result as inaccurate, you have the statutory right under Section 204 MV Act to request a medical examination and blood sample test by a registered medical practitioner within 2 hours.',
+        legalBasis: {
+          law: 'Motor Vehicles Act, 1988',
+          section: 'Section 204',
+          sourceName: 'Ministry of Road Transport and Highways (MoRTH)',
+          sourceUrl: 'https://morth.nic.in/motor-vehicles-amendment-act-2019',
+          lastVerified: '16 August 2026',
+          sourceType: 'PRIMARY_LAW'
+        },
+        scopeNote: 'Laboratory blood tests provide definitive medical evidence that supersedes faulty field breath meters.',
+        confidence: 'verified',
+        description: 'Laboratory blood test under Section 204 MV Act.',
+        legalSection: 'Section 204, MV Act 1988',
+        sourceId: 'mv-act-185'
+      }
+    ],
+    actions: [
+      {
+        number: 1,
+        title: 'Verify fresh straw and inspect digital reading',
+        instruction: 'Politely ask the officer to open a fresh sanitized straw in front of you. Inspect the digital number on the screen and ask for a printed test receipt.'
+      },
+      {
+        number: 2,
+        title: 'Check against 30 mg / 100 ml legal threshold',
+        instruction: 'If the reading is 30 mg or below, point this out calmly: "Officer, this is within the statutory limit under Section 185 MV Act."'
+      },
+      {
+        number: 3,
+        title: 'Refuse cash bribes — demand official court e-challan',
+        instruction: 'If the officer suggests paying cash on the spot to "settle it", state clearly: "I only pay against an official court e-challan. Please issue the challan for the Judicial Magistrate court."'
+      },
+      {
+        number: 4,
+        title: 'Demand Vehicle Custody Memo if car/bike is detained',
+        instruction: 'If you cannot arrange a sober licensed friend to drive, demand an official Vehicle Seizure Receipt under Section 207 MV Act detailing where the vehicle will be stored.'
+      },
+      {
+        number: 5,
+        title: 'Attend court or virtual court with legal aid',
+        instruction: 'Attend the designated Judicial Magistrate / Virtual Court on the assigned date. You can consult a lawyer or call DLSA Legal Aid at 15100.'
+      }
+    ],
+    donts: [
+      {
+        text: 'Never pay cash bribes or negotiate informal settlements on the road',
+        reason: 'Police constables cannot legally settle a Section 185 offence on the street. Paying bribes is a crime under Section 8 of the Prevention of Corruption Act and exposes you to extortion.'
+      },
+      {
+        text: 'Do not blow into an unsealed or already-opened straw',
+        reason: 'Used straws are unhygienic and can carry residual alcohol vapor from a previous person, causing false positive spikes.'
+      },
+      {
+        text: 'Do not flee, speed away, or enter into physical or verbal arguments',
+        reason: 'Fleeing or speeding away triggers non-bailable criminal charges under Section 281 BNS (rash driving) and Section 221 BNS (obstructing public servant).'
+      },
+      {
+        text: 'Do not surrender your vehicle without a written seizure memo',
+        reason: 'Surrendering vehicle keys without an official receipt leaves no legal proof of who has custody of your vehicle.'
+      }
+    ],
+    sayThis: [
+      {
+        id: 'st-dd-1',
+        situation: 'Requesting fresh sanitized straw',
+        english: 'Officer, could you please unpack a fresh, sealed straw in front of me for the breath test?',
+        hindi: 'अधिकारी महोदय, क्या आप कृपया श्वास परीक्षण के लिए मेरे सामने एक नई, सीलबंद स्ट्रॉ खोल सकते हैं?',
+        telugu: 'అధికారి గారూ, దయచేసి శ్వాస పరీక్ష కోసం నా ముందే కొత్త, సీలు వేసిన స్ట్రాను తెరవగలరా?',
+        context: 'Mandatory hygiene and calibration requirement before blowing into the meter.'
+      },
+      {
+        id: 'st-dd-2',
+        situation: 'Checking meter reading & printed slip',
+        english: 'May I please inspect the digital reading on the meter and receive a printed slip?',
+        hindi: 'क्या मैं कृपया मीटर पर डिजिटल रीडिंग देख सकता हूँ और एक प्रिंटेड पर्ची ले सकता हूँ?',
+        telugu: 'నేను దయచేసి మీటర్‌పై డిజిటల్ రీడింగ్ చూసి, ప్రింటెడ్ స్లిప్ తీసుకోవచ్చా?',
+        context: 'To verify whether the reading exceeds 30 mg / 100 ml.'
+      },
+      {
+        id: 'st-dd-3',
+        situation: 'Refusing spot cash & demanding court e-challan',
+        english: 'I will not pay informal cash on the road. Please issue the official court e-challan under Section 185 MV Act; I will appear before the Judicial Magistrate.',
+        hindi: 'मैं सड़क पर कोई अनौपचारिक नकद नहीं दूंगा। कृपया धारा 185 एमवी एक्ट के तहत आधिकारिक कोर्ट ई-चालान जारी करें; मैं मजिस्ट्रेट के सामने पेश होऊंगा।',
+        telugu: 'నేను రోడ్డుపై అనధికారిక నగదు ఇవ్వను. దయచేసి మోటార్ వాహనాల చట్టం సెక్షన్ 185 కింద అధికారిక కోర్టు ఈ-చలాన్ ఇవ్వండి; నేను మేజిస్ట్రేట్ కోర్టులో హాజరవుతాను.',
+        context: 'When an officer hints at or demands a cash bribe.'
+      },
+      {
+        id: 'st-dd-4',
+        situation: 'Requesting vehicle seizure memo',
+        english: 'If the vehicle is being detained under Section 207 MV Act, please provide an official Vehicle Seizure Receipt specifying the station yard.',
+        hindi: 'यदि वाहन को धारा 207 एमवी एक्ट के तहत जब्त किया जा रहा है, तो कृपया आधिकारिक जब्ती रसीद प्रदान करें जिसमें थाना या यार्ड निर्दिष्ट हो।',
+        telugu: 'వాహనాన్ని సెక్షన్ 207 ఎంవీ యాక్ట్ కింద స్వాధీనం చేసుకుంటే, ఏ స్టేషన్ యార్డులో ఉంచుతారో స్పష్టం చేస్తూ అధికారిక సీజర్ రసీదు ఇవ్వండి.',
+        context: 'Mandatory before surrendering vehicle keys.'
+      }
+    ],
+    escalationPath: [
+      {
+        level: 1,
+        title: 'Traffic Inspector / Assistant Commissioner of Police (ACP Traffic)',
+        designation: 'ACP / DCP (Traffic Division)',
+        description: 'If breathalyzer was uncalibrated, straw unhygienic, or vehicle seized without receipt, submit representation to ACP Traffic.',
+        action: 'Submit written complaint with test date, time, vehicle number, and officer name tag.',
+        statutoryBasis: 'Administrative oversight, Motor Vehicles Act'
+      },
+      {
+        level: 2,
+        title: 'Designated Judicial Magistrate / Virtual Court',
+        designation: 'Judicial Magistrate First Class (Traffic Court)',
+        description: 'All Section 185 cases are forwarded to the Judicial Magistrate. You can contest the reading, plead compounding, or present medical evidence.',
+        action: 'Appear on summons date or virtual court portal with advocate or DLSA legal aid.',
+        statutoryBasis: 'Section 185 MV Act & Criminal Procedure'
+      },
+      {
+        level: 3,
+        title: 'State Anti-Corruption Bureau (ACB / DVAC / 1064)',
+        designation: 'Anti-Corruption Authority',
+        description: 'If traffic officers demanded cash bribes or threatened false booking unless paid extortion money, report to ACB.',
+        action: 'Call toll-free 1064 or lodge grievance under Section 7 & 8 of the PC Act 1988.',
+        statutoryBasis: 'Prevention of Corruption Act, 1988'
+      }
+    ],
+    sourceIds: ['mv-act-185', 'pc-act-1988', 'nalsa-legal-aid', 'prakash-singh-pca'],
+    keywords: [
+      'drunk and drive',
+      'drunken driving',
+      'drink and drive',
+      'alcohol',
+      'breathalyzer',
+      'breath test',
+      'alcohol meter',
+      'bac limit',
+      '30mg',
+      'bribe',
+      'spot fine',
+      'challan',
+      'section 185',
+      'traffic police',
+      'car seized',
+      'bike seized',
+      'license suspended'
+    ]
   }
 ];

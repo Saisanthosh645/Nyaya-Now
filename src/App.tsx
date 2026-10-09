@@ -22,6 +22,7 @@ import { translations } from './data/translations';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Hero } from './components/Hero';
+import { AILegalAssistant } from './components/AILegalAssistant';
 import { SituationCard } from './components/SituationCard';
 import { SearchBar } from './components/SearchBar';
 import { SituationDetail } from './components/SituationDetail';
@@ -35,6 +36,15 @@ import { ConstitutionalTicker } from './components/ConstitutionalTicker';
 import { Toast } from './components/Toast';
 import { EmergencyFloatingButton } from './components/EmergencyFloatingButton';
 import { NotFoundPage } from './components/NotFoundPage';
+import { AILegalAssistantTeaser } from './components/ai-assistant/AILegalAssistantTeaser';
+import { VoiceLanguageAssistant } from './components/voice-assistant/VoiceLanguageAssistant';
+import { VoiceAssistantTeaser } from './components/voice-assistant/VoiceAssistantTeaser';
+import { DocumentIntelligence } from './components/document-intelligence/DocumentIntelligence';
+import { DocumentIntelligenceTeaser } from './components/document-intelligence/DocumentIntelligenceTeaser';
+import { EvidenceIntelligence } from './components/evidence-intelligence/EvidenceIntelligence';
+import { EvidenceIntelligenceTeaser } from './components/evidence-intelligence/EvidenceIntelligenceTeaser';
+import { LawyerAuthorityConnection } from './components/lawyer-connection/LawyerAuthorityConnection';
+import { LawyerAuthorityTeaser } from './components/lawyer-connection/LawyerAuthorityTeaser';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<ActiveView>({ type: 'home' });
@@ -64,6 +74,14 @@ export default function App() {
         } else {
           setCurrentView({ type: 'home' });
         }
+      } else if (hash === 'ai-assistant' || hash.startsWith('ai-assistant') || hash === 'voice-assistant' || hash.startsWith('voice-assistant')) {
+        setCurrentView({ type: 'ai-assistant' });
+      } else if (hash === 'document-intelligence' || hash === 'documents' || hash.startsWith('document')) {
+        setCurrentView({ type: 'document-intelligence' });
+      } else if (hash === 'evidence-intelligence' || hash === 'evidence' || hash.startsWith('evidence')) {
+        setCurrentView({ type: 'evidence-intelligence' });
+      } else if (hash === 'lawyer-connection' || hash === 'connect' || hash.startsWith('lawyer') || hash.startsWith('authorit')) {
+        setCurrentView({ type: 'lawyer-connection' });
       } else if (hash === 'complaints') {
         setCurrentView({ type: 'complaints' });
       } else if (hash === 'sources') {
@@ -83,6 +101,14 @@ export default function App() {
     setCurrentView(view);
     if (view.type === 'home') {
       window.location.hash = '';
+    } else if (view.type === 'ai-assistant' || view.type === 'voice-assistant') {
+      window.location.hash = 'ai-assistant';
+    } else if (view.type === 'document-intelligence') {
+      window.location.hash = 'document-intelligence';
+    } else if (view.type === 'evidence-intelligence') {
+      window.location.hash = 'evidence-intelligence';
+    } else if (view.type === 'lawyer-connection') {
+      window.location.hash = 'lawyer-connection';
     } else if (view.type === 'situation') {
       window.location.hash = `situations/${view.slug}`;
     } else if (view.type === 'complaints') {
@@ -141,7 +167,7 @@ export default function App() {
         {/* VIEW 1: HOME PAGE */}
         {currentView.type === 'home' && (
           <div className="w-full max-w-full overflow-x-hidden">
-            {/* Hero Section */}
+            {/* Original Hero Section (Main Landing at the Top) */}
             <Hero
               language={language}
               onOpenEmergency={() => setEmergencyModalOpen(true)}
@@ -206,6 +232,43 @@ export default function App() {
                   </button>
                 </div>
               )}
+            </section>
+
+            {/* FEATURE 01: AI & VOICE LEGAL ASSISTANT TEASER (Opens Full Page) */}
+            <section id="ai-legal-assistant" className="w-full">
+              <AILegalAssistantTeaser
+                language={language}
+                onOpenAssistant={(prompt?: string) => {
+                  navigateTo({ type: 'ai-assistant' });
+                  if (prompt) {
+                    sessionStorage.setItem('nyaya_pending_prompt', prompt);
+                  }
+                }}
+              />
+            </section>
+
+            {/* FEATURE 02: DOCUMENT INTELLIGENCE TEASER (Opens Full Page) */}
+            <section id="document-intelligence" className="w-full">
+              <DocumentIntelligenceTeaser
+                language={language}
+                onOpenDocumentIntelligence={() => navigateTo({ type: 'document-intelligence' })}
+              />
+            </section>
+
+            {/* FEATURE 04: EVIDENCE INTELLIGENCE TEASER (Opens Full Page) */}
+            <section id="evidence-intelligence" className="w-full">
+              <EvidenceIntelligenceTeaser
+                language={language}
+                onOpenEvidenceIntelligence={() => navigateTo({ type: 'evidence-intelligence' })}
+              />
+            </section>
+
+            {/* FEATURE 05: LAWYER / AUTHORITY CONNECTION TEASER (Opens Full Page) */}
+            <section id="lawyer-connection" className="w-full">
+              <LawyerAuthorityTeaser
+                language={language}
+                onOpenLawyerConnection={() => navigateTo({ type: 'lawyer-connection' })}
+              />
             </section>
 
             {/* THREE THINGS TO REMEMBER SECTION */}
@@ -396,6 +459,60 @@ export default function App() {
             language={language}
             onNavigate={navigateTo}
             onOpenEmergency={() => setEmergencyModalOpen(true)}
+          />
+        )}
+
+        {/* VIEW: AI & VOICE LEGAL ASSISTANT FULL PAGE */}
+        {(currentView.type === 'ai-assistant' || currentView.type === 'voice-assistant') && (
+          <AILegalAssistant
+            language={language}
+            onLanguageChange={handleLanguageChange}
+            onNavigateBack={() => navigateTo({ type: 'home' })}
+            onNavigateToLawyerConnection={() => navigateTo({ type: 'lawyer-connection' })}
+          />
+        )}
+
+        {/* VIEW 8: DOCUMENT INTELLIGENCE FULL PAGE */}
+        {currentView.type === 'document-intelligence' && (
+          <DocumentIntelligence
+            language={language}
+            onLanguageChange={handleLanguageChange}
+            onNavigateBack={() => navigateTo({ type: 'home' })}
+            onNavigateToAssistantWithPrompt={(prompt) => {
+              sessionStorage.setItem('nyaya_pending_prompt', prompt);
+              navigateTo({ type: 'ai-assistant' });
+            }}
+          />
+        )}
+
+        {/* VIEW 9: EVIDENCE INTELLIGENCE FULL PAGE */}
+        {currentView.type === 'evidence-intelligence' && (
+          <EvidenceIntelligence
+            language={language}
+            onLanguageChange={handleLanguageChange}
+            onNavigateBack={() => navigateTo({ type: 'home' })}
+            onNavigateToAssistantWithPrompt={(prompt) => {
+              sessionStorage.setItem('nyaya_pending_prompt', prompt);
+              navigateTo({ type: 'ai-assistant' });
+            }}
+            onNavigateToVoiceAssistant={() => navigateTo({ type: 'voice-assistant' })}
+            onNavigateToDocumentIntelligence={() => navigateTo({ type: 'document-intelligence' })}
+            onNavigateToLawyerConnection={() => navigateTo({ type: 'lawyer-connection' })}
+          />
+        )}
+
+        {/* VIEW 10: LAWYER & AUTHORITY CONNECTION FULL PAGE */}
+        {currentView.type === 'lawyer-connection' && (
+          <LawyerAuthorityConnection
+            language={language}
+            onLanguageChange={handleLanguageChange}
+            onNavigateBack={() => navigateTo({ type: 'home' })}
+            onNavigateToAssistantWithPrompt={(prompt) => {
+              sessionStorage.setItem('nyaya_pending_prompt', prompt);
+              navigateTo({ type: 'ai-assistant' });
+            }}
+            onNavigateToEvidenceWorkspace={() => navigateTo({ type: 'evidence-intelligence' })}
+            onNavigateToDocumentIntelligence={() => navigateTo({ type: 'document-intelligence' })}
           />
         )}
 

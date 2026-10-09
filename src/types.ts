@@ -132,6 +132,11 @@ export interface StateHelpline {
 
 export type ActiveView = 
   | { type: 'home' }
+  | { type: 'ai-assistant' }
+  | { type: 'voice-assistant' }
+  | { type: 'document-intelligence' }
+  | { type: 'evidence-intelligence' }
+  | { type: 'lawyer-connection' }
   | { type: 'situation'; slug: string }
   | { type: 'complaints'; subCategory?: string }
   | { type: 'sources' }

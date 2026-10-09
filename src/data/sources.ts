@@ -360,5 +360,18 @@ export const legalSources: Record<string, LegalSource> = {
     category: 'CRIMINAL_PROCEDURE',
     summary: 'A child in conflict with law cannot be kept in a police lockup or jail. Must be placed under charge of a Special Juvenile Police Unit (SJPU) or designated Child Welfare Police Officer (CWPO) and produced before the Juvenile Justice Board (JJB) within 24 hours.',
     lastReviewed: '16 August 2026'
+  },
+  'mv-act-185': {
+    id: 'mv-act-185',
+    title: 'Drunken Driving, Breath Testing, and Permissible Alcohol Limit',
+    organization: 'Ministry of Road Transport and Highways (MoRTH)',
+    legalSection: 'Section 185, 203, 204 & 207, Motor Vehicles Act, 1988 (Amended 2019)',
+    url: 'https://morth.nic.in/motor-vehicles-amendment-act-2019',
+    type: 'statute',
+    sourceType: 'PRIMARY_LAW',
+    officialBadge: true,
+    category: 'CRIMINAL_PROCEDURE',
+    summary: 'Establishes the statutory blood alcohol threshold of 30 mg per 100 ml of blood. A reading below 30 mg/100 ml is not an offence. First offence penalty: fine up to ₹10,000 and/or imprisonment up to 6 months. Second offence: fine up to ₹15,000 and/or imprisonment up to 2 years. Section 203 mandates breath analyser procedures; Section 204 grants right to medical laboratory blood test within 2 hours if disputed. Section 207 mandates official seizure memo if vehicle is detained. Demanding or paying cash bribes on the road is strictly unlawful under Section 7 & 8 of the Prevention of Corruption Act.',
+    lastReviewed: '16 August 2026'
   }
 };

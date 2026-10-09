@@ -9,7 +9,9 @@ import {
   Coins, 
   Scale, 
   ArrowRight,
-  Zap
+  Zap,
+  Gauge,
+  Car
 } from 'lucide-react';
 import { Situation, Language } from '../types';
 import { translations } from '../data/translations';
@@ -29,7 +31,9 @@ const iconMap: Record<string, React.ReactNode> = {
   Smartphone: <Smartphone className="w-6 h-6 text-purple-600" />,
   AlertTriangle: <AlertTriangle className="w-6 h-6 text-rose-600" />,
   Coins: <Coins className="w-6 h-6 text-emerald-600" />,
-  Scale: <Scale className="w-6 h-6 text-slate-700" />
+  Scale: <Scale className="w-6 h-6 text-slate-700" />,
+  Gauge: <Gauge className="w-6 h-6 text-amber-500" />,
+  Car: <Car className="w-6 h-6 text-amber-500" />
 };
 
 export const SituationCard: React.FC<SituationCardProps> = ({ situation, onSelect, language }) => {
