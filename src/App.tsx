@@ -176,6 +176,8 @@ export default function App() {
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
               onOpenDownloadModal={() => setDownloadModalOpen(true)}
+              onNavigate={navigateTo}
+              onOpenSos={() => setSosModalOpen(true)}
             />
 
             {/* Live Constitutional Safeguards Marquee Ticker */}

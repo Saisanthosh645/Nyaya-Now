@@ -15,16 +15,16 @@ export const EmergencyFloatingButton: React.FC<EmergencyFloatingButtonProps> = (
   const t = translations[language];
 
   return (
-    <div className="md:hidden fixed bottom-5 right-4 z-40 animate-in fade-in slide-in-from-bottom-5 duration-200">
+    <div className="md:hidden fixed bottom-4 right-3.5 z-40 animate-in fade-in slide-in-from-bottom-3 duration-200">
       <button
         id="floating-emergency-btn"
         onClick={onOpenEmergency}
-        className="relative flex items-center space-x-2 px-4 py-3 rounded-full bg-red-600 hover:bg-red-700 text-white font-black text-xs shadow-2xl shadow-red-600/60 border-2 border-white active:scale-95 transition-all cursor-pointer group"
+        className="relative flex items-center gap-1.5 px-3 py-2 rounded-full bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-black text-xs shadow-xl shadow-red-600/50 border border-white/90 active:scale-95 transition-all cursor-pointer group"
         aria-label="Launch Emergency Rights Guide"
       >
-        <span className="absolute -inset-0.5 rounded-full bg-red-500 animate-ping opacity-40 group-hover:opacity-75"></span>
-        <AlertCircle className="w-4 h-4 animate-pulse shrink-0 relative z-10" />
-        <span className="tracking-wide relative z-10">🚨 EMERGENCY GUIDE</span>
+        <span className="absolute -inset-0.5 rounded-full bg-red-500 animate-ping opacity-35 pointer-events-none"></span>
+        <AlertCircle className="w-3.5 h-3.5 animate-pulse shrink-0 relative z-10" />
+        <span className="tracking-wide relative z-10 text-[11px] font-extrabold">🚨 SOS</span>
       </button>
     </div>
   );

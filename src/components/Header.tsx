@@ -94,7 +94,7 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="text-base sm:text-lg font-black tracking-tight text-white group-hover:text-amber-400 transition-colors whitespace-nowrap">
                 NyayaNow
               </span>
-              <span className="inline-flex items-center space-x-0.5 text-[9px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-slate-800 text-amber-400 border border-slate-700 shrink-0">
+              <span className="hidden sm:inline-flex items-center space-x-0.5 text-[9px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-slate-800 text-amber-400 border border-slate-700 shrink-0">
                 <AshokaChakra size={9} speed="slow" color="#f59e0b" strokeWidth={2} />
                 <span>BNSS</span>
               </span>
@@ -290,14 +290,14 @@ export const Header: React.FC<HeaderProps> = ({
           </nav>
 
           {/* Right Action Controls: Language, SOS & Emergency Mode */}
-          <div className="flex items-center space-x-1 sm:space-x-1.5 shrink-0">
+          <div className="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
             
             {/* Language Selector Dropdown — Globe Icon */}
             <div className="relative" ref={langRef}>
               <button
                 id="language-selector-btn"
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 hover:border-amber-400/50 transition-all group cursor-pointer"
+                className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 hover:border-amber-400/50 transition-all group cursor-pointer"
                 aria-label="Select Language"
                 title="Change Language"
               >
@@ -345,11 +345,11 @@ export const Header: React.FC<HeaderProps> = ({
               )}
             </div>
 
-            {/* Quick SOS Helpline Trigger — Compact */}
+            {/* Quick SOS Helpline Trigger — Desktop & Tablet only (Available in Mobile Drawer) */}
             <button
               id="header-sos-btn"
               onClick={onOpenSos}
-              className="p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 hover:text-white text-xs font-semibold border border-slate-700/80 flex items-center gap-1.5 transition-all shrink-0 cursor-pointer"
+              className="hidden md:flex p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 hover:text-white text-xs font-semibold border border-slate-700/80 items-center gap-1.5 transition-all shrink-0 cursor-pointer"
               title="Official Emergency Helplines (112, 1091, 1064)"
               aria-label="Helplines"
             >
@@ -357,7 +357,7 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="hidden xl:inline text-xs">Helplines</span>
             </button>
 
-            {/* Offline App Hub Trigger — Desktop */}
+            {/* Offline App Hub Trigger — Desktop only (Available in Mobile Drawer & Page) */}
             {onOpenDownloadModal && (
               <button
                 id="header-offline-app-btn"
@@ -369,20 +369,6 @@ export const Header: React.FC<HeaderProps> = ({
                 <Smartphone className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
                 <span className="text-xs">Offline App</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              </button>
-            )}
-
-            {/* Offline App Hub Trigger — Mobile Quick Access */}
-            {onOpenDownloadModal && (
-              <button
-                id="header-mobile-offline-app-btn"
-                onClick={onOpenDownloadModal}
-                className="flex md:hidden items-center gap-1 px-2.5 py-1.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 active:bg-emerald-500/35 text-emerald-300 border border-emerald-500/40 text-xs font-bold transition-all shrink-0 cursor-pointer shadow-sm"
-                title="Download / Install Mobile App"
-                aria-label="Download App"
-              >
-                <Download className="w-3.5 h-3.5 text-emerald-400" />
-                <span>App</span>
               </button>
             )}
 
@@ -398,14 +384,14 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="xs:hidden">SOS</span>
             </button>
 
-            {/* Mobile Menu Toggle */}
+            {/* Mobile Menu Toggle — Always Visible, High Priority on Mobile */}
             <button
               id="mobile-menu-toggle"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none shrink-0 cursor-pointer"
+              className="lg:hidden p-1.5 rounded-xl bg-slate-800/90 text-amber-400 hover:text-white hover:bg-slate-700 border border-slate-700/80 focus:outline-none shrink-0 cursor-pointer transition-colors"
               aria-label="Open Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
