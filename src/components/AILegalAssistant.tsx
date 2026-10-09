@@ -164,19 +164,13 @@ export const AILegalAssistant: React.FC<AILegalAssistantProps> = ({
     scrollToBottom();
 
     try {
-      const chatRes: ChatResponseResult = await AILegalService.getChatResponse(query, language);
+      const history = messages
+        .filter((message) => message.content && (message.sender === 'user' || message.sender === 'assistant'))
+        .map((message) => ({ role: message.sender, content: message.content as string }))
+        .slice(-8);
+      const chatRes: ChatResponseResult = await AILegalService.getChatResponse(query, language, history);
 
-      const isGreeting = ['hi', 'hello', 'hey', 'namaste', 'namaskaram', 'yo', 'sup'].includes(query.toLowerCase());
-      let dossier: AIResponseData | undefined = undefined;
-      
-      if (!isGreeting) {
-        try {
-          dossier = await AILegalService.analyzeSituation(query, language);
-          setCurrentResponseData(dossier);
-        } catch {
-          // Fallback if structured dossier fails
-        }
-      }
+      setCurrentResponseData(null);
 
       const assistantMsg: ChatMessage = {
         id: 'ast-' + Date.now(),
@@ -187,8 +181,7 @@ export const AILegalAssistant: React.FC<AILegalAssistantProps> = ({
         allTranslations: chatRes.allTranslations,
         allSuggestions: chatRes.allSuggestions,
         suggestions: chatRes.suggestions,
-        citations: chatRes.citations,
-        structuredResponse: dossier
+        citations: chatRes.citations
       };
 
       setMessages((prev) => [...prev, assistantMsg]);
@@ -208,7 +201,9 @@ export const AILegalAssistant: React.FC<AILegalAssistantProps> = ({
         id: 'ast-err-' + Date.now(),
         sender: 'assistant',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        content: isHi
+        content: err instanceof Error
+          ? err.message
+          : isHi
           ? 'सॉरी, कुछ तकनीकी समस्या आई। कृपया अपना प्रश्न दोबारा पूछें।'
           : isTe
           ? 'క్షమించండి, సాంకేతిక సమస్య ఏర్పడింది. దయచేసి మళ్ళీ అడగండి.'

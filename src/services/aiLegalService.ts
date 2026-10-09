@@ -1035,7 +1035,8 @@ export class AILegalService {
    */
   public static async getChatResponse(
     message: string,
-    language: Language = 'en'
+    language: Language = 'en',
+    _history: Array<{ role: 'user' | 'assistant'; content: string }> = []
   ): Promise<ChatResponseResult> {
     const cleanMessage = message.trim().toLowerCase();
 
@@ -1083,20 +1084,224 @@ export class AILegalService {
     if (isGreeting && cleanMessage.length < 25) {
       return r(
         {
-          en: `Hello! I am your AI Legal First-Responder on Indian Law (BNSS 2023 & Constitution of India).\n\nAre you in an active situation with police right now, or do you have a specific legal question?`,
-          hi: `नमस्ते! मैं भारतीय कानून (BNSS 2023 एवं संविधान) पर आपका AI लीगल फर्स्ट-रेस्पॉन्डर हूँ।\n\nक्या आप अभी पुलिस के सामने हैं, या आपका कोई विशिष्ट कानूनी सवाल है?`,
-          te: `నమస్కారం! నేను భారతీయ చట్టాలు (BNSS 2023 మరియు రాజ్యాంగం) ఆధారంగా పనిచేసే మీ AI న్యాయ సహాయకుడిని.\n\nమీరు ప్రస్తుతం పోలీసుల ఎదురుగా ఉన్నారా, లేదా ఏదైనా నిర్దిష్ట న్యాయపరమైన సందేహం ఉందా?`
+          en: `Hello! I am **Nyaya Now**, your AI Legal First-Responder on Indian Law (BNSS 2023, BNS 2023 & Constitution of India).\n\nAre you in an active situation with police right now, or do you have a specific legal question?`,
+          hi: `नमस्ते! मैं **न्याय नाउ** हूँ, भारतीय कानून (BNSS 2023, BNS 2023 एवं संविधान) पर आपका AI लीगल फर्स्ट-रेस्पॉन्डर।\n\nक्या आप अभी पुलिस के सामने हैं, या आपका कोई विशिष्ट कानूनी सवाल है?`,
+          te: `నమస్కారం! నేను **న్యాయ నౌ**, భారతీయ చట్టాలు (BNSS 2023, BNS 2023 మరియు రాజ్యాంగం) ఆధారంగా పనిచేసే మీ AI న్యాయ సహాయకుడిని.\n\nమీరు ప్రస్తుతం పోలీసుల ఎదురుగా ఉన్నారా, లేదా ఏదైనా నిర్దిష్ట న్యాయపరమైన సందేహం ఉందా?`
         },
         ['Constitution of India Art. 21', 'BNSS 2023'],
         {
-          en: ['Police stopped me on road', 'Station summons without notice', 'Can police check my phone?'],
-          hi: ['पुलिस ने रास्ते में रोका', 'थाने आने का दबाव बना रहे हैं', 'क्या पुलिस फोन चेक कर सकती है?'],
-          te: ['పోలీసులు రోడ్డుపై ఆపారు', 'నోటీసు లేకుండా స్టేషన్కి రమ్మంటున్నారు', 'పోలీసులు నా ఫోన్ చెక్ చేయవచ్చా?']
+          en: ['Police stopped me on road', 'What is BNSS 2023?', 'My phone was stolen'],
+          hi: ['पुलिस ने रास्ते में रोका', 'BNSS 2023 क्या है?', 'मेरा फोन चोरी हो गया'],
+          te: ['పోలీసులు రోడ్డుపై ఆపారు', 'BNSS 2023 అంటే ఏమిటి?', 'నా ఫోన్ దొంగిలించబడింది']
         }
       );
     }
 
-    // 1b. Police stopped on road / Traffic check / Nakabandi / Vehicle inspection / Keys
+    // 2. WHAT IS BNSS 2023 / NEW CRIMINAL LAWS
+    if (
+      cleanMessage.includes('what is bnss') || cleanMessage.includes('bnss 2023') ||
+      cleanMessage.includes('bharatiya nagarik suraksha') || cleanMessage.includes('new criminal law') ||
+      cleanMessage.includes('new laws') || cleanMessage.includes('crpc vs bnss') ||
+      cleanMessage.includes('బిఎన్ఎస్ఎస్') || cleanMessage.includes('కొత్త చట్టాలు') ||
+      cleanMessage.includes('बीएनएसएस') || cleanMessage.includes('नए कानून')
+    ) {
+      return r(
+        {
+          en: `**Overview of the Bharatiya Nagarik Suraksha Sanhita (BNSS), 2023:**\n\nThe BNSS 2023 replaced the Code of Criminal Procedure (CrPC), 1973 with effect from **1st July 2024** as India's governing procedural law for investigations, arrests, and bail.\n\n• **Notice Before Arrest (BNSS Sec 35(3))**: For offences punishable up to 7 years, arrest is not automatic. Police MUST issue a written Notice of Appearance specifying time and grounds.\n• **Zero FIR & e-FIR (BNSS Sec 173)**: Mandatory registration of FIR regardless of territorial jurisdiction, with digital filing recognized.\n• **Mandatory Electronic Evidence (BNSS Sec 105 & BSA Sec 63)**: Search and seizure operations require videography and hash value documentation to avoid tampering.\n• **Safeguards for Women (BNSS Sec 43(5))**: No woman can be arrested between sunset and sunrise without prior written order from a Judicial Magistrate.\n• **Arrest Notification (BNSS Sec 48 & 58)**: Designated family member must be informed immediately, and accused produced before Magistrate within 24 hours.`,
+          hi: `**भारतीय नागरिक सुरक्षा संहिता (BNSS), 2023 का संक्षिप्त विवरण:**\n\nBNSS 2023 ने 1 जुलाई 2024 से दंड प्रक्रिया संहिता (CrPC 1973) का स्थान लिया है। यह आपराधिक जांच और नागरिक अधिकारों को नियंत्रित करता है।\n\n• **लिखित नोटिस की अनिवार्यता (धारा 35(3))**: 7 वर्ष से कम सजा वाले मामलों में गिरफ्तारी से पहले लिखित 'उपस्थिति नोटिस' देना अनिवार्य है।\n• **जीरो एफआईआर (धारा 173)**: क्षेत्राधिकार की परवाह किए बिना किसी भी थाने में जीरो एफआईआर दर्ज कराना अनिवार्य है।\n• **डिजिटल साक्ष्य और वीडियोग्राफी (धारा 105)**: तलाशी व जब्ती की वीडियोग्राफी और मोबाइल/डिवाइस का हैश वैल्यू दर्ज करना आवश्यक है।\n• **महिलाओं के अधिकार (धारा 43(5))**: सूर्यास्त के बाद और सूर्योदय से पहले महिला को मजिस्ट्रेट के आदेश के बिना गिरफ्तार नहीं किया जा सकता।\n• **24 घंटे में मजिस्ट्रेट पेशी (धारा 58)**: गिरफ्तारी के 24 घंटे के भीतर पेश करना कानूनी बाध्यता है।`,
+          te: `**భారతీయ నాగరిక్ సురక్ష సంహిత (BNSS), 2023 పూర్తి వివరాలు:**\n\nBNSS 2023 చట్టం 1 జూలై 2024 నుండి పాత CrPC 1973 స్థానంలో అమలులోకి వచ్చింది.\n\n• **లిఖితపూర్వక నోటీస్ (సెక్షన్ 35(3))**: 7 ఏళ్ల లోపు శిక్ష ఉండే కేసులలో అరెస్ట్ చేయడానికి ముందు రాతపూర్వక నోటీస్ ఇవ్వడం తప్పనిసరి.\n• **జీరో ఎఫ్‌ఐఆర్ (సెక్షన్ 173)**: పరిధితో సంబంధం లేకుండా ఏదైనా స్టేషన్‌లో జీరో ఎఫ్‌ఐఆర్ నమోదు చేయవచ్చు.\n• **డిజిటల్ సాక్ష్యాల వీడియోగ్రఫీ (సెక్షన్ 105)**: తనిఖీలలో వీడియో రికార్డింగ్ మరియు హ్యాష్ విలువ నమోదు తప్పనిసరి.\n• **మహిళల రక్షణ (సెక్షన్ 43(5))**: సూర్యాస్తమయం తర్వాత మరియు సూర్యోదయానికి ముందు మేజిస్ట్రేట్ అనుమతి లేకుండా మహిళలను అరెస్ట్ చేయరాదు.\n• **24 గంటల్లో మేజిస్ట్రేట్ ఎదుట హాజరు (సెక్షన్ 58)**: అరెస్ట్ చేసిన 24 గంటలలోపు మేజిస్ట్రేట్ ముందు హాజరుపరచాలి.`
+        },
+        ['BNSS 2023 Sec 35, 43, 48, 58, 105, 173', 'Ministry of Home Affairs New Criminal Laws Portal', 'India Code (indiacode.nic.in)'],
+        {
+          en: ['What is Section 35(3) Notice?', 'Can police take me to station without notice?', 'What are my rights during road stop?'],
+          hi: ['धारा 35(3) नोटिस क्या है?', 'क्या बिना नोटिस थाने ले जा सकते हैं?', 'सड़क पर रोके जाने पर क्या अधिकार हैं?'],
+          te: ['సెక్షన్ 35(3) నోటీస్ అంటే ఏమిటి?', 'నోటీస్ లేకుండా స్టేషన్‌కి తీసుకెళ్లవచ్చా?', 'రోడ్డుపై ఆపినప్పుడు హక్కులేంటి?']
+        }
+      );
+    }
+
+    // 3. STATION SUMMONS / "ASKED ME TO COME TO THE STATION" / "POLICE STOPPED ME ON ROAD AND ASKED ME TO COME TO STATION"
+    if (
+      (cleanMessage.includes('station') || cleanMessage.includes('thaane') || cleanMessage.includes('స్టేషన్') || cleanMessage.includes('थाने') || cleanMessage.includes('summons')) &&
+      (cleanMessage.includes('come') || cleanMessage.includes('asked') || cleanMessage.includes('call') || cleanMessage.includes('stopped') ||
+       cleanMessage.includes('పిలిచారు') || cleanMessage.includes('రమ్మన్నారు') || cleanMessage.includes('बुलाया') || cleanMessage.includes('आने'))
+    ) {
+      return r(
+        {
+          en: `**Police cannot orally force you to accompany them to the police station without formal written notice:**\n\n• **BNSS Section 35(3) (Old CrPC 41A)**: For offences punishable up to 7 years, police MUST serve a written **Notice of Appearance** specifying the case, time, and place. Verbal commands or roadside intimidation have no legal force.\n• **Arnesh Kumar v. State of Bihar (SC)**: Supreme Court ruled arbitrary detention without Section 35 notice is illegal and officers face contempt.\n• **Right to Counsel (BNSS Sec 38 & Art 22(1))**: You have the right to be accompanied by your advocate.\n• **Verify Badge (BNSS Sec 36 / D.K. Basu)**: Check the officer's uniform nameplate and station tag.\n\n**Polite Response**: *"Officer, under BNSS Section 35(3), please issue me a formal written Notice of Appearance specifying the matter. I will duly appear along with my legal counsel."*`,
+          hi: `**पुलिस मौखिक कहने या रास्ते में रोकने पर आपको जबरन थाने ले जाने के लिए बाध्य नहीं कर सकती:**\n\n• **BNSS धारा 35(3) (पूर्व CrPC 41A)**: 7 वर्ष से कम सजा वाले मामलों में लिखित **उपस्थिति नोटिस** (Notice of Appearance) देना अनिवार्य है। केवल मौखिक आदेश पर थाने जाने की कोई बाध्यता नहीं है।\n• **अर्णेश कुमार सुप्रीम कोर्ट फैसला**: बिना धारा 35 नोटिस के थाने बुलाना या हिरासत में रखना पूरी तरह अवैध है।\n• **वकील का अधिकार (अनुच्छेद 22(1) एवं धारा 38)**: आपको अपने वकील के साथ थाने जाने का पूरा अधिकार है।\n• **अधिकारी की पहचान (धारा 36)**: वर्दी पर स्पष्ट नेमप्लेट और थाने का बैज होना अनिवार्य है।\n\n**विनम्रता से कहें**: *"अधिकारी महोदय, BNSS धारा 35(3) के तहत कृपया मुझे लिखित नोटिस प्रदान करें। मैं अपने वकील के साथ विधिवत थाने में उपस्थित हो जाऊंगा।"*`,
+          te: `**పోలీసులు లిఖితపూర్వక నోటీసు లేకుండా మిమ్మల్ని స్టేషన్‌కు రమ్మని బలవంతం చేయలేరు:**\n\n• **BNSS సెక్షన్ 35(3) (పాత CrPC 41A)**: 7 సంవత్సరాల లోపు శిక్ష ఉండే కేసులలో విచారణకు పిలవాలంటే తప్పనిసరిగా లిఖితపూర్వక **నోటీస్ ఆఫ్ అప్పియరెన్స్** ఇవ్వాలి. కేవలం మాటల మీద వెళ్లవలసిన అవసరం లేదు.\n• **అర్నేష్ కుమార్ సుప్రీం కోర్టు తీర్పు**: సరైన రాతపూర్వక నోటీసు లేకుండా స్టేషన్‌కు పిలవడం చట్టవిరుద్ధం.\n• **న్యాయవాది సహాయం (ఆర్టికల్ 22(1) & సెక్షన్ 38)**: మీ లాయర్‌ను వెంట తీసుకెళ్లే హక్కు మీకు ఉంది.\n• **అధికారి గుర్తింపు (సెక్షన్ 36)**: అధికారి నేమ్ బ్యాడ్జ్ మరియు పోలీస్ స్టేషన్ వివరాలు ఉండాలి.\n\n**స్పష్టంగా చెప్పండి**: *"అధికారి గారూ, BNSS సెక్షన్ 35(3) ప్రకారం దయచేసి నాకు లిఖితపూర్వక నోటీస్ ఇవ్వండి. నేను నా న్యాయవాదితో కలిసి స్టేషన్‌కు వస్తాను."*`
+        },
+        ['BNSS 2023 Sec 35(3) & 36', 'Arnesh Kumar v. State of Bihar (2014)', 'Constitution Art. 21 & 22(1)'],
+        {
+          en: ['Can I take my lawyer with me?', 'What if they refuse to give written notice?', 'Can they seize my vehicle?'],
+          hi: ['क्या वकील साथ ले जा सकते हैं?', 'नोटिस देने से मना करें तो क्या करें?', 'क्या गाड़ी जब्त कर सकते हैं?'],
+          te: ['లాయర్‌ను వెంట తీసుకెళ్లవచ్చా?', 'నోటీస్ ఇవ్వకపోతే ఏం చేయాలి?', 'వాహనం సీజ్ చేయవచ్చా?']
+        },
+        effectiveLang === 'te'
+          ? '“అధికారి గారూ, BNSS సెక్షన్ 35(3) ప్రకారం నాకు లిఖితపూర్వక నోటీసు ఇవ్వండి, నేను లాయర్‌తో వస్తాను.”'
+          : effectiveLang === 'hi'
+          ? '“अधिकारी महोदय, BNSS धारा 35(3) के तहत कृपया मुझे लिखित नोटिस दें, मैं वकील के साथ आऊंगा।”'
+          : '“Officer, under BNSS Section 35(3), please issue me a written notice specifying the inquiry; I will appear with my counsel.”'
+      );
+    }
+
+    // 4. STOLEN PHONE / THEFT / SNATCHING / ROBBERY ON BUS OR ROAD
+    if (
+      cleanMessage.includes('stolen') || cleanMessage.includes('theft') || cleanMessage.includes('snatch') ||
+      cleanMessage.includes('robbed') || cleanMessage.includes('chori') || cleanMessage.includes('loot') ||
+      cleanMessage.includes('దొంగిలించబడింది') || cleanMessage.includes('దొంగతనం') || cleanMessage.includes('లాక్కున్నారు') ||
+      cleanMessage.includes('चोरी') || cleanMessage.includes('छीन लिया') || cleanMessage.includes('लूट')
+    ) {
+      return r(
+        {
+          en: `**Immediate Legal & Practical Steps for a Stolen Mobile Phone:**\n\n• **Direct Legal Classification**: This is an offence of **theft under Section 303(2) of the Bharatiya Nyaya Sanhita (BNS), 2023** (or robbery/snatching under Section 309 BNS).\n• **1. Block SIM Immediately**: Call your telecom provider (Jio, Airtel, Vi, BSNL) to prevent financial fraud and OTP misuse.\n• **2. Block IMEI on CEIR ([ceir.gov.in](https://ceir.gov.in))**: Submit device details and police complaint copy on the Central Equipment Identity Register to blacklist the handset across Indian networks.\n• **3. Register Police FIR**: File a formal theft complaint at the nearest police station or via your State Police e-FIR portal. Under BNSS Section 173, registration of a cognizable offence FIR is mandatory.\n• **4. Remote Lock & Sign Out**: Use Google Find My Device (android.com/find) or Apple Find My (icloud.com/find) to lock the device and wipe data.\n• **5. Alert Your Bank**: Temporarily freeze UPI IDs and net banking accounts associated with that number.\n\n**Police Complaint Sample**: *"To SHO [Police Station]. Subject: Theft of phone [Brand/Model, IMEI: XXXXXXXXXXXXXXX] on [Date] at [Location/Bus]. Please register an FIR under Section 303 BNS and issue an acknowledged copy for CEIR blocking."*`,
+          hi: `**मोबाइल फोन चोरी होने पर तत्काल कानूनी एवं व्यावहारिक कदम:**\n\n• **कानूनी स्थिति**: यह **भारतीय न्याय संहिता (BNS), 2023 की धारा 303(2) के तहत चोरी** का संज्ञेय अपराध है।\n• **1. सिम कार्ड तुरंत ब्लॉक करें**: बैंक ओटीपी और यूपीआई के दुरुपयोग से बचने के लिए टेलिकॉम कंपनी को कॉल कर सिम ब्लॉक कराएं।\n• **2. CEIR पोर्टल पर IMEI ब्लॉक करें**: भारत सरकार के **[ceir.gov.in](https://ceir.gov.in)** पोर्टल पर आईएमईआई नंबर ब्लॉक करें ताकि चोर फोन का उपयोग न कर सके।\n• **3. एफआईआर (FIR) दर्ज कराएं**: नजदीकी थाने में या राज्य पुलिस के ई-एफआईआर पोर्टल पर धारा 303 BNS में चोरी की एफआईआर दर्ज कराएं (BNSS धारा 173 में अनिवार्य)।\n• **4. रिमोट लॉक**: गूगल Find My Device या एप्पल Find My से फोन को लॉक करें।\n• **5. बैंक को सूचित करें**: बैंक से यूपीआई और नेट बैंकिंग को अस्थायी रूप से रोकने का अनुरोध करें।`,
+          te: `**మొబైల్ ఫోన్ దొంగతనానికి గురైనప్పుడు వెంటనే చేయవలసిన చట్టపరమైన పనులు:**\n\n• **చట్టపరమైన స్థితి**: ఇది **భారతీయ న్యాయ సంహిత (BNS), 2023 సెక్షన్ 303(2) కింద దొంగతనం** నేరం.\n• **1. వెంటనే సిమ్ బ్లాక్ చేయండి**: బ్యాంక్ ఓటీపీలు దుర్వినియోగం కాకుండా టెలికాం ఆపరేటర్‌కు కాల్ చేసి సిమ్ బ్లాక్ చేయించండి.\n• **2. CEIR పోర్టల్‌లో IMEI బ్లాక్ చేయండి**: అధికారిక కేంద్ర ప్రభుత్వ పోర్టల్ **[ceir.gov.in](https://ceir.gov.in)** లో మొబైల్ IMEI ని దేశవ్యాప్తంగా బ్లాక్ చేయండి.\n• **3. పోలీస్ ఎఫ్‌ఐఆర్ నమోదు చేయండి**: సమీప పోలీస్ స్టేషన్‌లో లేదా ఆన్‌లైన్ పోర్టల్‌లో దొంగతనంపై ఎఫ్‌ఐఆర్ ఇవ్వండి. BNSS సెక్షన్ 173 ప్రకారం నమోదు తప్పనిసరి.\n• **4. రిమోట్ లాక్ చేయండి**: గూగుల్ Find My Device ద్వారా ఫోన్‌ను రిమోట్‌గా లాక్ చేసి అకౌంట్స్ లాగౌట్ చేయండి.\n• **5. బ్యాంకుకు తెలపండి**: యూపీఐ (UPI) లావాదేవీలను తాత్కాలికంగా నిలిపివేయండి.`
+        },
+        ['BNS 2023 Sec 303(2) & 309', 'BNSS 2023 Sec 173', 'CEIR Portal (ceir.gov.in)', 'DoT Telecom Security Guidelines'],
+        {
+          en: ['How to block IMEI on CEIR portal?', 'What if police refuse to file theft FIR?', 'How to get duplicate SIM card?'],
+          hi: ['CEIR पर IMEI कैसे ब्लॉक करें?', 'अगर पुलिस एफआईआर दर्ज न करे तो?', 'डुप्लीकेट सिम कैसे लें?'],
+          te: ['CEIR లో IMEI ఎలా బ్లాక్ చేయాలి?', 'ఎఫ్‌ఐఆర్ రాయకపోతే ఏం చేయాలి?', 'డూప్లికేట్ సిమ్ ఎలా పొందాలి?']
+        }
+      );
+    }
+
+    // 5. LOST PHONE / MISPLACED (DISTINCT FROM THEFT)
+    if (
+      (cleanMessage.includes('lost') || cleanMessage.includes('misplaced') || cleanMessage.includes('fell') ||
+       cleanMessage.includes('kho gaya') || cleanMessage.includes('gum') || cleanMessage.includes('పోగొట్టుకున్నాను') ||
+       cleanMessage.includes('పోయాయి') || cleanMessage.includes('పోయి') || cleanMessage.includes('खो गया')) &&
+      !cleanMessage.includes('stolen') && !cleanMessage.includes('theft') && !cleanMessage.includes('chori')
+    ) {
+      return r(
+        {
+          en: `**Procedure for a Lost or Misplaced Mobile Phone (Lost Property vs Theft):**\n\n• **Classification**: Misplacing a phone is a **Lost Property / Non-Cognizable Incident**, not criminal theft. Do not file a false theft FIR.\n• **1. Locate Device**: Check Google Find My Device (android.com/find) or Apple Find My (icloud.com/find) to view the last location ping.\n• **2. Block SIM**: Request a temporary SIM block from your telecom operator.\n• **3. File Digital Lost Article Report**: Visit your State Police Citizen Portal/App (e.g. Delhi Police Lost Report, Karnataka KSP, UP COP, Telangana Police Portal). Lodge a "Lost Article Report" to receive an instant digitally signed Non-Cognizable Report (NCR) certificate.\n• **4. Block IMEI on CEIR ([ceir.gov.in](https://ceir.gov.in))**: Use the digital loss report receipt to blacklist the handset on the national CEIR portal.\n• **5. Duplicate SIM**: Show the official police loss receipt and Aadhaar card at your telecom store to get a duplicate SIM.`,
+          hi: `**खोए हुए मोबाइल फोन के लिए आवश्यक कानूनी प्रक्रिया (Lost Property):**\n\n• **कानूनी अंतर**: फोन खो जाना 'खोई हुई संपत्ति' (Non-Cognizable) की श्रेणी में आता है, चोरी में नहीं। झूठी चोरी की एफआईआर न कराएं।\n• **1. लोकेशन ट्रैक करें**: गूगल Find My Device या एप्पल Find My से अंतिम लोकेशन देखें।\n• **2. सिम ब्लॉक करें**: टेलिकॉम कंपनी को कॉल करके तुरंत सिम ब्लॉक करवाएं।\n• **3. डिजिटल लॉस्ट रिपोर्ट दर्ज करें**: राज्य पुलिस की वेबसाइट या मोबाइल ऐप पर 'Lost Article Report' दर्ज करें और तुरंत डिजिटल पावती डाउनलोड करें।\n• **4. CEIR पोर्टल पर ब्लॉक करें**: [ceir.gov.in](https://ceir.gov.in) पर जाकर लॉस्ट रिपोर्ट के साथ IMEI ब्लॉक करें।\n• **5. नया सिम प्राप्त करें**: पुलिस पावती और आधार कार्ड लेकर टेलिकॉम स्टोर से नया सिम प्राप्त करें।`,
+          te: `**ఫోన్ పోగొట్టుకున్నప్పుడు తీసుకోవలసిన చర్యలు (మిస్సింగ్ రిపోర్ట్):**\n\n• **ముఖ్యమైన తేడా**: ఫోన్ పోగొట్టుకోవడం అనేది 'లాస్ట్ ప్రాపర్టీ' కిందకు వస్తుంది, నేరం కిందకు రాదు. తప్పుడు దొంగతనం కేసు పెట్టవద్దు.\n• **1. లొకేషన్ తనిఖీ**: గూగుల్ Find My Device ద్వారా ఫోన్ ఎక్కడ ఉందో చూడండి.\n• **2. సిమ్ బ్లాక్**: టెలికాం ఆపరేటర్‌కు కాల్ చేసి సిమ్ బ్లాక్ చేయించండి.\n• **3. డిజిటల్ లాస్ట్ రిపోర్ట్ తీసుకోండి**: రాష్ట్ర పోలీస్ యాప్ లేదా వెబ్‌సైట్‌లో 'Lost Mobile Report' పెట్టి డిజిటల్ సర్టిఫికేట్ డౌన్‌లోడ్ చేసుకోండి.\n• **4. CEIR లో బ్లాక్ చేయండి**: [ceir.gov.in](https://ceir.gov.in) లో పోలీస్ రశీదుతో IMEI బ్లాక్ చేయండి.\n• **5. డూప్లికేట్ సిమ్ పొందండి**: పోలీస్ రశీదు మరియు ఆధార్‌తో కొత్త సిమ్ తీసుకోండి.`
+        },
+        ['BNSS 2023 Non-Cognizable Reporting', 'DoT CEIR Portal (ceir.gov.in)', 'State Police Citizen Portals'],
+        {
+          en: ['How to get duplicate SIM card?', 'Can CEIR trace my lost phone?', 'What if someone finds my phone?'],
+          hi: ['डुप्लीकेट सिम कैसे प्राप्त करें?', 'क्या CEIR खोया फोन ढूंढ सकता है?', 'अगर किसी को फोन मिले तो?'],
+          te: ['డూప్లికేట్ సిమ్ ఎలా తీసుకోవాలి?', 'CEIR ద్వారా ఫోన్ దొరుకుతుందా?', 'ఎవరికైనా ఫోన్ దొరికితే ఏం చేయాలి?']
+        }
+      );
+    }
+
+    // 6. ONLINE FRAUD / CYBER CRIME / UPI SCAM / APK SCAM
+    if (
+      cleanMessage.includes('fraud') || cleanMessage.includes('cyber') || cleanMessage.includes('scam') ||
+      cleanMessage.includes('upi') || cleanMessage.includes('debited') || cleanMessage.includes('apk') ||
+      cleanMessage.includes('otp') || cleanMessage.includes('phishing') || cleanMessage.includes('మోసం') ||
+      cleanMessage.includes('సైబర్') || cleanMessage.includes('धोखा') || cleanMessage.includes('साइबर')
+    ) {
+      return r(
+        {
+          en: `**Emergency Actions for Online Financial Fraud & UPI Scams:**\n\n• **Act Inside the Golden Hour**: The first 2 to 3 hours are critical to freeze stolen money before fraudsters cash out through mule accounts.\n• **1. Dial 1930 Immediately**: Call the **National Cyber Crime Helpline (1930)** operated by the Indian Cyber Crime Coordination Centre (I4C). Provide UTR transaction ID, amount, bank name, and fraudulent UPI handle.\n• **2. File on [cybercrime.gov.in](https://cybercrime.gov.in)**: Register a formal incident on the National Cybercrime Reporting Portal.\n• **3. Contact Bank Fraud Desk**: Call your bank's 24x7 toll-free fraud helpline to block net banking, cards, and freeze beneficiary transfer.\n• **4. Preserve Evidence**: Take full screenshots of SMS, UPI receipts, WhatsApp chats, and fraudulent APK links.\n• **Applicable Law**: BNS 2023 Section 318(4) (Cheating) and IT Act 2000 Section 66D (Cheating by personation).`,
+          hi: `**ऑनलाइन वित्तीय धोखाधड़ी एवं यूपीआई फ्रॉड पर तत्काल कार्रवाई:**\n\n• **गोल्डन ऑवर में कार्रवाई करें**: घटना के 2-3 घंटे के भीतर साइबर सेल और बैंक पैसे को फ्रीज (होल्ड) करवा सकते हैं।\n• **1. तुरंत 1930 पर कॉल करें**: भारत सरकार के **राष्ट्रीय साइबर हेल्पलाइन नंबर 1930** पर तुरंत कॉल करें और यूटीआर (UTR) नंबर व राशि दर्ज कराएं।\n• **2. cybercrime.gov.in पर रिपोर्ट करें**: आधिकारिक नेशनल साइबर क्राइम रिपोर्टिंग पोर्टल पर ऑनलाइन शिकायत दर्ज करें।\n• **3. बैंक फ्रॉड हेल्पडेस्क**: अपने बैंक को फोन करके संबंधित यूपीआई और कार्ड को ब्लॉक करवाएं और ट्रांजेक्शन फ्रीज करने का अनुरोध करें।\n• **4. सबूत सुरक्षित रखें**: बैंक एसएमएस, स्क्रीनशॉट, कॉल लॉग और चैट को डिलीट न करें।`,
+          te: `**ఆన్‌లైన్ ఫైనాన్షియల్ ఫ్రాడ్ మరియు సైబర్ మోసాలపై అత్యవసర చర్యలు:**\n\n• **గోల్డెన్ అవర్ లో స్పందించండి**: మొదటి 2-3 గంటల్లో స్పందిస్తే మోసగాడి ఖాతాలోని నగదును హోల్డ్ (Freeze) చేయవచ్చు.\n• **1. వెంటనే 1930 కి కాల్ చేయండి**: భారత ప్రభుత్వ **జాతీయ సైబర్ హెల్ప్‌లైన్ 1930** కి వెంటనే కాల్ చేసి UTR నంబర్, తేదీ, మొత్తం వివరాలు ఇవ్వండి.\n• **2. cybercrime.gov.in లో రిపోర్ట్ చేయండి**: అధికారిక నేషనల్ సైబర్ క్రైమ్ పోర్టల్‌లో ఫిర్యాదు చేయండి.\n• **3. బ్యాంక్ కస్టమర్ కేర్**: మీ బ్యాంకుకు వెంటనే కాల్ చేసి యూపీఐ మరియు నెట్ బ్యాంకింగ్ లావాదేవీలను బ్లాక్ చేయించండి.\n• **4. సాక్ష్యాలను భద్రపరచండి**: ట్రాన్సాక్షన్ మెసేజ్‌లు, వాట్సాప్ చాట్‌లు, స్క్రీన్‌షాట్‌లను భద్రపరచండి.`
+        },
+        ['BNS 2023 Sec 318(4)', 'IT Act 2000 Sec 66D', 'National Cyber Crime Helpline 1930', 'cybercrime.gov.in'],
+        {
+          en: ['What details does 1930 ask for?', 'How does cyber cell freeze money?', 'Can bank refund fraudulent UPI debit?'],
+          hi: ['1930 पर क्या जानकारी देनी होती है?', 'साइबर सेल पैसे कैसे फ्रीज करता है?', 'क्या बैंक पैसे वापस कर सकता है?'],
+          te: ['1930 లో ఏ వివరాలు అడుగుతారు?', 'సైబర్ సెల్ డబ్బులు ఎలా ఫ్రీజ్ చేస్తుంది?', 'బ్యాంకు నుండి డబ్బులు వాపస్ వస్తాయా?']
+        }
+      );
+    }
+
+    // 7. LANDLORD SECURITY DEPOSIT WITHHELD
+    if (
+      cleanMessage.includes('landlord') || cleanMessage.includes('security deposit') || cleanMessage.includes('deposit') ||
+      cleanMessage.includes('tenant') || cleanMessage.includes('rent') || cleanMessage.includes('vacate') ||
+      cleanMessage.includes('घर मालिक') || cleanMessage.includes('किराया') || cleanMessage.includes('ఇంటి ఓనర్') || cleanMessage.includes('డిపాజిట్')
+    ) {
+      return r(
+        {
+          en: `**Legal Rights Regarding Withheld Security Deposit by Landlord:**\n\n• **Direct Answer**: If you vacated adhering to the agreed notice period without causing structural damage beyond normal wear and tear, withholding your deposit is an unlawful breach of tenancy agreement.\n• **1. Collate Move-out Evidence**: Keep flat condition handover photos/videos, move-out confirmation chats, and rent payment receipts.\n• **2. Send Formal Legal Demand Notice**: Send a 15-day demand notice via Speed Post and Email.\n• **3. Civil Recovery Suit**: File a Summary Recovery Suit under **Order 37 of the Code of Civil Procedure (CPC)** or approach the Rent Authority under the Model Tenancy Act.\n• **4. Consumer Forum**: If rented through a broker, PG company, or property firm, file a grievance on **[consumerhelpline.gov.in](https://consumerhelpline.gov.in)**.\n\n**Demand Sample**: *"To [Landlord]. As per tenancy ended on [Date] with peaceful handover, ₹[Amount] security deposit remains unlawfully withheld. Please transfer within 15 days, failing which legal recovery proceedings under Order 37 CPC will be initiated."*`,
+          hi: `**मकान मालिक द्वारा सिक्योरिटी डिपॉजिट रोकने पर कानूनी अधिकार:**\n\n• **सीधा उत्तर**: नोटिस पीरियड का पालन करते हुए घर खाली करने के बाद मकान मालिक कानूनी रूप से आपकी सिक्योरिटी डिपॉजिट नहीं रोक सकता।\n• **1. सबूत जुटाएं**: घर खाली करते समय की तस्वीरें, वीडियो, किराया रसीदें और चाबी सौंपने की चैट सुरक्षित रखें।\n• **2. 15 दिन का लीगल डिमांड नोटिस भेजें**: ईमेल और स्पीड पोस्ट से 15 दिनों में पैसे लौटाने का औपचारिक नोटिस भेजें।\n• **3. सिविल कोर्ट में समरी रिकवरी**: सीपीसी (CPC) के **ऑर्डर 37 के तहत समरी सूट** दायर करें या रेंट ट्रिब्यूनल में जाएं।\n• **4. उपभोक्ता आयोग**: यदि ब्रोकर या पीजी कंपनी के जरिए लिया था, तो राष्ट्रीय उपभोक्ता हेल्पलाइन ([consumerhelpline.gov.in](https://consumerhelpline.gov.in)) पर शिकायत करें।`,
+          te: `**ఇంటి ఓనర్ సెక్యూరిటీ డిపాజిట్ ఇవ్వకపోతే మీ చట్టపరమైన హక్కులు:**\n\n• **స్పష్టమైన సమాధానం**: నోటీస్ పీరియడ్ నిబంధనలు పాటించి ఇంటిని ఖాళీ చేసినప్పుడు, ఓనర్ సెక్యూరిటీ డిపాజిట్‌ను నిలిపివేయడం చట్టవిరుద్ధం.\n• **1. సాక్ష్యాలు భద్రపరచండి**: ఇల్లు ఖాళీ చేసిన నాటి ఫోటోలు, వీడియోలు, రెంట్ రశీదులు భద్రపరచండి.\n• **2. 15 రోజుల లీగల్ నోటీస్ ఇవ్వండి**: స్పీడ్ పోస్ట్ మరియు ఈమెయిల్ ద్వారా డిపాజిట్ మొత్తాన్ని 15 రోజుల్లో తిరిగి ఇవ్వాలని నోటీస్ పంపండి.\n• **3. సివిల్ కోర్టు పిటిషన్**: CPC ఆర్డర్ 37 కింద రికవరీ పిటిషన్ వేయవచ్చు.\n• **4. కన్స్యూమర్ ఫోరమ్**: బ్రోకర్ లేదా పీజీ మేనేజ్‌మెంట్ ద్వారా తీసుకుంటే [consumerhelpline.gov.in](https://consumerhelpline.gov.in) లో ఫిర్యాదు చేయవచ్చు.`
+        },
+        ['Order 37 Code of Civil Procedure (Summary Recovery)', 'Model Tenancy Act 2021', 'Consumer Protection Act 2019', 'National Consumer Helpline (consumerhelpline.gov.in)'],
+        {
+          en: ['How to draft legal notice to landlord?', 'Can I complain to police about withheld deposit?', 'What is Order 37 CPC recovery?'],
+          hi: ['मकान मालिक को लीगल नोटिस कैसे भेजें?', 'क्या पुलिस में शिकायत कर सकते हैं?', 'ऑर्डर 37 सीपीसी रिकवरी क्या है?'],
+          te: ['ఓనర్‌కు లీగల్ నోటీస్ ఎలా పంపాలి?', 'పోలీసులకు ఫిర్యాదు చేయవచ్చా?', 'ఆర్డర్ 37 రికవరీ పిటిషన్ అంటే ఏమిటి?']
+        }
+      );
+    }
+
+    // 8. ARTICLE 21 / CONSTITUTIONAL RIGHTS
+    if (
+      cleanMessage.includes('article 21') || cleanMessage.includes('art 21') || cleanMessage.includes('right to life') ||
+      cleanMessage.includes('ఆర్టికల్ 21') || cleanMessage.includes('अनुच्छेद 21')
+    ) {
+      return r(
+        {
+          en: `**Article 21 of the Constitution of India — Right to Life and Personal Liberty:**\n\n• **Core Constitutional Text**: *"No person shall be deprived of his life or personal liberty except according to procedure established by law."*\n• **Just, Fair & Reasonable Law**: In *Maneka Gandhi v. Union of India (1978)*, the Supreme Court held that procedural law must be non-arbitrary, fair, and just.\n• **Right to Privacy (Puttaswamy 2017)**: A 9-judge bench recognized privacy, including digital data and personal correspondence, as an intrinsic fundamental right under Article 21.\n• **Derived Rights**: Right to Free Legal Aid (*Hussainara Khatoon*), Right to Speedy Trial, Right against Custodial Torture (*Prem Shankar Shukla*), and Right to Clean Environment (*Subhash Kumar*).\n• **Applicability**: Applies to all individuals in India, citizens and non-citizens alike.`,
+          hi: `**भारतीय संविधान का अनुच्छेद 21 — जीवन और व्यक्तिगत स्वतंत्रता का अधिकार:**\n\n• **मूल पाठ**: *"विधि द्वारा स्थापित प्रक्रिया के अतिरिक्त किसी भी व्यक्ति को उसके जीवन या दैहिक स्वतंत्रता से वंचित नहीं किया जाएगा।"*\n• **मेनका गांधी फैसला (1978)**: सुप्रीम कोर्ट ने तय किया कि कोई भी कानून निष्पक्ष, न्यायसंगत और गैर-मनमाना होना चाहिए।\n• **निजता का मौलिक अधिकार (पुट्टास्वामी 2017)**: 9 जजों की बेंच ने डिजिटल डेटा और व्यक्तिगत बातचीत की प्राइवेसी को अनुच्छेद 21 का अभिन्न अंग माना।\n• **शामिल अधिकार**: मुफ्त कानूनी सहायता का अधिकार, त्वरित सुनवाई (Speedy Trial) का अधिकार, और पुलिस प्रताड़ना से सुरक्षा।`,
+          te: `**భారత రాజ్యాంగంలోని ఆర్టికల్ 21 — జీవించే హక్కు మరియు వ్యక్తిగత స్వేచ్ఛ:**\n\n• **రాజ్యాంగ నిబంధన**: *"చట్టం నిర్దేశించిన పద్ధతి ప్రకారం తప్ప, ఏ వ్యక్తి యొక్క ప్రాణాన్ని లేదా వ్యక్తిగత స్వేచ్ఛను హరించకూడదు."*\n• **మేనకా గాంధీ తీర్పు (1978)**: చట్టపరమైన విధానం న్యాయబద్ధంగా, నిష్పక్షపాతంగా ఉండాలని సుప్రీంకోర్టు స్పష్టం చేసింది.\n• **గోప్యతా హక్కు (పుట్టస్వామి 2017)**: వ్యక్తిగత గోప్యత ఆర్టికల్ 21 లో అంతర్భాగమని 9 మంది జడ్జిల ధర్మాసనం తీర్పు చెప్పింది.\n• **ఇతర హక్కులు**: ఉచిత న్యాయ సహాయం, సత్వర విచారణ, మరియు లాకప్ హింస నుండి రక్షణ.`
+        },
+        ['Constitution of India Art. 21', 'Maneka Gandhi v. Union of India (1978)', 'KS Puttaswamy v. Union of India (2017)', 'India Code (indiacode.nic.in)'],
+        {
+          en: ['What is the Puttaswamy Privacy judgment?', 'What is Maneka Gandhi case?', 'How to enforce Article 21 in High Court?'],
+          hi: ['पुट्टास्वामी निजता फैसला क्या है?', 'मेनका गांधी केस क्या था?', 'हाईकोर्ट में अनुच्छेद 21 कैसे लागू कराएं?'],
+          te: ['పుట్టస్వామి తీర్పు వివరాలేంటి?', 'మేనకా గాంధీ కేసు ప్రాముఖ్యత ఏమిటి?', 'హైకోర్టులో ఆర్టికల్ 21 ఎలా అమలు చేయాలి?']
+        }
+      );
+    }
+
+    // 9. POLICE SEIZED PHONE / CONFISCATED DEVICE
+    if (
+      (cleanMessage.includes('police') || cleanMessage.includes('officer') || cleanMessage.includes('పోలీసులు') || cleanMessage.includes('पुलिस')) &&
+      (cleanMessage.includes('seized') || cleanMessage.includes('took') || cleanMessage.includes('confiscated') ||
+       cleanMessage.includes('తీసుకున్నారు') || cleanMessage.includes('లాక్కున్నారు') || cleanMessage.includes('जब्त') || cleanMessage.includes('ले लिया'))
+    ) {
+      return r(
+        {
+          en: `**Statutory Safeguards Against Police Seizure of Mobile Phones:**\n\n• **BNSS Section 105 & Section 94**: Digital devices can only be seized under a formal judicial search warrant or documented Section 105 seizure memo.\n• **Mandatory Hash Value (BSA Sec 63)**: To prevent planting or tampering with digital evidence, police MUST generate and record the device's cryptographic Hash Value in the seizure memo.\n• **Two Independent Witnesses**: Seizure must occur in the presence of two independent local witnesses who sign the seizure list.\n• **Never Sign Blank Papers**: Verify that make, model, and physical condition are noted accurately.\n• **Application for Return**: Your advocate can apply under **BNSS Section 497 (Old CrPC 451/457)** before the Judicial Magistrate for interim return of your device.`,
+          hi: `**पुलिस द्वारा मोबाइल फोन जब्त किए जाने पर कानूनी अधिकार:**\n\n• **BNSS धारा 105 एवं 94**: डिजिटल उपकरण की जब्ती केवल अदालती सर्च वारंट या औपचारिक जब्ती मेमो (Seizure Memo) के तहत ही हो सकती है।\n• **हैश वैल्यू (Hash Value) अनिवार्य**: BSA धारा 63 के तहत इलेक्ट्रॉनिक साक्ष्य से छेड़छाड़ रोकने के लिए फोन का हैश वैल्यू दर्ज करना अनिवार्य है।\n• **स्वतंत्र गवाह**: जब्ती पर दो स्वतंत्र स्थानीय गवाहों के हस्ताक्षर होने चाहिए।\n• **फोन वापसी की अर्जी**: मजिस्ट्रेट के समक्ष **BNSS धारा 497 (पूर्व CrPC 451/457)** के तहत फोन वापस पाने की अर्जी लगाई जा सकती है।`,
+          te: `**మొబైల్ ఫోన్ సీజ్ చేసినప్పుడు మీ చట్టపరమైన హక్కులు:**\n\n• **BNSS సెక్షన్ 105 మరియు 94**: కోర్టు సెర్చ్ వారెంట్ లేదా లిఖితపూర్వక సీజర్ మెమో (Seizure Memo) లేకుండా ఫోన్ స్వాధీనం చేసుకోలేరు.\n• **హ్యాష్ వాల్యూ నమోదు (BSA సెక్షన్ 63)**: సాక్ష్యాలు తారుమారు కాకుండా ఉండేందుకు డివైస్ హ్యాష్ వేల్యూ నమోదు చేయాలి.\n• **ఇద్దరు సాక్షులు**: సీజింగ్ సమయంలో ఇద్దరు స్వతంత్ర వ్యక్తులు సాక్షులుగా సంతకం చేయాలి.\n• **ఫోన్ తిరిగి పొందడం**: మేజిస్ట్రేట్ కోర్టులో **BNSS సెక్షన్ 497** కింద పిటిషన్ వేసి మీ ఫోన్‌ను తిరిగి పొందవచ్చు.`
+        },
+        ['BNSS 2023 Sec 105 & Sec 94', 'BSA 2023 Sec 63 (Electronic Evidence)', 'BNSS 2023 Sec 497 (Return of Property)', 'Constitution Art. 20(3) & 21'],
+        {
+          en: ['What is a Hash Value in phone seizure?', 'How to apply for phone return under BNSS 497?', 'Can police inspect data without court warrant?'],
+          hi: ['फोन जब्ती में हैश वैल्यू क्या है?', 'धारा 497 में फोन वापस कैसे लें?', 'क्या बिना वारंट डेटा देख सकते हैं?'],
+          te: ['సీజర్ మెమోలో హ్యాష్ వాల్యూ అంటే ఏమిటి?', 'సెక్షన్ 497 కింద ఫోన్ ఎలా తిరిగి పొందాలి?', 'వారెంట్ లేకుండా డేటా చూడవచ్చా?']
+        }
+      );
+    }
+
+    // 10. UNLOCK PHONE / PASSCODE DEMAND / WHATSAPP CHECK
+    if (
+      cleanMessage.includes('unlock') || cleanMessage.includes('password') || cleanMessage.includes('passcode') ||
+      cleanMessage.includes('fingerprint') || cleanMessage.includes('face id') || cleanMessage.includes('whatsapp') ||
+      cleanMessage.includes('chats') || cleanMessage.includes('అన్‌లాక్') || cleanMessage.includes('పాస్‌వర్డ్') ||
+      cleanMessage.includes('अनलॉक') || cleanMessage.includes('पासवर्ड')
+    ) {
+      return r(
+        {
+          en: `**Police cannot force you to unlock your personal phone or disclose passwords on the road:**\n\n• **Article 20(3) (Right Against Self-Incrimination)**: You cannot be compelled to provide passcodes or act as a witness against yourself.\n• **Article 21 (Puttaswamy 2017)**: Privacy is a Fundamental Right protecting personal electronic conversations.\n• **Judicial Order Required**: In *Virendra Khanna v. State of Karnataka (2021)*, courts held digital passcodes can only be required under specific magistrate authorization in formal investigations, not casual roadside checks.\n\n**Polite Response**: *"Officer, my phone contains private communications. Under Articles 20(3) and 21, I respectfully decline to unlock my device without a judicial warrant."*`,
+          hi: `**पुलिस रास्ते में आपका मोबाइल फोन अनलॉक करने या पासवर्ड देने के लिए मजबूर नहीं कर सकती:**\n\n• **अनुच्छेद 20(3) (आत्म-दोषारोपण से संरक्षण)**: किसी भी नागरिक को अपने ही खिलाफ गवाह बनने या जबरन पासवर्ड साझा करने के लिए बाध्य नहीं किया जा सकता।\n• **अनुच्छेद 21 (पुट्टास्वामी फैसला)**: निजता (प्राइवेसी) आपका मौलिक अधिकार है।\n• **अदालती आदेश अनिवार्य**: वीरेंद्र खन्ना बनाम कर्नाटक राज्य मामले में कोर्ट ने स्पष्ट किया कि पासवर्ड की मांग केवल औपचारिक जांच में अदालत की अनुमति से हो सकती है।\n\n**विनम्रता से कहें**: *"अधिकारी महोदय, फोन में मेरा निजी डेटा है। बिना कोर्ट वारंट या धारा 105 जब्ती मेमो के मैं इसे अनलॉक करने के लिए बाध्य नहीं हूँ।"*`,
+          te: `**రోడ్డుపై పోలీసులు మీ మొబైల్ ఫోన్ అన్‌లాక్ చేయాలని బలవంతం చేయకూడదు:**\n\n• **ఆర్టికల్ 20(3) (స్వీయ-నేరారోపణ వ్యతిరేక హక్కు)**: తనపై తానే సాక్ష్యం చెప్పుకోవాలని ఎవరినీ బలవంతం చేయరాదు. పాస్‌వర్డ్ ఇవ్వాలని ఒత్తిడి చేయడం చట్టవిరుద్ధం.\n• **ఆర్టికల్ 21 (పుట్టస్వామి తీర్పు)**: వ్యక్తిగత గోప్యత ప్రాథమిక హక్కు.\n• **కోర్టు వారెంట్ అవసరం**: అధికారిక దర్యాప్తులో మేజిస్ట్రేట్ అనుమతితో మాత్రమే డిజిటల్ పరికరాల పరిశీలన జరుగుతుంది.\n\n**స్పష్టంగా చెప్పండి**: *"అధికారి గారూ, నా ఫోన్‌లో వ్యక్తిగత వివరాలు ఉన్నాయి. కోర్టు సెర్చ్ వారెంట్ లేదా సెక్షన్ 105 మెమో లేకుండా చూపించడానికి నేను బాధ్యుడిని కాను."*`
+        },
+        ['Constitution of India Art. 20(3) & 21', 'KS Puttaswamy v. Union of India (2017)', 'Virendra Khanna v. State of Karnataka (2021)'],
+        {
+          en: ['Can they seize my phone if I refuse?', 'What if they threaten me?', 'How to file complaint against officer?'],
+          hi: ['क्या वे फोन जब्त कर सकते हैं?', 'यदि धमकी दें तो क्या करें?', 'अधिकारी की शिकायत कैसे करें?'],
+          te: ['ఫోన్ లాక్కుంటే ఏం చేయాలి?', 'బెదిరిస్తే ఎవరికి ఫిర్యాదు చేయాలి?', 'సీజర్ మెమో అంటే ఏమిటి?']
+        },
+        effectiveLang === 'te'
+          ? '“అధికారి గారూ, సెర్చ్ వారెంట్ లేదా సెక్షన్ 105 సీజర్ మెమో లేకుండా నా ఫోన్ అన్‌లాక్ చేయలేను.”'
+          : effectiveLang === 'hi'
+          ? '“अधिकारी महोदय, बिना सर्च वारंट या धारा 105 जब्ती मेमो के मैं फोन अनलॉक करने के लिए बाध्य नहीं हूँ।”'
+          : '“Officer, unless you possess a judicial search warrant or formal Section 105 seizure memo, I respectfully decline to unlock my device.”'
+      );
+    }
+
+    // 11. Police stopped on road / Traffic check / Nakabandi / Vehicle inspection / Keys
     if (
       cleanMessage.includes('stop') || cleanMessage.includes('stopped') || cleanMessage.includes('road') ||
       cleanMessage.includes('checkpoint') || cleanMessage.includes('nakabandi') || cleanMessage.includes('pulled over') ||
@@ -1105,7 +1310,7 @@ export class AILegalService {
       cleanMessage.includes('ఆపారు') || cleanMessage.includes('ఆపడం') || cleanMessage.includes('రోడ్డుపై') || cleanMessage.includes('రోడ్డు') ||
       cleanMessage.includes('తనిఖీ') || cleanMessage.includes('చెక్పోస్ట్') || cleanMessage.includes('బైక్') || cleanMessage.includes('కారు') ||
       cleanMessage.includes('లైసెన్స్') || cleanMessage.includes('కీలు') || cleanMessage.includes('తాళాలు') || cleanMessage.includes('చెకింగ్') ||
-      cleanMessage.includes('రోకా') || cleanMessage.includes('सड़क') || cleanMessage.includes('नाकाबंदी') || cleanMessage.includes('गाड़ी') ||
+      cleanMessage.includes('रोका') || cleanMessage.includes('सड़क') || cleanMessage.includes('नाकाबंदी') || cleanMessage.includes('गाड़ी') ||
       cleanMessage.includes('लाइसेंस') || cleanMessage.includes('चाबी') || cleanMessage.includes('ट्रैफिक') || cleanMessage.includes('चेकिंग')
     ) {
       return r(
@@ -1128,15 +1333,15 @@ export class AILegalService {
       );
     }
 
-    // 2. Phone checking / searching personal device
+    // 12. General fallback for phone
     if (
-      cleanMessage.includes('phone') || cleanMessage.includes('mobile') || cleanMessage.includes('whatsapp') ||
-      cleanMessage.includes('ఫోన్') || cleanMessage.includes('మొబైల్') || cleanMessage.includes('చాట్') ||
-      cleanMessage.includes('फोन') || cleanMessage.includes('मोबाइल') || cleanMessage.includes('व्हाट्सएप')
+      cleanMessage.includes('phone') || cleanMessage.includes('mobile') ||
+      cleanMessage.includes('ఫోన్') || cleanMessage.includes('మొబైల్') ||
+      cleanMessage.includes('फोन') || cleanMessage.includes('मोबाइल')
     ) {
       return r(
         {
-          en: `**Police cannot search your mobile phone or WhatsApp chats casually on the road.**\n\n• **Article 21 (Puttaswamy 2017)**: Privacy is a Fundamental Right.\n• **BNSS Section 94**: Digital devices can only be seized under a formal judicial search warrant or documented Section 105 seizure memo signed by witnesses.\n• **No self-incrimination**: Article 20(3) guarantees you cannot be compelled to unlock your device or provide passcodes without judicial order.\n\n**Polite Response**: *"Officer, my phone contains private communications. Unless you have a judicial search warrant or formal Section 105 seizure memo, I respectfully exercise my constitutional right to privacy under Article 21."*`,
+          en: `**Police cannot search your mobile phone or WhatsApp chats casually on the road.**\n\n• **Article 21 (Puttaswamy 2017)**: Privacy is a Fundamental Right.\n• **BNSS Section 94 & 105**: Digital devices can only be seized under a formal judicial search warrant or documented Section 105 seizure memo signed by witnesses.\n• **No self-incrimination**: Article 20(3) guarantees you cannot be compelled to unlock your device or provide passcodes without judicial order.\n\n**Polite Response**: *"Officer, my phone contains private communications. Unless you have a judicial search warrant or formal Section 105 seizure memo, I respectfully exercise my constitutional right to privacy under Article 21."*`,
           hi: `**पुलिस रास्ते में आपका मोबाइल फोन या व्हाट्सएप चैट चेक नहीं कर सकती।**\n\n• **अनुच्छेद 21 (पुट्टास्वामी फैसला)**: निजता (प्राइवेसी) आपका मौलिक अधिकार है।\n• **BNSS धारा 94/105**: किसी भी डिजिटल उपकरण की जब्ती केवल अदालती सर्च वारंट या दो गवाहों वाले जब्ती मेमो (Seizure Memo) के तहत ही हो सकती है।\n• **अनुच्छेद 20(3)**: आपको फोन अनलॉक करने या पासवर्ड देने के लिए जबरन मजबूर नहीं किया जा सकता।\n\n**विनम्रता से कहें**: *"अधिकारी महोदय, फोन में मेरा निजी डेटा है। बिना कोर्ट वारंट या धारा 105 जब्ती मेमो के मैं इसे दिखाने के लिए बाध्य नहीं हूँ।"*`,
           te: `**పోలీసులు రోడ్డుపై మీ మొబైల్ ఫోన్ లేదా వాట్సాప్ చాట్‌లను అకారణంగా చెక్ చేయకూడదు.**\n\n• **ఆర్టికల్ 21 (పుట్టస్వామి తీర్పు)**: వ్యక్తిగత గోప్యత ప్రాథమిక హక్కు.\n• **BNSS సెక్షన్ 94 మరియు 105**: కోర్టు సెర్చ్ వారెంట్ లేదా ఇద్దరు స్వతంత్ర సాక్షుల సంతకాలతో కూడిన సీజర్ మెమో (Seizure Memo) లేకుండా ఫోన్ స్వాధీనం చేసుకోలేరు.\n• **ఆర్టికల్ 20(3)**: కోర్టు ఆదేశాలు లేకుండా ఫోన్ పాస్‌వర్డ్ ఇవ్వాలని బలవంతం చేయరాదు.\n\n**స్పష్టంగా చెప్పండి**: *"అధికారి గారూ, నా ఫోన్‌లో వ్యక్తిగత వివరాలు ఉన్నాయి. కోర్టు సెర్చ్ వారెంట్ లేదా సెక్షన్ 105 మెమో లేకుండా చూపించడానికి నేను బాధ్యుడిని కాను."*`
         },
@@ -1145,42 +1350,11 @@ export class AILegalService {
           en: ['Can they seize my phone?', 'What if they threaten me?', 'How to file complaint against officer?'],
           hi: ['क्या वे फोन जब्त कर सकते हैं?', 'यदि धमकी दें तो क्या करें?', 'अधिकारी की शिकायत कैसे करें?'],
           te: ['ఫోన్ లాక్కుంటే ఏం చేయాలి?', 'బెదిరిస్తే ఎవరికి ఫిర్యాదు చేయాలి?', 'సీజర్ మెమో అంటే ఏమిటి?']
-        },
-        effectiveLang === 'te'
-          ? '“అధికారి గారూ, సెర్చ్ వారెంట్ లేదా సెక్షన్ 105 సీజర్ మెమో లేకుండా నా ఫోన్ అన్‌లాక్ చేయలేను.”'
-          : effectiveLang === 'hi'
-          ? '“अधिकारी महोदय, बिना सर्च वारंट या धारा 105 जब्ती मेमो के मैं फोन अनलॉक करने के लिए बाध्य नहीं हूँ।”'
-          : '“Officer, unless you possess a judicial search warrant or formal Section 105 seizure memo, I respectfully decline to unlock my device.”'
+        }
       );
     }
 
-    // 3. Station summons without Section 35 notice / oral summons
-    if (
-      cleanMessage.includes('station') || cleanMessage.includes('thaane') || cleanMessage.includes('summons') || cleanMessage.includes('notice') ||
-      cleanMessage.includes('స్టేషన్') || cleanMessage.includes('రమ్మన్నారు') || cleanMessage.includes('పిలిచారు') || cleanMessage.includes('నోటీసు') ||
-      cleanMessage.includes('थाने') || cleanMessage.includes('थाने चलो') || cleanMessage.includes('बुलाया') || cleanMessage.includes('नोटिस')
-    ) {
-      return r(
-        {
-          en: `**Police cannot orally force you to come to the police station without formal written notice.**\n\n• **BNSS Section 35(3) (Old CrPC 41A)**: For offences punishable up to 7 years, police MUST issue a written Notice of Appearance specifying time, place, and grounds.\n• **Arnesh Kumar v. State of Bihar**: Supreme Court held arbitrary detention without Section 35 notice is illegal.\n• You are NOT required to sit at the station all day on an oral phone call or verbal command.\n\n**Polite Response**: *"Officer, under BNSS Section 35(3), please serve me a written Notice of Appearance specifying the matter. I will duly appear along with my legal counsel."*`,
-          hi: `**पुलिस आपको मौखिक आदेश या फोन पर बिना लिखित नोटिस के थाने आने के लिए मजबूर नहीं कर सकती।**\n\n• **BNSS धारा 35(3) (पूर्व CrPC 41A)**: 7 साल तक की सजा वाले मामलों में लिखित 'उपस्थिति नोटिस' (Notice of Appearance) देना अनिवार्य है।\n• **अर्णेश कुमार सुप्रीम कोर्ट फैसला**: बिना धारा 35 नोटिस के थाने बुलाना या हिरासत में रखना पूरी तरह अवैध है।\n• केवल मौखिक फोन कॉल पर थाने में दिनभर बैठने की कोई कानूनी बाध्यता नहीं है।\n\n**विनम्रता से कहें**: *"अधिकारी महोदय, BNSS धारा 35(3) के तहत कृपया मुझे लिखित नोटिस दें। मैं अपने वकील के साथ विधिवत उपस्थित हो जाऊंगा।"*`,
-          te: `**లిఖితపూర్వక నోటీసు లేకుండా పోలీసులు కేవలం మాటలతో మిమ్మల్ని స్టేషన్‌కు రమ్మని బలవంతం చేయలేరు.**\n\n• **BNSS సెక్షన్ 35(3) (పాత CrPC 41A)**: 7 సంవత్సరాల లోపు శిక్ష ఉండే కేసులలో విచారణకు పిలవాలంటే తప్పనిసరిగా లిఖితపూర్వక నోటీసు ఇవ్వాలి.\n• **అర్నేష్ కుమార్ సుప్రీం కోర్టు తీర్పు**: సరైన నోటీసు లేకుండా స్టేషన్ కు పిలవడం లేదా నిర్బంధించడం చట్టవిరుద్ధం.\n• కేవలం ఫోన్ కాల్ లేదా మాటల మీద రోజంతా స్టేషన్‌లో కూర్చోవలసిన అవసరం లేదు.\n\n**స్పష్టంగా చెప్పండి**: *"అధికారి గారూ, BNSS సెక్షన్ 35(3) ప్రకారం దయచేసి నాకు లిఖితపూర్వక నోటీసు ఇవ్వండి. నేను నా న్యాయవాదితో కలిసి వస్తాను."*`
-        },
-        ['BNSS 2023 Sec 35(3)', 'Arnesh Kumar v. State of Bihar (2014)', 'Constitution Art. 22(1)'],
-        {
-          en: ['Can I take my lawyer with me?', 'What if they refuse notice?', 'Can I record police audio/video?'],
-          hi: ['क्या वकील साथ ले जा सकते हैं?', 'नोटिस देने से मना करें तो?', 'क्या पुलिस की रिकॉर्डिंग कर सकते हैं?'],
-          te: ['న్యాయవాదిని వెంట తీసుకెళ్లవచ్చా?', 'నోటీసు ఇవ్వకపోతే ఏం చేయాలి?', 'పోలీసులను రికార్డ్ చేయవచ్చా?']
-        },
-        effectiveLang === 'te'
-          ? '“అధికారి గారూ, BNSS సెక్షన్ 35(3) ప్రకారం నాకు లిఖితపూర్వక నోటీసు జారీ చేయండి.”'
-          : effectiveLang === 'hi'
-          ? '“अधिकारी महोदय, BNSS धारा 35(3) के तहत कृपया मुझे लिखित नोटिस प्रदान करें।”'
-          : '“Officer, under BNSS Section 35(3), please issue a formal written notice specifying the inquiry.”'
-      );
-    }
-
-    // 4. Breathalyzer / Drunk and drive
+    // 13. Breathalyzer / Drunk and drive
     if (
       cleanMessage.includes('drink') || cleanMessage.includes('drunk') || cleanMessage.includes('breathalyzer') || cleanMessage.includes('daroo') || cleanMessage.includes('alcohol') ||
       cleanMessage.includes('తాగి') || cleanMessage.includes('డ్రంక్') || cleanMessage.includes('మద్యం') || cleanMessage.includes('బ్రీత్‌లైజర్') ||
@@ -1206,7 +1380,7 @@ export class AILegalService {
       );
     }
 
-    // 5. Woman rights / Arrest after sunset
+    // 14. Woman rights / Arrest after sunset
     if (
       cleanMessage.includes('woman') || cleanMessage.includes('female') || cleanMessage.includes('girl') || cleanMessage.includes('lady') || cleanMessage.includes('mahila') ||
       cleanMessage.includes('మహిళ') || cleanMessage.includes('స్త్రీ') || cleanMessage.includes('ఆడవారు') || cleanMessage.includes('లేడీ') ||
@@ -1232,7 +1406,7 @@ export class AILegalService {
       );
     }
 
-    // 6. FIR refused / Zero FIR
+    // 15. FIR refused / Zero FIR
     if (
       cleanMessage.includes('fir') || cleanMessage.includes('complaint') || cleanMessage.includes('refused') ||
       cleanMessage.includes('ఎఫ్ఐఆర్') || cleanMessage.includes('ఫిర్యాదు') || cleanMessage.includes('నిరాకరణ') ||
@@ -1258,7 +1432,7 @@ export class AILegalService {
       );
     }
 
-    // 7. Arrest / Custody / Bail
+    // 16. Arrest / Custody / Bail
     if (
       cleanMessage.includes('arrest') || cleanMessage.includes('bail') || cleanMessage.includes('custody') || cleanMessage.includes('hawaalat') ||
       cleanMessage.includes('అరెస్ట్') || cleanMessage.includes('అరెస్టు') || cleanMessage.includes('బెయిల్') || cleanMessage.includes('కస్టడీ') ||
@@ -1284,7 +1458,7 @@ export class AILegalService {
       );
     }
 
-    // 8. Bribe / Extortion / Illegal Demands
+    // 17. Bribe / Extortion / Illegal Demands
     if (
       cleanMessage.includes('bribe') || cleanMessage.includes('ghoos') || cleanMessage.includes('rishwat') || cleanMessage.includes('paisa') || cleanMessage.includes('money') ||
       cleanMessage.includes('లంచం') || cleanMessage.includes('డబ్బులు') || cleanMessage.includes('డబ్బు') ||
@@ -1310,7 +1484,7 @@ export class AILegalService {
       );
     }
 
-    // 9. Physical Violence / Beating / Police Brutality
+    // 18. Physical Violence / Beating / Police Brutality
     if (
       cleanMessage.includes('beat') || cleanMessage.includes('hit') || cleanMessage.includes('slap') || cleanMessage.includes('violence') || cleanMessage.includes('kottaru') ||
       cleanMessage.includes('కొట్టారు') || cleanMessage.includes('దాడి') || cleanMessage.includes('హింస') ||
@@ -1336,34 +1510,7 @@ export class AILegalService {
       );
     }
 
-    // 9b. Threat of False Case / Framing
-    if (
-      cleanMessage.includes('false case') || cleanMessage.includes('fake case') || cleanMessage.includes('frame') ||
-      cleanMessage.includes('framing') || cleanMessage.includes('threat') || cleanMessage.includes('dhamki') ||
-      cleanMessage.includes('తప్పుడు కేసు') || cleanMessage.includes('ఫేక్ కేసు') || cleanMessage.includes('బెదిరింపు') ||
-      cleanMessage.includes('झूठा केस') || cleanMessage.includes('फर्जी केस') || cleanMessage.includes('धमकी')
-    ) {
-      return r(
-        {
-          en: `**Protection Against Police Threats & Fabricated Cases:**\n\n• **BNS Section 248 (Old IPC 211)**: Threatening or framing an innocent person with false criminal charges is punishable with up to 7 years imprisonment.\n• **Demand Written Notice (BNSS Sec 35(3))**: Without written grounds and Section 35 notice, police threats have no legal force.\n• **Immediate Written Complaint to SP**: Report harassment to District Superintendent of Police or Commissioner with time, date, and officer names.\n• **Anticipatory Bail (BNSS Sec 482)**: If you fear imminent arrest on false charges, you can move High Court or Sessions Court for Anticipatory Bail.\n\n**Polite Response**: *"Officer, I have done nothing unlawful. If there is a formal allegation, please serve me a Section 35 notice in writing so my lawyer can respond."*`,
-          hi: `**झूठे केस की धमकी और पुलिस दबाव से कानूनी सुरक्षा:**\n\n• **BNS धारा 248 (पूर्व IPC 211)**: किसी निर्दोष व्यक्ति पर झूठा केस लगाने की धमकी देना या फंसाना 7 साल तक की जेल की सजा वाला अपराध है।\n• **लिखित नोटिस की मांग (BNSS धारा 35(3))**: बिना लिखित कारणों और नोटिस के मौखिक धमकियों की कोई कानूनी मान्यता नहीं है।\n• **एसपी (SP) को शिकायत**: समय, तारीख और अधिकारी के नाम के साथ जिले के पुलिस अधीक्षक को तुरंत लिखित शिकायत भेजें।\n• **अग्रिम जमानत (BNSS धारा 482)**: यदि झूठे केस में गिरफ्तारी का डर हो तो सत्र न्यायालय या उच्च न्यायालय से अग्रिम जमानत ले सकते हैं।\n\n**विनम्रता से कहें**: *"अधिकारी महोदय, मैंने कोई गैर-कानूनी काम नहीं किया है। यदि कोई आरोप है तो BNSS धारा 35 के तहत लिखित नोटिस दें, मेरे वकील जवाब देंगे।"*`,
-          te: `**తప్పుడు కేసుల బెదిరింపులు మరియు రక్షణ:**\n\n• **BNS సెక్షన్ 248 (పాత IPC 211)**: అమాయకులపై తప్పుడు కేసులు పెడతామని బెదిరించడం లేదా ఇరికించడం 7 సంవత్సరాల వరకు జైలు శిక్ష పడే నేరం.\n• **లిఖితపూర్వక నోటీసు కోరండి (BNSS సెక్షన్ 35(3))**: సరైన రాతపూర్వక కారణాలు మరియు నోటీసు లేకుండా మాటల బెదిరింపులకు చట్టపరమైన విలువ లేదు.\n• **ఎస్పీ (SP) కి ఫిర్యాదు**: తేదీ, సమయం మరియు పోలీసుల వివరాలతో జిల్లా ఎస్పీ లేదా కమిషనర్‌కు లిఖితపూర్వకంగా ఫిర్యాదు చేయండి.\n• **ముందస్తు బెయిల్ (BNSS సెక్షన్ 482)**: తప్పుడు కేసులో అరెస్ట్ చేస్తారనే భయం ఉంటే సెషన్స్ కోర్టు లేదా హైకోర్టులో ముందస్తు బెయిల్ పొందవచ్చు.\n\n**స్పష్టంగా చెప్పండి**: *"అధికారి గారూ, నేను ఎటువంటి చట్టవిరుద్ధ పని చేయలేదు. ఆరోపణలు ఉంటే BNSS సెక్షన్ 35 ప్రకారం రాతపూర్వక నోటీస్ ఇవ్వండి, నా లాయర్ స్పందిస్తారు."*`
-        },
-        ['BNS 2023 Sec 248', 'BNSS 2023 Sec 35(3) & 482', 'Constitution Art. 21'],
-        {
-          en: ['How to apply for Anticipatory Bail?', 'How to complain to Police Complaints Authority?', 'What if police threaten family?'],
-          hi: ['अग्रिम जमानत कैसे लें?', 'पुलिस शिकायत प्राधिकरण में कैसे जाएं?', 'परिवार को धमकी दें तो क्या करें?'],
-          te: ['ముందస్తు బెయిల్ ఎలా పొందాలి?', 'పోలీస్ కంప్లైంట్స్ అథారిటీకి ఎలా ఫిర్యాదు చేయాలి?', 'కుటుంబాన్ని బెదిరిస్తే ఏం చేయాలి?']
-        },
-        effectiveLang === 'te'
-          ? '“అధికారి గారూ, BNSS సెక్షన్ 35 ప్రకారం రాతపూర్వక నోటీస్ ఇవ్వండి, నా న్యాయవాది సమాధానం ఇస్తారు.”'
-          : effectiveLang === 'hi'
-          ? '“अधिकारी महोदय, BNSS धारा 35 के तहत लिखित नोटिस दें, मेरे वकील जवाब देंगे।”'
-          : '“Officer, please serve a formal Section 35 notice in writing so my advocate may respond.”'
-      );
-    }
-
-    // 10. General / Fallback Legal Query
+    // 19. General / Fallback Legal Query
     return r(
       {
         en: `**Legal Assessment & Citizen Rights Overview:**\n\n1. **Right to Know Grounds**: Under Constitution Article 22(1) and BNSS Section 47, any police action requires clear statutory cause.\n2. **Right to Legal Counsel**: Article 22(1) and BNSS Section 38 ensure you have the right to contact and consult an advocate of your choice.\n3. **Notice Requirement**: For offenses punishable up to 7 years, police must serve a Section 35(3) written notice before custodial action.\n4. **Emergency Assistance**: In case of immediate distress or extortion, call National Emergency 112.\n\n*Would you like detailed guidance on bail, traffic rules, FIR registration, or dealing with station notices?*`,
